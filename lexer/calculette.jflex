@@ -18,33 +18,33 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
         Operateurs
    ------------------------------------------------- */
 
-":="     { return new Symbol(parser.EQUALS, yyline, yycolumn); }
+":="     { return new Symbol(CalculetteSymbol.EQUALS, yyline, yycolumn); }
 
-"["      { return new Symbol(parser.LPAR, yyline, yycolumn); }
-"]"      { return new Symbol(parser.RPAR, yyline, yycolumn); }
+"["      { return new Symbol(CalculetteSymbol.LPAR, yyline, yycolumn); }
+"]"      { return new Symbol(CalculetteSymbol.RPAR, yyline, yycolumn); }
 
-";"      { return new Symbol(parser.SEMIC, yyline, yycolumn); }
-","      { return new Symbol(parser.COMMA, yyline, yycolumn); }
+";"      { return new Symbol(CalculetteSymbol.SEMIC, yyline, yycolumn); }
+","      { return new Symbol(CalculetteSymbol.COMMA, yyline, yycolumn); }
 
 
 /* -------------------------------------------------
         Valeurs
    ------------------------------------------------- */
 
-{Integer}      { return new Symbol(parser.INT, yyline, yycolumn,
+{Integer}      { return new Symbol(CalculetteSymbol.INT, yyline, yycolumn,
 				   new Integer(yytext())); }
-{Real}         { return new Symbol(parser.REAL, yyline, yycolumn,
+{Real}         { return new Symbol(CalculetteSymbol.REAL, yyline, yycolumn,
 				   new Float(yytext())); }
 
 /* -------------------------------------------------
         Variables
    ------------------------------------------------- */
 
-"int"          { return new Symbol(parser.ENUMTYPE, yyline, yycolumn,
+"int"          { return new Symbol(CalculetteSymbol.ENUMTYPE, yyline, yycolumn,
 				   EnumType.INT); }
-"real"         { return new Symbol(parser.ENUMTYPE, yyline, yycolumn,
+"real"         { return new Symbol(CalculetteSymbol.ENUMTYPE, yyline, yycolumn,
 				   EnumType.REAL); }
-{Id}           { return new Symbol(parser.ID, yyline, yycolumn,
+{Id}           { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,
 				   yytext()); }
 
 /* -------------------------------------------------

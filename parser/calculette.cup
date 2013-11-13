@@ -7,7 +7,7 @@ parser code {: // ajout de variables ou surcharge de méthodes
     public List<Type> usedVars;
     public List<Integer> tabLengths;
     public int deepness;
-    :}
+:}
 
 action code {: // méthodes utiles pour les actions associées à la grammaire
     public void defineType(List<Type> list, EnumType type) {
@@ -18,12 +18,22 @@ action code {: // méthodes utiles pour les actions associées à la grammaire
     public Type addVar(List<Type> list, String name, List<Integer> tabLengths) {
         Type res = new Type(name, tabLengths);
         list.add(res);
-        tabLengths.clean();
+        tabLengths.clear();
         return res;
     }
 
-    public boolean isDecl(Type var) {
-        return declVars.contains(var);
+    public Type getVar(List<Type> list, String name) {
+        for(Type t: list)
+            if (t.getName().equals(name))
+                return t;
+        return null;
+    }
+
+    public boolean isDecl(String var, List<Type> declVars) {
+        for(Type t: declVars)
+            if (t.getName().equals(var))
+                return true;
+        return false;
     }
 :}
 
@@ -43,31 +53,36 @@ non terminal P, D, Ss, T, L, I, S, E;
 
 start with P;
 
-P ::= D Ss              {: checkUnusedVars(); :}
+P ::= D Ss                      {: /*checkUnusedVars();*/ :}
     ;
 
-D ::= T:type L SEMIC    {: defineType(declVars, type); :}
+D ::= T:type L SEMIC            {: defineType(declVars, type); :}
     ;
 
-T ::= ENUMTYPE:type     {: RESULT = type; :}
+T ::= ENUMTYPE:type             {: RESULT = type; :}
     ;
 
-L ::= L COMMA I:name    {: addVar(declVars, name, tabLengths); :}
-    | I:name            {: addVar(declVars, name); :}
+L ::= L COMMA I:name            {: addVar(declVars, name, tabLengths); :}
+    | I:name                    {: addVar(declVars, name); :}
     ;
 
-I ::= ID:name           {: RESULT = name; :}
-    | I:name LPAR INT:nb RPAR {: tabLengths.add(nb); :}
+I ::= ID:name                   {: RESULT = name; :}
+    | I:name LPAR INT:nb RPAR   {: tabLengths.add(nb); :}
     ;
 
 Ss ::= Ss S {: deepness = 0; :}
     |     S {: deepness = 0; :}
     ;
 
-S ::= ID:var1 EQUALS E:nb SEMIC {: if (!isDecl(var1) || !var1.validPos(deepness, nb)) throw new Error(); :}
+S ::= ID:var1 EQUALS E:nb SEMIC {: Type t = getVar(var1, declVars);
+                                   if ((t == null) ||
+                                        (t.validPos(deepness, nb)))
+                                            throw new Error(); :}
     ;
 
-E ::= I:name LPAR INT:nb RPAR {: deepness += 1; addVar(usedVars, name, null); RESULT = nb; :}
-    | INT {: RESULT = 0; :}
-    | REAL {: RESULT = 0; :}
+E ::= I:name LPAR INT:nb RPAR   {: deepness += 1;
+                                   addVar(usedVars, name, null);
+                                   RESULT = nb; :}
+    | INT                       {: RESULT = 0; :}
+    | REAL                      {: RESULT = 0; :}
     ;
