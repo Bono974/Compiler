@@ -1,0 +1,73 @@
+import java_cup.runtime.*;
+import java.lang.Number;
+import java.util.*;
+
+parser code {: // ajout de variables ou surcharge de méthodes
+    public List<Type> declVars;
+    public List<Type> usedVars;
+    public List<Integer> tabLengths;
+    public int deepness;
+    :}
+
+action code {: // méthodes utiles pour les actions associées à la grammaire
+    public void defineType(List<Type> list, EnumType type) {
+        for (Type t : list)
+            t.setType(type);
+    }
+
+    public Type addVar(List<Type> list, String name, List<Integer> tabLengths) {
+        Type res = new Type(name, tabLengths);
+        list.add(res);
+        tabLengths.clean();
+        return res;
+    }
+
+    public boolean isDecl(Type var) {
+        return declVars.contains(var);
+    }
+:}
+
+init with {: //  initialisation des variables
+    declVars = new ArrayList<Type>();
+    usedVars = new ArrayList<Type>();
+    tabLengths = new ArrayList<Integer>();
+    deepness = 0;
+:}
+
+terminal SEMIC, COMMA, EQUALS, LPAR, RPAR, ENUMTYPE;
+terminal int INT;
+terminal Float REAL;
+terminal String ID;
+
+non terminal P, D, Ss, T, L, I, S, E;
+
+start with P;
+
+P ::= D Ss              {: checkUnusedVars(); :}
+    ;
+
+D ::= T:type L SEMIC    {: defineType(declVars, type); :}
+    ;
+
+T ::= ENUMTYPE:type     {: RESULT = type; :}
+    ;
+
+L ::= L COMMA I:name    {: addVar(declVars, name, tabLengths); :}
+    | I:name            {: addVar(declVars, name); :}
+    ;
+
+I ::= ID:name           {: RESULT = name; :}
+    | I:name LPAR INT:nb RPAR {: tabLengths.add(nb); :}
+    ;
+
+Ss ::= Ss S {: deepness = 0; :}
+    |     S {: deepness = 0; :}
+    ;
+
+S ::= ID:var1 EQUALS E:nb SEMIC {: if (!isDecl(var1) || !var1.validPos(deepness, nb)) throw new Error(); :}
+    ;
+
+E ::= I:name LPAR INT:nb RPAR {: deepness += 1; addVar(usedVars, name, null); RESULT = nb; :}
+    | INT {: RESULT = 0; :}
+    | REAL {: RESULT = 0; :}
+    ;
