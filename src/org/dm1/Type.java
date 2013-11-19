@@ -6,10 +6,10 @@ import java.util.*;
 import org.dm1.*;
 
 // Les types
-// cf EnumType pour connaître les types autorisés
+// cf EnumType pour connaitre les types autorisees
 // type simple:
 //    int, real, boolean, etc
-// types composés:
+// types composees:
 //    left -> right
 //    left X right
 //    pointeur(left)
@@ -140,7 +140,7 @@ public class Type {
 		}
 	}
 
-	// Teste si deux types sont équivalents
+	// Teste si deux types sont eequivalents
 	public boolean eq(Type with){
 		//System.err.println("############################### EQ ENTRE "+toString()+" ET "+with.toString());
 		if ((with.type!=type)
@@ -172,8 +172,8 @@ public class Type {
 		return true;
 	}
 
-	// Calcule la première différences entre deux types
-	// c'est-à-dire la présence d'une variable dans un 
+	// Calcule la premiere diffeerences entre deux types
+	// c'est-a-dire la preesence d'une variable dans un 
 	// terme pour une constante (ou une autre variable)
 	// dans l'autre
 	public Diff diff(Type with){

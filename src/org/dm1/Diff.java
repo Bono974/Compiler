@@ -5,7 +5,7 @@ import java.util.*;
 
 import org.dm1.*;
 
-// Sert à marquer une différence entre deux types pour l'unification
+// Sert a marquer une difference entre deux types pour l'unification
 public class Diff {
 	private Type var;	
 	private Type cons;

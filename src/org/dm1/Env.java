@@ -6,7 +6,7 @@ import java.util.*;
 import org.dm1.*;
 
 // Environnement
-// Il sagit d'une pile d'arbres binaires partags
+// Il sagit d'une pile d'arbres binaires partagees
 
 public class Env {
 
