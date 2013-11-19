@@ -2,14 +2,14 @@ import java_cup.runtime.*;
 import java.lang.Number;
 import java.util.*;
 
-parser code {: // ajout de variables ou surcharge de méthodes
+parser code {: // ajout de variables ou surcharge de methodes
     public List<Type> declVars;
     public List<Type> usedVars;
     public List<Integer> tabLengths;
     public int deepness;
 :}
 
-action code {: // méthodes utiles pour les actions associées à la grammaire
+action code {: // methodes utiles pour les actions associees à la grammaire
     public void defineType(List<Type> list, EnumType type) {
         for (Type t : list)
             t.setType(type);

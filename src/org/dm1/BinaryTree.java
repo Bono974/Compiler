@@ -10,10 +10,10 @@ import org.dm1.*;
 
 // Arbre Binaire de recherche
 // symbol est le mot, type est son type
-// left contient les mots placés avant dans l'ordre alphabétique
-// right contient les mots placés aprËs dans l'ordre alphabétique
-// type sert à ranger le type 
-// flag sert à éviter de parcourir deux fois
+// left contient les mots places avant dans l'ordre alphabetique
+// right contient les mots places apres dans l'ordre alphabetique
+// type sert a ranger le type 
+// flag sert a eviter de parcourir deux fois
 
 public class BinaryTree {
 
@@ -96,7 +96,7 @@ public class BinaryTree {
 			return new BinaryTree(a.left, a.right, s, t);
 	}
 
-	// produit une chaÓne pour lecture
+	// produit une chaine pour lecture
 	public String toString() {
 		String result = new String();
 		result += symbol;
