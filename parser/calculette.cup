@@ -2,46 +2,16 @@ import java_cup.runtime.*;
 import java.lang.Number;
 import java.util.*;
 
-parser code {: // ajout de variables ou surcharge de methodes
-    public List<Type> declVars;
-    public List<Type> usedVars;
-    public List<Integer> tabLengths;
-    public int deepness;
+parser code {:
+
 :}
 
-action code {: // methodes utiles pour les actions associees à la grammaire
-    public void defineType(List<Type> list, EnumType type) {
-        for (Type t : list)
-            t.setType(type);
-    }
+action code {:
 
-    public Type addVar(List<Type> list, String name, List<Integer> tabLengths) {
-        Type res = new Type(name, tabLengths);
-        list.add(res);
-        tabLengths.clear();
-        return res;
-    }
-
-    public Type getVar(List<Type> list, String name) {
-        for(Type t: list)
-            if (t.getName().equals(name))
-                return t;
-        return null;
-    }
-
-    public boolean isDecl(String var, List<Type> declVars) {
-        for(Type t: declVars)
-            if (t.getName().equals(var))
-                return true;
-        return false;
-    }
 :}
 
-init with {: //  initialisation des variables
-    declVars = new ArrayList<Type>();
-    usedVars = new ArrayList<Type>();
-    tabLengths = new ArrayList<Integer>();
-    deepness = 0;
+init with {:
+
 :}
 
 terminal SEMIC, COMMA, EQUALS, LPAR, RPAR, ENUMTYPE;

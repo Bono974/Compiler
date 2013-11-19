@@ -41,9 +41,9 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
    ------------------------------------------------- */
 
 "int"          { return new Symbol(CalculetteSymbol.ENUMTYPE, yyline, yycolumn,
-				   EnumType.INT); }
+				   EnumType.INTEGER); }
 "real"         { return new Symbol(CalculetteSymbol.ENUMTYPE, yyline, yycolumn,
-				   EnumType.REAL); }
+				   EnumType.FLOAT); }
 {Id}           { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,
 				   yytext()); }
 
