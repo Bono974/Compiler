@@ -1,5 +1,11 @@
 *.class
 
+**/bin/
+
+Error.txt
+Output.txt
+src/CalculetteParser.java
+src/CalculetteSymbol.java
 
 # Fichier temporaire de Mac #
 .DS_Store
