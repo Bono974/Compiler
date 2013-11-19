@@ -1,0 +1,2 @@
+Syntax error at character 1 of input
+Couldn't repair and continue parse at character 1 of input

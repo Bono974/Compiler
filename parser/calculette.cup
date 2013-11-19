@@ -53,36 +53,31 @@ non terminal P, D, Ss, T, L, I, S, E;
 
 start with P;
 
-P ::= D Ss                      {: /*checkUnusedVars();*/ :}
+P ::= D Ss                      {: :}
     ;
 
-D ::= T:type L SEMIC            {: defineType(declVars, type); :}
+D ::= T:type L SEMIC            {: :}
     ;
 
-T ::= ENUMTYPE:type             {: RESULT = type; :}
+T ::= ENUMTYPE                 {:  :}
     ;
 
-L ::= L COMMA I:name            {: addVar(declVars, name, tabLengths); :}
-    | I:name                    {: addVar(declVars, name); :}
+L ::= L COMMA I:name            {:  :}
+    | I:name                    {:  :}
     ;
 
-I ::= ID:name                   {: RESULT = name; :}
-    | I:name LPAR INT:nb RPAR   {: tabLengths.add(nb); :}
+I ::= ID:name                   {: :}
+    | I:name LPAR INT RPAR   {: :}
     ;
 
-Ss ::= Ss S {: deepness = 0; :}
-    |     S {: deepness = 0; :}
+Ss ::= Ss S {: :}
+    |     S {: :}
     ;
 
-S ::= ID:var1 EQUALS E:nb SEMIC {: Type t = getVar(var1, declVars);
-                                   if ((t == null) ||
-                                        (t.validPos(deepness, nb)))
-                                            throw new Error(); :}
+S ::= ID:var1 EQUALS E SEMIC {: :}
     ;
 
-E ::= I:name LPAR INT:nb RPAR   {: deepness += 1;
-                                   addVar(usedVars, name, null);
-                                   RESULT = nb; :}
-    | INT                       {: RESULT = 0; :}
-    | REAL                      {: RESULT = 0; :}
+E ::= I:name LPAR INT RPAR   {: :}
+    | INT                       {:  :}
+    | REAL                      {:  :}
     ;
