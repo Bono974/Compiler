@@ -14,13 +14,55 @@ init with {:
 
 :}
 
-terminal SEMIC, COMMA, EQUALS, LPAR, RPAR, ENUMTYPE;
-terminal int INT;
+terminal SEMIC, COMMA, EQUALS, LPAR, RPAR, ENUM_TYPE, AFFECT, ENUM_OP, ENUM_BOOL;
+terminal Integer INT;
 terminal Float REAL;
 terminal String ID;
 
-non terminal P, D, Ss, T, L, I, S, E;
+non terminal affectation;
+non terminal Expression expression;
+non terminal Expression expression_variable, expression_arith, expression_bool;
+non terminal Expression expression_numerique;
 
+start with affectation;
+
+affectation ::= expression:id AFFECT expression:exp SEMIC  {: Instruction aff = new Affectation(id, exp);
+                                                              aff.verifier();
+                                                              System.out.println(aff.evaluer()); :}
+            ;
+
+expression ::= expression_variable:exp  {: RESULT = exp; :}
+            //|  expression_arith:exp     {: RESULT = exp; :}
+            //|  expression_bool:exp      {: RESULT = exp; :}
+            |  expression_numerique:exp      {: RESULT = exp; :}
+
+            ;
+
+expression_variable  ::= ID:id                         {: Expression variable = new Variable(id);
+                                                          variable.verifier();
+                                                          RESULT = variable; :}
+                      /*|  ENUM_TYPE ID:id               {: Expression variable = new Variable(id);
+                                                          variable.verifier();
+                                                          RESULT = variable; :}*/
+                      ;
+
+
+expression_numerique ::=  INT:nb    {: RESULT = new Value(nb); :}
+                        | REAL:nb   {: RESULT = new Value(nb); :}
+                        ;
+
+
+/*
+expression_arith ::= expression_arith ENUM_OP expression_arith {: :}
+                  ;
+
+expression_bool ::= expression_bool ENUM_BOOL expression_bool {: :}
+                 ;
+*/
+
+//non terminal P, D, Ss, T, L, I, S, E;
+
+/*
 start with P;
 
 P ::= D Ss                      {: :}
@@ -51,3 +93,4 @@ E ::= I:name LPAR INT RPAR   {: :}
     | INT                       {:  :}
     | REAL                      {:  :}
     ;
+*/

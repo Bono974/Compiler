@@ -18,7 +18,7 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
         Operateurs
    ------------------------------------------------- */
 
-":="     { return new Symbol(CalculetteSymbol.EQUALS, yyline, yycolumn); }
+":="     { return new Symbol(CalculetteSymbol.AFFECT, yyline, yycolumn); }
 
 "["      { return new Symbol(CalculetteSymbol.LPAR, yyline, yycolumn); }
 "]"      { return new Symbol(CalculetteSymbol.RPAR, yyline, yycolumn); }
@@ -40,9 +40,9 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
         Variables
    ------------------------------------------------- */
 
-"int"          { return new Symbol(CalculetteSymbol.ENUMTYPE, yyline, yycolumn,
+"int"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
 				   EnumType.INTEGER); }
-"real"         { return new Symbol(CalculetteSymbol.ENUMTYPE, yyline, yycolumn,
+"real"         { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
 				   EnumType.FLOAT); }
 {Id}           { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,
 				   yytext()); }

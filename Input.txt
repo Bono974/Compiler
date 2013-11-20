@@ -1,4 +1,2 @@
-int a;
-int a;
-int a;
-int a;
+0.2 := 456456;
+
