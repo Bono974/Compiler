@@ -3,7 +3,15 @@ import java.lang.Number;
 import java.util.*;
 
 parser code {:
-
+    public void syntax_error(Symbol cur_token) {
+        System.err.println("----error----");
+        System.err.println("line :"+ cur_token.left + " column :"+ cur_token.right);
+        report_error("syntax_error", null);
+    }
+    public void unrecovered_syntax_error(Symbol cur_token) {
+        syntax_error(cur_token);
+        System.err.println("----fin----");
+    }
 :}
 
 action code {:
@@ -11,10 +19,16 @@ action code {:
 :}
 
 init with {:
-
+//Liste d'Instructions
+//Table de variables HashMap <variable, type>
+//Pile de HashMap<ListeInstruction, HashMap<variable, type>> à voir en détail
 :}
 
-terminal SEMIC, COMMA, EQUALS, LPAR, RPAR, ENUM_TYPE, AFFECT, ENUM_OP, ENUM_BOOL;
+terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT, TRUE, FALSE;
+terminal PLUS, MINUS, TIMES, DIVIDE, MOD, MINUS_U, NOT_U;
+terminal EQUALS, AFFECT;
+terminal LPAR, RPAR, SEMIC, COMMA, ENUM_TYPE, ENUM_OP;
+
 terminal Integer INT;
 terminal Float REAL;
 terminal String ID;
@@ -24,41 +38,92 @@ non terminal Expression expression;
 non terminal Expression expression_variable, expression_arith, expression_bool;
 non terminal Expression expression_numerique;
 
+precedence left AND, OR;
+precedence left LT, GT, GE, LE, EQ, DIFF;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE, MOD;
+precedence left MINUS_U, NOT_U;
+
+
 start with affectation;
 
-affectation ::= expression:id AFFECT expression:exp SEMIC  {: Instruction aff = new Affectation(id, exp);
-                                                              aff.verifier();
-                                                              System.out.println(aff.evaluer()); :}
-            ;
+affectation ::= ENUM_TYPE expression_variable:id AFFECT expression_arith:exp SEMIC  {: Instruction aff = new Affectation(id, exp);
+                                                                                       aff.verifier();
+                                                                                       //ajout du type dans une table de HashMap<variable, type>
+                                                                                       System.out.println(aff.evaluer()); :}
+             |  expression_variable:id AFFECT expression_arith:exp SEMIC            {: Instruction aff = new Affectation(id, exp);
+                                                                                       aff.verifier();
+                                                                                       System.out.println(aff.evaluer()); :}
+             ;
+//on verra plus tard pour les affectations de booleens (pas encore un type déclaré)
 
-expression ::= expression_variable:exp  {: RESULT = exp; :}
-            //|  expression_arith:exp     {: RESULT = exp; :}
-            //|  expression_bool:exp      {: RESULT = exp; :}
-            |  expression_numerique:exp      {: RESULT = exp; :}
+expression_variable  ::= ID:id     {: Expression variable = new Variable(id);
+                                      variable.verifier();
+                                      RESULT = variable; :}
+                      ;
 
-            ;
-
-expression_variable  ::= ID:id                         {: Expression variable = new Variable(id);
-                                                          variable.verifier();
-                                                          RESULT = variable; :}
-                      /*|  ENUM_TYPE ID:id               {: Expression variable = new Variable(id);
-                                                          variable.verifier();
-                                                          RESULT = variable; :}*/
+expression_numerique ::= INT:nb    {: RESULT = new Value(nb); :}
+                      |  REAL:nb   {: RESULT = new Value(nb); :}
                       ;
 
 
-expression_numerique ::=  INT:nb    {: RESULT = new Value(nb); :}
-                        | REAL:nb   {: RESULT = new Value(nb); :}
-                        ;
-
+expression_arith ::= expression_arith:e1 PLUS   expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.PLUS);   :}
+	              |  expression_arith:e1 MINUS  expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.MINUS);  :}
+                  |  expression_arith:e1 TIMES  expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.TIMES);  :}
+                  |  expression_arith:e1 DIVIDE expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.DIVIDE); :}
+                  |  expression_arith:e1 MOD    expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.MOD);    :}
+                  //|  LPAR expression_arith:exp RPAR                     {: RESULT = new OperationArithmetique(e;       :}
+                  |  MINUS expression_arith:exp                         {: RESULT = new OperationArithmetique(exp, EnumOp.MINUS_U);   :} %prec MINUS_U
+                  |  expression_variable:exp                            {: RESULT = exp; :}
+                  |  expression_numerique:exp                           {: RESULT = exp; :}
+                  ;
+// A voir : verification à la volée / génération du code
+// ou bien, génération en sortie de bloc : au moment du dépilement d'un
+// "environnement", géneration du code 3-adress (génération en buffer
+// d'Environnement)
 
 /*
-expression_arith ::= expression_arith ENUM_OP expression_arith {: :}
-                  ;
+expression_bool ::= expression_arith:e1 AND     expression_arith:e2     {: RESULT = new OperationBooleenne(e1, e2, EnumOp.AND);  :}
+                 |  expression_arith:e1 OR      expression_arith:e2     {: RESULT = new OperationBooleenne(e1, e2, EnumOp.OR);   :}
+                 |  expression_arith:e1 DIFF    expression_arith:e2     {: RESULT = new OperationBooleenne(e1, e2, EnumOp.DIFF); :}
+                 |  expression_arith:e1 LT      expression_arith:e2     {: RESULT = new OperationBooleenne(e1, e2, EnumOp.LT);   :}
+                 |  expression_arith:e1 GT      expression_arith:e2     {: RESULT = new OperationBooleenne(e1, e2, EnumOp.GT);   :}
+                 |  expression_arith:e1 GE      expression_arith:e2     {: RESULT = new OperationBooleenne(e1, e2, EnumOp.GE);   :}
+                 |  expression_arith:e1 LE      expression_arith:e2     {: RESULT = new OperationBooleenne(e1, e2, EnumOp.LE);   :}
+                 |  expression_arith:e1 EQ      expression_arith:e2     {: RESULT = new OperationBooleenne(e1, e2, EnumOp.EQUALS);; :}
 
-expression_bool ::= expression_bool ENUM_BOOL expression_bool {: :}
+                 |  expression_bool:b1 AND      expression_bool:b2      {: RESULT = new OperationBooleenne(e1, e2, EnumOp.AND); :}
+                 |  expression_bool:b1 OR       expression_bool:b2      {: RESULT = new OperationBooleenne(e1, e2, EnumOp.OR); :}
+                 |  expression_bool:b1 DIFF     expression_bool:b2      {: RESULT = new OperationBooleenne(e1, e2, EnumOp.DIFF); :}
+                 |  expression_bool:b1 EQ       expression_bool:b2      {: RESULT = new OperationBooleenne(e1, e2, EnumOp.EQUALS); :}
+
+                 |  NOT expression_bool:b                               {: RESULT = new OperationBooleenne(b, EnumOp.NOT); :} %prec NOT_U
+                 //|  LPAR expression_bool:b RPAR                         {: RESULT = new OperationBooleenne(b,         :}
+                 | expression_numerique:exp                             {: RESULT = exp; :}
+                 | expression_arith:exp                                 {: RESULT = exp; :}
                  ;
 */
+// Revoir la grammaire pour inclure les expressions booleennes
+
+/*
+start with instructions;
+*/
+
+/*instructions :: affectation instructions
+              | instruction_for instructions
+              | instruction_while instructions
+              | instruction_if instructions
+              | // vide, fin parsing
+              ;*/
+
+
+//instruction_for :: FOR '(' affectation ';' expression_bool ';' incrementation ')' '{'instructions '}'
+//instruction_while :: WHILE '(' expression_bool ')' '{' instructions '}'
+//instruction_if :: IF '(' expression_bool ')' THEN '{' Instructions '}' ELSE '{' instructions '}'
+
+
+
+
 
 //non terminal P, D, Ss, T, L, I, S, E;
 

@@ -26,6 +26,26 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 ";"      { return new Symbol(CalculetteSymbol.SEMIC, yyline, yycolumn); }
 ","      { return new Symbol(CalculetteSymbol.COMMA, yyline, yycolumn); }
 
+"+"      { return new Symbol(CalculetteSymbol.PLUS,  yyline, yycolumn); }
+"-"      { return new Symbol(CalculetteSymbol.MINUS, yyline, yycolumn); }
+"*"      { return new Symbol(CalculetteSymbol.TIMES, yyline, yycolumn); }
+"/"      { return new Symbol(CalculetteSymbol.DIVIDE,yyline, yycolumn); }
+"("      { return new Symbol(CalculetteSymbol.LPAR,  yyline, yycolumn); }
+")"      { return new Symbol(CalculetteSymbol.RPAR,  yyline, yycolumn); }
+
+"&&"     { return new Symbol(CalculetteSymbol.AND,   yyline, yycolumn); }
+"||"     { return new Symbol(CalculetteSymbol.OR,    yyline, yycolumn); }
+"<"      { return new Symbol(CalculetteSymbol.LT,    yyline, yycolumn); }
+">"      { return new Symbol(CalculetteSymbol.GT,    yyline, yycolumn); }
+"<="     { return new Symbol(CalculetteSymbol.LE,    yyline, yycolumn); }
+">="     { return new Symbol(CalculetteSymbol.GE,    yyline, yycolumn); }
+"=="     { return new Symbol(CalculetteSymbol.EQ,    yyline, yycolumn); }
+"!="     { return new Symbol(CalculetteSymbol.DIFF,  yyline, yycolumn); }
+"%"      { return new Symbol(CalculetteSymbol.MOD,   yyline, yycolumn); }
+"!"      { return new Symbol(CalculetteSymbol.NOT,   yyline, yycolumn); }
+"true"   { return new Symbol(CalculetteSymbol.TRUE,  yyline, yycolumn); }
+"false"  { return new Symbol(CalculetteSymbol.FALSE, yyline, yycolumn); }
+
 
 /* -------------------------------------------------
         Valeurs

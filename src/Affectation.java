@@ -5,7 +5,6 @@ public class Affectation extends Instruction {
     public Affectation(Expression gauche, Expression droite){
         this.gauche = gauche;
         this.droite = droite;
-        verifier();
     }
 
     public boolean verifier(){
