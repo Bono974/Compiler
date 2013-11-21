@@ -14,11 +14,11 @@ public class OperationArithmetique extends Operation {
     public String evaluer(EnumOp prevOp) {
         String result = "";
 
-        if (prevOp == EnumOp.UNKNOWN) // Premiere expression pour l'affectation
-            result += gauche.evaluer(null) + " " + op + " " + droite.evaluer(op);
+        if (prevOp == EnumOp.UNKNOWN)
+            result += gauche.evaluer(null) + " " + op + " " +  droite.evaluer(op);
         else
-            result += gauche.evaluer(null) + " " + op + " t" + (registreCourant + 1) +
-                " \nt" + (registreCourant + 1) + " = " + droite.evaluer(op);
+            result += gauche.evaluer(null) + " " +  op + " " + droite.evaluer(op) +
+                "\nt" + (registreCourant+1) + " = t" + (registreCourant);
 
         return result;
     }

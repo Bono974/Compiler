@@ -1,2 +1,2 @@
-real titi := 1 + 2 - 2  + o + p -j / d + k -l -j;
+real titi := 1 + 2 - 2  + o + p - j + d + k -l -j;
 
