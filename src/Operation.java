@@ -24,9 +24,7 @@ public class Operation extends Expression {
         return true;
     }
 
-    public String evaluer(){
-        if (unaire)
-            return op + gauche.evaluer();
-        return gauche.evaluer() + op + droite.evaluer();
+    public String evaluer(EnumOp prevOp){
+        return "TOTO";
     }
 }

@@ -3,7 +3,7 @@ public abstract class Expression {
     //public Instruction (List<Instruction> l);
 
     public abstract boolean verifier();
-    public abstract String evaluer();
+    public abstract String evaluer(EnumOp prevOp);
 }
 
 

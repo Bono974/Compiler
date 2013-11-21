@@ -1,2 +1,2 @@
-real titi := 1 + 1 - j -f +4 * koko;
+real titi := 1 + 2 + 3 + 4;
 

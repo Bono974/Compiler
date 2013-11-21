@@ -1,1 +1,4 @@
-titi=1PLUS1MINUSjMINUSfPLUS4TIMESkoko
+titi=1
+t0 = t-1 PLUS 2
+t1 = t0 PLUS 3
+t2 = t1 PLUS 4

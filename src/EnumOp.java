@@ -4,5 +4,7 @@ public enum EnumOp {
     //Opérations booléennes
     AND, OR, LT, GT, LE, GE, EQ, DIFF, MOD, NOT, TRUE, FALSE,
     //Opérateur inconnu
-    UNKNOW
+    UNKNOWN,
+    //Opérateur d'affectation
+    AFFECT
 }

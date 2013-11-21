@@ -15,13 +15,14 @@ parser code {:
 :}
 
 action code {:
-
+  int registreCourant = 0;
 :}
 
 init with {:
 //Liste d'Instructions
 //Table de variables HashMap <variable, type>
 //Pile de HashMap<ListeInstruction, HashMap<variable, type>> à voir en détail
+  //registreCourant = 0; 
 :}
 
 terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT, TRUE, FALSE;
@@ -67,13 +68,13 @@ expression_numerique ::= INT:nb    {: RESULT = new Value(nb); :}
                       ;
 
 
-expression_arith ::= expression_arith:e1 PLUS   expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.PLUS);   :}
-	              |  expression_arith:e1 MINUS  expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.MINUS);  :}
-                  |  expression_arith:e1 TIMES  expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.TIMES);  :}
-                  |  expression_arith:e1 DIVIDE expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.DIVIDE); :}
-                  |  expression_arith:e1 MOD    expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.MOD);    :}
+expression_arith ::= expression_arith:e1 PLUS   expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.PLUS, registreCourant++);   :}
+	                |  expression_arith:e1 MINUS  expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.MINUS, registreCourant++);  :}
+                  |  expression_arith:e1 TIMES  expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.TIMES, registreCourant++);  :}
+                  |  expression_arith:e1 DIVIDE expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.DIVIDE, registreCourant++); :}
+                  |  expression_arith:e1 MOD    expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.MOD, registreCourant++);    :}
                   //|  LPAR expression_arith:exp RPAR                     {: RESULT = new OperationArithmetique(e;       :}
-                  |  MINUS expression_arith:exp                         {: RESULT = new OperationArithmetique(exp, EnumOp.MINUS_U);   :} %prec MINUS_U
+                  |  MINUS expression_arith:exp                         {: RESULT = new OperationArithmetique(exp, EnumOp.MINUS_U, registreCourant++);   :} %prec MINUS_U
                   |  expression_variable:exp                            {: RESULT = exp; :}
                   |  expression_numerique:exp                           {: RESULT = exp; :}
                   ;

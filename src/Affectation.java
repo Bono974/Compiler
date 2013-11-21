@@ -13,7 +13,8 @@ public class Affectation extends Instruction {
     }
 
     public String evaluer(){
-        return gauche.evaluer() + "=" + droite.evaluer();
+
+        return gauche.evaluer(EnumOp.UNKNOWN) + "=" + droite.evaluer(EnumOp.AFFECT);
     }
 }
 

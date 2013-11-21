@@ -9,7 +9,7 @@ public class Value<T> extends Expression {
         return true;
     }
 
-    public String evaluer() {
+    public String evaluer(EnumOp prevOp) {
         return this.value + "";
     }
 }
