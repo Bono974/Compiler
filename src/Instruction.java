@@ -4,6 +4,6 @@ public abstract class Instruction {
 
 
     public abstract boolean verifier();
-    public abstract String evaluer();
+    public abstract String evaluer(int registreCourant);
 }
 

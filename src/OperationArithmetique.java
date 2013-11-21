@@ -12,16 +12,14 @@ public class OperationArithmetique extends Operation {
     }
 
     public String evaluer(EnumOp prevOp) {
-        //if (unaire)
-        //    return op + gauche.evaluer(EnumOp.UNKNOWN);
-        
-        //return gauche.evaluer(EnumOp.UNKNOWN) + op + droite.evaluer(op);
+        String result = "";
 
-    	//if (prevOp == EnumOp.UNKNOWN)
-    	//	return ""; 
+        if (prevOp == EnumOp.UNKNOWN) // Premiere expression pour l'affectation
+            result += gauche.evaluer(null) + " " + op + " " + droite.evaluer(op);
+        else
+            result += gauche.evaluer(null) + " " + op + " t" + (registreCourant + 1) +
+                " \nt" + (registreCourant + 1) + " = " + droite.evaluer(op);
 
-    	return gauche.evaluer(EnumOp.UNKNOWN) + "\nt" + 
-    		registreCourant + " = " + "t" + (registreCourant - 1) + " " + 
-    		op + " " + droite.evaluer(op);
+        return result;
     }
 }

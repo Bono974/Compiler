@@ -12,9 +12,11 @@ public class Affectation extends Instruction {
         return true;
     }
 
-    public String evaluer(){
+    public String evaluer(int registreCourant){
+        String result = "t0 = " + droite.evaluer(EnumOp.UNKNOWN) + "\n";
+        result += gauche.evaluer(EnumOp.AFFECT) + " = t" + registreCourant;
 
-        return gauche.evaluer(EnumOp.UNKNOWN) + "=" + droite.evaluer(EnumOp.AFFECT);
+        return result;
     }
 }
 
