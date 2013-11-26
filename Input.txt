@@ -1,2 +1,1 @@
-real titi := 1 + 2 - 2  + o + p - j + d + k -l -j;
-
+if ( t < l ) then {  }

@@ -14,7 +14,10 @@ public class VariableTableau extends Variable {
     public String evaluer(EnumOp prevOp){
         // retourne le String de taille evalué en 3-code adress
         // suivi de this.variable [dernier registre taille]
-        return "TOTO";
+        String result = taille.evaluer(prevOp);
+        result += "\n *(" + this.nomVariable + " + " + "dernierREG)"; // dernier registre utilisé + ")"
+
+        return result;
     }
 }
 

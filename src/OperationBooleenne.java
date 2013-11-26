@@ -7,5 +7,11 @@ public class OperationBooleenne extends Operation {
         super(unaire, op);
     }
 
+    public String evaluer(EnumOp prevOp) {
+        String result = "";
+        result += gauche.evaluer(null) + " " + op + " " +  droite.evaluer(null);
+
+        return result;
+    }
 }
 

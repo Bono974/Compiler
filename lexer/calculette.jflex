@@ -7,7 +7,7 @@ import java_cup.runtime.Symbol;
 %cupsym CalculetteSymbol
 %cup
 
-Integer = [[:digit:]]+
+Integer = "-"?[[:digit:]]+
 Real = "-"?{Integer}(\.{Integer})?([Ee][+-]?{Integer})?
 Id = [a-zA-Z]+([a-zA-Z] | [[:digit:]])*
 Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
@@ -22,6 +22,10 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 
 "["      { return new Symbol(CalculetteSymbol.LSBRA, yyline, yycolumn); }
 "]"      { return new Symbol(CalculetteSymbol.RSBRA, yyline, yycolumn); }
+"{"      { return new Symbol(CalculetteSymbol.LBRACE, yyline, yycolumn); }
+"}"      { return new Symbol(CalculetteSymbol.RBRACE, yyline, yycolumn); }
+"("      { return new Symbol(CalculetteSymbol.LRBRA,  yyline, yycolumn); }
+")"      { return new Symbol(CalculetteSymbol.RRBRA,  yyline, yycolumn); }
 
 ";"      { return new Symbol(CalculetteSymbol.SEMIC, yyline, yycolumn); }
 ","      { return new Symbol(CalculetteSymbol.COMMA, yyline, yycolumn); }
@@ -30,8 +34,6 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 "-"      { return new Symbol(CalculetteSymbol.MINUS, yyline, yycolumn); }
 "*"      { return new Symbol(CalculetteSymbol.TIMES, yyline, yycolumn); }
 "/"      { return new Symbol(CalculetteSymbol.DIVIDE,yyline, yycolumn); }
-"("      { return new Symbol(CalculetteSymbol.LRBRA,  yyline, yycolumn); }
-")"      { return new Symbol(CalculetteSymbol.RRBRA,  yyline, yycolumn); }
 
 "&&"     { return new Symbol(CalculetteSymbol.AND,   yyline, yycolumn); }
 "||"     { return new Symbol(CalculetteSymbol.OR,    yyline, yycolumn); }
@@ -46,6 +48,12 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 "true"   { return new Symbol(CalculetteSymbol.TRUE,  yyline, yycolumn); }
 "false"  { return new Symbol(CalculetteSymbol.FALSE, yyline, yycolumn); }
 
+
+"if"     { return new Symbol(CalculetteSymbol.IF, yyline, yycolumn);    }
+"then"   { return new Symbol(CalculetteSymbol.THEN, yyline, yycolumn);  }
+"else"   { return new Symbol(CalculetteSymbol.ELSE, yyline, yycolumn);  }
+"for"    { return new Symbol(CalculetteSymbol.FOR, yyline, yycolumn);   }
+"while"  { return new Symbol(CalculetteSymbol.WHILE, yyline, yycolumn); }
 
 /* -------------------------------------------------
         Valeurs
