@@ -1,5 +1,5 @@
 public class Variable extends Expression {
-    private String nomVariable;
+    protected String nomVariable;
 
     public Variable(String nomVariable) {
         this.nomVariable = nomVariable;
