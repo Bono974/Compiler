@@ -16,6 +16,9 @@ parser code {:
 
 action code {:
   int registreCourant = 0;
+  boolean countOP = false; // Times, div
+  boolean countMOD = false; // Mod
+  int registreAvantTimes = -1; // Times, div et mod
 :}
 
 init with {:
@@ -43,7 +46,8 @@ non terminal Expression expression_numerique;
 precedence left AND, OR;
 precedence left LT, GT, GE, LE, EQ, DIFF;
 precedence left PLUS, MINUS;
-precedence left TIMES, DIVIDE, MOD;
+precedence left TIMES, DIVIDE; // Vérifier la précédence de MOD <<<<
+precedence left MOD;
 precedence left MINUS_U, NOT_U;
 
 
@@ -52,10 +56,12 @@ start with affectation;
 affectation ::= ENUM_TYPE expression_variable:id AFFECT expression_arith:exp SEMIC  {: Instruction aff = new Affectation(id, exp);
                                                                                        aff.verifier();
                                                                                        //ajout du type dans une table de HashMap<variable, type>
-                                                                                       System.out.println(aff.evaluer(registreCourant - 1)); :}
+                                                                                       System.out.println(aff.evaluer(registreCourant - 1)); 
+                                                                                    :}
              |  expression_variable:id AFFECT expression_arith:exp SEMIC            {: Instruction aff = new Affectation(id, exp);
                                                                                        aff.verifier();
-                                                                                       System.out.println(aff.evaluer(registreCourant - 1)); :}
+                                                                                       System.out.println(aff.evaluer(registreCourant - 1)); 
+                                                                                    :}
              ;
 //on verra plus tard pour les affectations de booleens (pas encore un type déclaré)
 
@@ -70,11 +76,31 @@ expression_numerique ::= INT:nb    {: RESULT = new Value(nb); :}
                       ;
 
 
-expression_arith ::= expression_arith:e1 PLUS   expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.PLUS,   registreCourant++);  :}
-                  |  expression_arith:e1 MINUS  expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.MINUS,  registreCourant++);  :}
-                  |  expression_arith:e1 TIMES  expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.TIMES,  registreCourant++);  :}
-                  |  expression_arith:e1 DIVIDE expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.DIVIDE, registreCourant++);  :}
-                  |  expression_arith:e1 MOD    expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.MOD,    registreCourant++);  :}
+expression_arith ::= expression_arith:e1 PLUS   expression_arith:e2     {:  RESULT = new OperationArithmetique(e1, e2, EnumOp.PLUS,   registreCourant); 
+                                                                            int tmp = OperationArithmetique.genCode(e1, e2, EnumOp.PLUS, registreCourant++, countOP, registreAvantTimes); 
+                                                                            if(tmp != -1) { registreAvantTimes = tmp; } 
+                                                                            countOP = false; countMOD = false;
+                                                                        :}
+                  |  expression_arith:e1 MINUS  expression_arith:e2     {:  RESULT = new OperationArithmetique(e1, e2, EnumOp.MINUS,  registreCourant); 
+                                                                            int tmp = OperationArithmetique.genCode(e1, e2, EnumOp.MINUS, registreCourant++, countOP, registreAvantTimes); 
+                                                                            if(tmp != -1) { registreAvantTimes = tmp; } 
+                                                                            countOP = false; countMOD = false;
+                                                                        :}
+                  |  expression_arith:e1 TIMES  expression_arith:e2     {:  RESULT = new OperationArithmetique(e1, e2, EnumOp.TIMES,  registreCourant); 
+                                                                            int tmp = OperationArithmetique.genCode(e1, e2, EnumOp.TIMES, registreCourant++, countOP, registreAvantTimes); 
+                                                                            if(tmp != -1) { registreAvantTimes = tmp; } 
+                                                                            countOP = true; countMOD = false;
+                                                                        :}
+                  |  expression_arith:e1 DIVIDE expression_arith:e2     {:  RESULT = new OperationArithmetique(e1, e2, EnumOp.DIVIDE, registreCourant); 
+                                                                            int tmp = OperationArithmetique.genCode(e1, e2, EnumOp.DIVIDE, registreCourant++, countOP, registreAvantTimes); 
+                                                                            if(tmp != -1) { registreAvantTimes = tmp; } 
+                                                                            countOP = true; countMOD = false;
+                                                                        :}
+                  |  expression_arith:e1 MOD    expression_arith:e2     {:  RESULT = new OperationArithmetique(e1, e2, EnumOp.MOD,    registreCourant); 
+                                                                            int tmp = OperationArithmetique.genCode(e1, e2, EnumOp.MOD, registreCourant++, countOP, registreAvantTimes); 
+                                                                            if(tmp != -1) { registreAvantTimes = tmp; } 
+                                                                            countOP = true; countMOD = true;
+                                                                        :}
                   //|  LPAR expression_arith:exp RPAR                     {: RESULT = new OperationArithmetique(e;       :}
                   |  MINUS expression_arith:exp                         {: RESULT = new OperationArithmetique(exp, EnumOp.MINUS_U, registreCourant++);    :} %prec MINUS_U
                   |  expression_variable:exp                            {: RESULT = exp; :}

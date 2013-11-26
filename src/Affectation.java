@@ -13,8 +13,9 @@ public class Affectation extends Instruction {
     }
 
     public String evaluer(int registreCourant){
-        String result = "t0 = " + droite.evaluer(EnumOp.UNKNOWN);
-        result += "\n" + gauche.evaluer(null) + " = t" + registreCourant;
+        //String result = "t0 = " + droite.evaluer(EnumOp.UNKNOWN);
+        //result += "\n" + gauche.evaluer(null) + " = t" + registreCourant;
+        String result = gauche.evaluer(null) + " = t" + registreCourant;
 
         return result;
     }
