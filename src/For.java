@@ -1,4 +1,5 @@
 public class For extends Instruction {
+
     private Instruction affectation;
     private Expression condition;
     private Expression increment;
@@ -12,8 +13,6 @@ public class For extends Instruction {
         this.self = self;
     }
 
-    public String evaluer(int registreCourant){
-        return "TOTO";
-    }
+    public void genererCode(Label suivant) { }
 }
 

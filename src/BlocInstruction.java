@@ -8,13 +8,7 @@ public class BlocInstruction extends Instruction {
         this.list = list;
     }
 
-    public boolean verifier() {
-        return true;
-    }
+    public void genererCode(Label suivant) {
 
-    public String evaluer(int registreCourant) {
-        //Parcourir la liste et evaluer chaque element
-        //idée : pop.evaluer()
-        return "TOTO";
     }
 }

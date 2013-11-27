@@ -7,7 +7,15 @@ public class While extends Instruction {
         this.self = self;
     }
 
-    public String evaluer(int registreCourant){
-        return "TOTO";
+    public void genererCode(Label suivant) {
+        Label avantWhile = new Label();
+        Label selfLabel = new Label();
+
+        System.out.println(avantWhile + ":");
+        condition.genererJumpCode(selfLabel, suivant);
+
+        System.out.println(selfLabel + ":");
+        self.genererCode(avantWhile);
+        System.out.println("goto "+ avantWhile);
     }
 }

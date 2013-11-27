@@ -6,18 +6,8 @@ public class VariableTableau extends Variable {
         this.taille = taille;
     }
 
-    public boolean verifier() {
-        //Verifier si taille passé en parametre <= this.taille
-        return true;
-    }
-
-    public String evaluer(EnumOp prevOp){
-        // retourne le String de taille evalué en 3-code adress
-        // suivi de this.variable [dernier registre taille]
-        String result = taille.evaluer(prevOp);
-        result += "\n *(" + this.nomVariable + " + " + "dernierREG)"; // dernier registre utilisé + ")"
-
-        return result;
+    public Identifiant genererCode() {
+        return null;
     }
 }
 

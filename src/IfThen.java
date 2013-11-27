@@ -8,10 +8,15 @@ public class IfThen extends Instruction {
         this.self = self;
     }
 
-    public String evaluer(int registreCourant){
-        return "TOTO";
-    }
+    public void genererCode(Label suivant) {
+        Label selfLabel = new Label();
+        condition.genererJumpCode(selfLabel, suivant);
 
+        String result = selfLabel + ":";
+        System.out.println(result);
+
+        self.genererCode(suivant);
+    }
 }
 
 

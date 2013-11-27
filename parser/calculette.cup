@@ -15,8 +15,7 @@ parser code {:
 :}
 
 action code {:
-  int registreCourant = 0;
-  int registreAvantTimes = -1; // Times, div et mod
+//  int registreCourant = 0;
 :}
 
 init with {:
@@ -55,24 +54,25 @@ precedence left PLUS, MINUS;
 precedence left TIMES, DIVIDE; // Vérifier la précédence de MOD <<<<
 precedence left MOD;
 precedence left MINUS_U, NOT_U;
+precedence right THEN, ELSE;
 
 start with beginning;
 
-beginning ::= beginning instruction:inst {: //Gestion du numéro du label
-                                             System.out.println(inst.evaluer(registreCourant - 1 /*, label*/));
-                                             registreCourant = 0; :}
+beginning ::= beginning instruction:inst {: Label suivant = new Label();
+                                            inst.genererCode(suivant);
+                                            System.out.println("\n" + suivant + ":"); :}
             | /* Fin du parsing */
             ;
 
-instruction ::= affectation instruction
-             |  instruction_for instruction
-             |  instruction_while instruction
-             |  instruction_if instruction
-             |  bloc_instruction instruction
+instruction ::= affectation:affInstruction                      {: RESULT = affInstruction; :}
+             |  instruction_for:forInstruction                  {: RESULT = forInstruction; :}
+             |  instruction_while:whileInstruction              {: RESULT = whileInstruction; :}
+             |  instruction_if:ifInstruction                    {: RESULT = ifInstruction; :}
+             |  bloc_instruction:blocInstruction                {: RESULT = blocInstruction; :}
              ;
 
-affectation ::= ENUM_TYPE expression_variable:id AFFECT expression_arith:exp SEMIC  {: RESULT = new Affectation(id, exp); :}
-             |  expression_variable:id AFFECT expression_arith:exp SEMIC            {: RESULT = new Affectation(id, exp); :}
+affectation ::= ENUM_TYPE ID:id AFFECT expression_arith:exp SEMIC  {: RESULT = new Affectation(id, exp); :}
+             |  ID:id AFFECT expression_arith:exp SEMIC            {: RESULT = new Affectation(id, exp); :}
              ;
 
 instruction_if ::= IF LRBRA expression_bool:condition RRBRA THEN
@@ -80,7 +80,7 @@ instruction_if ::= IF LRBRA expression_bool:condition RRBRA THEN
                         ELSE instruction:blocElse                                   {: RESULT = new IfThenElse(condition, blocIf, blocElse); :}
 
                 |  IF LRBRA expression_bool:condition RRBRA THEN
-                        instruction:blocIf                                         {: RESULT = new IfThen(condition, blocIf); :}
+                        instruction:blocIf                                          {: RESULT = new IfThen(condition, blocIf); :}
                 ;
 
 
@@ -103,53 +103,37 @@ liste_instruction ::= liste_instruction:list instruction:nouvelleInstruction    
                    ;
 
 
-expression_variable  ::= ID:id                                          {: RESULT = new Variable(id); :}
-                      | ID:id LSBRA expression_arith:exp RSBRA          {: RESULT = new VariableTableau(id, exp); :}
-                      ;
-
 expression_numerique ::= INT:nb    {: RESULT = new Value(nb); :}
                       |  REAL:nb   {: RESULT = new Value(nb); :}
                       ;
 
 
-expression_arith ::= expression_arith:e1 PLUS   expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.PLUS,   registreCourant);
-                                                                           int tmp = OperationArithmetique.genCode(e1, e2, EnumOp.PLUS, registreCourant++, registreAvantTimes);
-                                                                           if(tmp != -1) { registreAvantTimes = tmp; } :}
-                  |  expression_arith:e1 MINUS  expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.MINUS,  registreCourant);
-                                                                           int tmp = OperationArithmetique.genCode(e1, e2, EnumOp.MINUS, registreCourant++, registreAvantTimes);
-                                                                           if(tmp != -1) { registreAvantTimes = tmp; } :}
-                  |  expression_arith:e1 TIMES  expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.TIMES,  registreCourant);
-                                                                           int tmp = OperationArithmetique.genCode(e1, e2, EnumOp.TIMES, registreCourant++, registreAvantTimes);
-                                                                           if(tmp != -1) { registreAvantTimes = tmp; } :}
-                  |  expression_arith:e1 DIVIDE expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.DIVIDE, registreCourant);
-                                                                           int tmp = OperationArithmetique.genCode(e1, e2, EnumOp.DIVIDE, registreCourant++, registreAvantTimes);
-                                                                           if(tmp != -1) { registreAvantTimes = tmp; } :}
-                  |  expression_arith:e1 MOD    expression_arith:e2     {: RESULT = new OperationArithmetique(e1, e2, EnumOp.MOD,    registreCourant);
-                                                                           int tmp = OperationArithmetique.genCode(e1, e2, EnumOp.MOD, registreCourant++, registreAvantTimes);
-                                                                           if(tmp != -1) { registreAvantTimes = tmp; } :}
-                  |  MINUS expression_arith:exp                         {: RESULT = new OperationArithmetique(exp, EnumOp.MINUS_U, registreCourant);
-                                                                           int tmp = OperationArithmetique.genCodeUnaire(exp, EnumOp.MOD, registreCourant++, registreAvantTimes);
-                                                                           if(tmp != -1) { registreAvantTimes = tmp; } :} %prec MINUS_U
+expression_arith ::= expression_arith:e1 PLUS   expression_arith:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.PLUS); :}
+                  |  expression_arith:e1 MINUS  expression_arith:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.MINUS); :}
+                  |  expression_arith:e1 TIMES  expression_arith:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.TIMES); :}
+                  |  expression_arith:e1 DIVIDE expression_arith:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.DIVIDE); :}
+                  |  expression_arith:e1 MOD    expression_arith:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.MOD); :}
+                  |  MINUS expression_arith:exp                         {: RESULT = new ArithmetiqueUnaire(exp, EnumOp.MINUS); :}
                   |  LRBRA expression_arith:exp RRBRA                   {: RESULT = exp; :}
                   |  expression_variable:exp                            {: RESULT = exp; :}
                   |  expression_numerique:exp                           {: RESULT = exp; :}
                   ;
 
-expression_bool ::= expression_arith:e1 AND     expression_arith:e2     {:  RESULT = new OperationBooleenne(e1, e2, EnumOp.AND);     :}
-                 |  expression_arith:e1 OR      expression_arith:e2     {:  RESULT = new OperationBooleenne(e1, e2, EnumOp.OR);      :}
-                 |  expression_arith:e1 DIFF    expression_arith:e2     {:  RESULT = new OperationBooleenne(e1, e2, EnumOp.DIFF);    :}
-                 |  expression_arith:e1 LT      expression_arith:e2     {:  RESULT = new OperationBooleenne(e1, e2, EnumOp.LT);      :}
-                 |  expression_arith:e1 GT      expression_arith:e2     {:  RESULT = new OperationBooleenne(e1, e2, EnumOp.GT);      :}
-                 |  expression_arith:e1 GE      expression_arith:e2     {:  RESULT = new OperationBooleenne(e1, e2, EnumOp.GE);      :}
-                 |  expression_arith:e1 LE      expression_arith:e2     {:  RESULT = new OperationBooleenne(e1, e2, EnumOp.LE);      :}
-                 |  expression_arith:e1 EQ      expression_arith:e2     {:  RESULT = new OperationBooleenne(e1, e2, EnumOp.EQUALS);  :}
+expression_bool ::= expression_arith:e1 AND     expression_arith:e2     {:  RESULT = new AndBool(e1, e2);     :}
+                 |  expression_arith:e1 OR      expression_arith:e2     {:  RESULT = new OrBool(e1, e2);      :}
+                 |  expression_arith:e1 DIFF    expression_arith:e2     {:  RESULT = new ComparaisonBool(e1, e2, EnumOp.DIFF);    :}
+                 |  expression_arith:e1 LT      expression_arith:e2     {:  RESULT = new ComparaisonBool(e1, e2, EnumOp.LT);      :}
+                 |  expression_arith:e1 GT      expression_arith:e2     {:  RESULT = new ComparaisonBool(e1, e2, EnumOp.GT);      :}
+                 |  expression_arith:e1 GE      expression_arith:e2     {:  RESULT = new ComparaisonBool(e1, e2, EnumOp.GE);      :}
+                 |  expression_arith:e1 LE      expression_arith:e2     {:  RESULT = new ComparaisonBool(e1, e2, EnumOp.LE);      :}
+                 |  expression_arith:e1 EQ      expression_arith:e2     {:  RESULT = new ComparaisonBool(e1, e2, EnumOp.EQUALS);  :}
 
-                 |  expression_bool:b1 AND      expression_bool:b2      {:  RESULT = new OperationBooleenne(b1, b2, EnumOp.AND);     :}
-                 |  expression_bool:b1 OR       expression_bool:b2      {:  RESULT = new OperationBooleenne(b1, b2, EnumOp.OR);      :}
-                 |  expression_bool:b1 DIFF     expression_bool:b2      {:  RESULT = new OperationBooleenne(b1, b2, EnumOp.DIFF);    :}
-                 |  expression_bool:b1 EQ       expression_bool:b2      {:  RESULT = new OperationBooleenne(b1, b2, EnumOp.EQUALS);  :}
+                 |  expression_bool:b1 AND      expression_bool:b2      {:  RESULT = new AndBool(b1, b2);     :}
+                 |  expression_bool:b1 OR       expression_bool:b2      {:  RESULT = new OrBool(b1, b2);      :}
+                 |  expression_bool:b1 DIFF     expression_bool:b2      {:  RESULT = new ComparaisonBool(b1, b2, EnumOp.DIFF);    :}
+                 |  expression_bool:b1 EQ       expression_bool:b2      {:  RESULT = new ComparaisonBool(b1, b2, EnumOp.EQUALS);  :}
 
-                 |  NOT expression_bool:b                               {:  RESULT = new OperationBooleenne(b, EnumOp.NOT); :} %prec NOT_U
+                 |  NOT expression_bool:b                               {:  RESULT = new NotBool(b); :} %prec NOT_U
                  |  LRBRA expression_bool:b RRBRA                       {:  RESULT = b;   :}
                  //|  expression_arith:exp                                {:  RESULT = exp; :}
                  ;

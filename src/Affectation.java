@@ -1,23 +1,16 @@
 public class Affectation extends Instruction {
-    private Expression gauche;
+
+    private String nom;
     private Expression droite;
 
-    public Affectation(Expression gauche, Expression droite){
-        this.gauche = gauche;
+    //On verra plus tard les tableaux
+    public Affectation(String nom, Expression droite){
+        this.nom = nom;
         this.droite = droite;
     }
 
-    public boolean verifier(){
-        // Verification de gauche.type == droite.type
-        return true;
-    }
-
-    public String evaluer(int registreCourant){
-        //String result = "t0 = " + droite.evaluer(EnumOp.UNKNOWN);
-        //result += "\n" + gauche.evaluer(null) + " = t" + registreCourant;
-        String result = gauche.evaluer(null) + " = t" + registreCourant;
-
-        return result;
+    public void genererCode(Label suivant) {
+        Identifiant res = droite.genererCode();
+        System.out.println(this.nom + " = " + res);
     }
 }
-

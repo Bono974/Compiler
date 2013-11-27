@@ -1,16 +1,13 @@
-public class Value<T> extends Expression {
+public class Value<T> extends OperationArithmetique {
+
     private T value;
 
     public Value(T value){
         this.value = value;
     }
 
-    public boolean verifier() {
-        return true;
-    }
-
-    public String evaluer(EnumOp prevOp) {
-        return this.value + "";
+    public Identifiant genererCode() {
+        return new IdentifiantValeur(this.value);
     }
 }
 
