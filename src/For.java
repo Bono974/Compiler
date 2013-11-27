@@ -1,17 +1,18 @@
-public class For extends IfThenElse {
-    public For(Instruction blocIf, Instruction blocThen, Expression condition){
-        super(blocIf, blocThen, condition);
-    }
+public class For extends Instruction {
+    private Instruction affectation;
+    private Expression condition;
+    private Expression increment;
 
-    public boolean verifier(){
-        // Verification de gauche.type == droite.type
-        return true;
+    private Instruction self;
+
+    public For(Instruction affectation, Expression condition, Expression increment, Instruction self) {
+        this.affectation = affectation;
+        this.condition = condition;
+        this.increment = increment;
+        this.self = self;
     }
 
     public String evaluer(int registreCourant){
-        String result = "Label x :";
-        //result += super.evaluer() + "\n GOTO Label x";
-        //Rajouter cas de sortie de boucle.
         return "TOTO";
     }
 }

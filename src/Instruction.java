@@ -3,7 +3,6 @@ public abstract class Instruction {
     //public Instruction (List<Instruction> l);
 
 
-    public abstract boolean verifier();
     public abstract String evaluer(int registreCourant);
 }
 
