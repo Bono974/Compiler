@@ -14,8 +14,8 @@ public class ComparaisonBool extends OperationBooleenne {
     public void genererJumpCode(Label oui, Label non) {
         Identifiant gaucheRes = gauche.genererCode();
         Identifiant droiteRes = droite.genererCode();
-        String res = "if "+ gaucheRes + " " + op + " " + droiteRes + "goto " + oui + "\n" +
-                    "goto " + non;
+        String res = "if "+ gaucheRes + " " + op + " " + droiteRes + " goto " + oui +
+                     "\ngoto " + non;
         System.out.println(res);
     }
 }

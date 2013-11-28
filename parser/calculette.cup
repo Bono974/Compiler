@@ -115,7 +115,7 @@ expression_arith ::= expression_arith:e1 PLUS   expression_arith:e2     {: RESUL
                   |  expression_arith:e1 MOD    expression_arith:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.MOD); :}
                   |  MINUS expression_arith:exp                         {: RESULT = new ArithmetiqueUnaire(exp, EnumOp.MINUS); :}
                   |  LRBRA expression_arith:exp RRBRA                   {: RESULT = exp; :}
-                  |  expression_variable:exp                            {: RESULT = exp; :}
+                  |  ID:id                                              {: RESULT = new Variable(id); :}
                   |  expression_numerique:exp                           {: RESULT = exp; :}
                   ;
 
@@ -134,6 +134,6 @@ expression_bool ::= expression_arith:e1 AND     expression_arith:e2     {:  RESU
                  |  expression_bool:b1 EQ       expression_bool:b2      {:  RESULT = new ComparaisonBool(b1, b2, EnumOp.EQUALS);  :}
 
                  |  NOT expression_bool:b                               {:  RESULT = new NotBool(b); :} %prec NOT_U
-                 |  LRBRA expression_bool:b RRBRA                       {:  RESULT = b;   :}
-                 //|  expression_arith:exp                                {:  RESULT = exp; :}
+                 //|  LRBRA expression_bool:b RRBRA                       {:  RESULT = b;   :}
+                 |  expression_arith:exp                                {:  RESULT = exp; :}
                  ;
