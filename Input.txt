@@ -1,12 +1,4 @@
-while(1)
-{
-    toto := t;
-    toto := t;
-    toto := t;
-    toto := t;
-    toto := t;
-    toto := t;
-    toto := t;
-    toto := t;
+bibi [i + 3 - k %2] := 3;
 
-}
+if ((3 < 2) && (3)) then
+    bibi := bibi + 2;
