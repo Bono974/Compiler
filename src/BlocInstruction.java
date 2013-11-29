@@ -9,6 +9,7 @@ public class BlocInstruction extends Instruction {
     }
 
     public void genererCode(Label suivant) {
-
+        for (Instruction ptr : this.list)
+            ptr.genererCode(suivant);
     }
 }

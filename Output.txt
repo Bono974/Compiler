@@ -1,6 +1,15 @@
-t0 = i + 3
-t1 = k % 2
-t2 = t0 - t1
-*(bibi + t2) = 3
+L1:
+if 1 != 0 goto L2
+goto L0
+L2:
+toto = t
+toto = t
+toto = t
+toto = t
+toto = t
+toto = t
+toto = t
+toto = t
+goto L1
 
 L0:

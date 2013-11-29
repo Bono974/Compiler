@@ -1,2 +1,12 @@
-bibi [i + 3 - k %2] := 3;
+while(1)
+{
+    toto := t;
+    toto := t;
+    toto := t;
+    toto := t;
+    toto := t;
+    toto := t;
+    toto := t;
+    toto := t;
 
+}
