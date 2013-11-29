@@ -1,12 +1,5 @@
-while(1)
-{
-    toto := t;
-    toto := t;
-    toto := t;
-    toto := t;
-    toto := t;
-    toto := t;
-    toto := t;
-    toto := t;
-
+for(i:=0;(1 < 10); i := i + 1;) {
+    i := 69;
 }
+
+

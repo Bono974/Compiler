@@ -85,7 +85,7 @@ instruction_if ::= IF LRBRA expression_bool:condition RRBRA THEN
                 ;
 
 
-instruction_for ::= FOR LRBRA affectation:affect SEMIC expression_bool:condition SEMIC increment:inc RRBRA
+instruction_for ::= FOR LRBRA affectation:affect expression_bool:condition affectation:inc RRBRA
                         instruction:blocFor                                         {: RESULT = new For(affect, condition, inc, blocFor); :}
                  ;
 
