@@ -48,10 +48,11 @@ non terminal LinkedList<Instruction> liste_instruction;
 non terminal Expression expression_variable, expression_arith, expression_bool;
 non terminal Expression expression_numerique, increment;
 
+
 precedence left AND, OR;
 precedence left LT, GT, GE, LE, EQ, DIFF;
 precedence left PLUS, MINUS;
-precedence left TIMES, DIVIDE; // Vérifier la précédence de MOD <<<<
+precedence left TIMES, DIVIDE;
 precedence left MOD;
 precedence left MINUS_U, NOT_U;
 precedence right THEN, ELSE;
@@ -71,8 +72,8 @@ instruction ::= affectation:affInstruction                      {: RESULT = affI
              |  bloc_instruction:blocInstruction                {: RESULT = blocInstruction; :}
              ;
 
-affectation ::= ENUM_TYPE ID:id AFFECT expression_arith:exp SEMIC  {: RESULT = new Affectation(id, exp); :}
-             |  ID:id AFFECT expression_arith:exp SEMIC            {: RESULT = new Affectation(id, exp); :}
+affectation ::= ENUM_TYPE expression_variable:id AFFECT expression_arith:exp SEMIC  {: RESULT = new Affectation(id, exp); :}
+             |  expression_variable:id AFFECT expression_arith:exp SEMIC            {: RESULT = new Affectation(id, exp); :}
              ;
 
 instruction_if ::= IF LRBRA expression_bool:condition RRBRA THEN
@@ -107,6 +108,10 @@ expression_numerique ::= INT:nb    {: RESULT = new Value(nb); :}
                       |  REAL:nb   {: RESULT = new Value(nb); :}
                       ;
 
+expression_variable ::= ID:id                                  {: RESULT = new Variable(id); :}
+                     |  ID:id LSBRA expression_arith:exp RSBRA {: RESULT = new VariableTableau(id, exp); :}
+                     ;
+
 
 expression_arith ::= expression_arith:e1 PLUS   expression_arith:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.PLUS); :}
                   |  expression_arith:e1 MINUS  expression_arith:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.MINUS); :}
@@ -115,7 +120,7 @@ expression_arith ::= expression_arith:e1 PLUS   expression_arith:e2     {: RESUL
                   |  expression_arith:e1 MOD    expression_arith:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.MOD); :}
                   |  MINUS expression_arith:exp                         {: RESULT = new ArithmetiqueUnaire(exp, EnumOp.MINUS); :}
                   |  LRBRA expression_arith:exp RRBRA                   {: RESULT = exp; :}
-                  |  ID:id                                              {: RESULT = new Variable(id); :}
+                  |  expression_variable:exp                            {: RESULT = exp; :}
                   |  expression_numerique:exp                           {: RESULT = exp; :}
                   ;
 

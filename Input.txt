@@ -1,11 +1,2 @@
-bobo := 2 - 3 / 2 * 4;
-
-if (j == 4) then
-    if (j != 2) then
-        b := b + 1;
-    else
-        h := l;
-else
-    k := p;
-
+bibi [i + 3 - k %2] := 3;
 

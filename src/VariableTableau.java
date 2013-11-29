@@ -7,7 +7,7 @@ public class VariableTableau extends Variable {
     }
 
     public Identifiant genererCode() {
-        return null;
+        Identifiant res = this.taille.genererCode();
+        return new IdentifiantVariableTableau(this.nomVariable, res);
     }
 }
-

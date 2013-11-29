@@ -1,16 +1,17 @@
 public class Affectation extends Instruction {
 
-    private String nom;
+    private Expression variable;
     private Expression droite;
 
     //On verra plus tard les tableaux
-    public Affectation(String nom, Expression droite){
-        this.nom = nom;
+    public Affectation(Expression variable, Expression droite){
+        this.variable = variable;
         this.droite = droite;
     }
 
     public void genererCode(Label suivant) {
-        Identifiant res = droite.genererCode();
-        System.out.println(this.nom + " = " + res);
+        Identifiant resDroite = droite.genererCode();
+        Identifiant resVariable = variable.genererCode();
+        System.out.println(resVariable + " = " + resDroite);
     }
 }
