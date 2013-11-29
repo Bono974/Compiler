@@ -15,7 +15,6 @@ public class For extends Instruction {
 
     public void genererCode(Label suivant) { 
 
-
         Label avantFor = new Label();
         Label selfLabel = new Label();
 
