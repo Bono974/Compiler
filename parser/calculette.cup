@@ -31,6 +31,7 @@ terminal PLUS, MINUS, TIMES, DIVIDE, MOD, MINUS_U, NOT_U;
 terminal EQUALS, AFFECT;
 terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE, ENUM_OP;
 terminal RBRACE, LBRACE;
+terminal INC, DEC;
 //Rounded bracket ( ) RBRA
 //Square bracket [ ]  SBRA
 //Brace  { } BRACES
@@ -89,7 +90,12 @@ instruction_for ::= FOR LRBRA affectation:affect expression_bool:condition SEMIC
                         instruction:blocFor                                         {: RESULT = new For(affect, condition, inc, blocFor); :}
                  ;
 
-//increment ::= ID:id
+increment ::= ID:id INC   {: RESULT = ; :}
+            | INC ID:id   {: RESULT = ; :}
+            | ID:id DEC   {: RESULT = ; :}
+            | DEC ID:id   {: RESULT = ; :}
+            | expression_variable:id AFFECT expression_arith:exp SEMIC              {: RESULT = new Affectation(id, exp); :}
+            ;
 
 instruction_while ::= WHILE LRBRA expression_bool:condition RRBRA
                          instruction:blocWhile                                      {: RESULT = new While(condition, blocWhile); :}

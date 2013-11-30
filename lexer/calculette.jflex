@@ -15,6 +15,13 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 %%
 
 /* -------------------------------------------------
+        Increments / Decrements
+   ------------------------------------------------- */
+
+"++" { return new Symbol(CalculetteSymbol.INC, yyline, yycolumn); }
+"--" { return new Symbol(CalculetteSymbol.DEC, yyline, yycolumn); }
+
+/* -------------------------------------------------
         Operateurs
    ------------------------------------------------- */
 

@@ -33,6 +33,17 @@ goto L1
 L0:
 
 
+i = 0
+L1:
+if 1 < 10 goto L2
+goto L0
+L2:
+i = 69
+t0 = i + 1
+i = t0
+goto L1
+
+L0:
 
 
 
