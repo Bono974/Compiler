@@ -1,8 +1,4 @@
 do {
     i := k + 1;
-    if (j != k) then
-        u := u + 1;
-    else
-        u := 1;
-} while ((g + 1) && k);
+} while (a && k);
 

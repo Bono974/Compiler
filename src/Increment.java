@@ -8,8 +8,8 @@ public class Increment extends Instruction {
     }
 
     public void genererCode(Label suivant) {
-        Identifiant resDroite = droite.genererCode();
+        /*Identifiant resDroite = droite.genererCode();
         Identifiant resVariable = variable.genererCode();
-        System.out.println(resVariable + " = " + resDroite);
+        System.out.println(resVariable + " = " + resDroite);*/
     }
 }

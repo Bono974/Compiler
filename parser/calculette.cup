@@ -43,11 +43,11 @@ terminal String ID;
 non terminal beginning;
 
 non terminal Instruction instruction, bloc_instruction;
-non terminal Instruction affectation, instruction_if, instruction_while, instruction_for;
+non terminal Instruction affectation, instruction_if, instruction_while, instruction_for, increment;
 non terminal LinkedList<Instruction> liste_instruction;
 
 non terminal Expression expression_variable, expression_arith, expression_bool, expression_arithBool;
-non terminal Expression expression_numerique, increment;
+non terminal Expression expression_numerique;
 
 
 precedence left AND, OR;
@@ -86,15 +86,15 @@ instruction_if ::= IF  expression_bool:condition THEN
                 ;
 
 
-instruction_for ::= FOR LRBRA affectation:affect expression_bool:condition SEMIC affectation:inc RRBRA
+instruction_for ::= FOR LRBRA affectation:affect expression_bool:condition SEMIC increment:inc RRBRA
                         instruction:blocFor                                         {: RESULT = new For(affect, condition, inc, blocFor); :}
                  ;
 
-increment ::= ID:id INC   {: RESULT = ; :}
-            | INC ID:id   {: RESULT = ; :}
-            | ID:id DEC   {: RESULT = ; :}
-            | DEC ID:id   {: RESULT = ; :}
-            | expression_variable:id AFFECT expression_arith:exp SEMIC              {: RESULT = new Affectation(id, exp); :}
+increment ::= /*ID:id INC   //{: RESULT = ; :}
+            | INC ID:id   //{: RESULT = ; :}
+            | ID:id DEC   //{: RESULT = ; :}
+            | DEC ID:id   //{: RESULT = ; :}
+            | */expression_variable:id AFFECT expression_arith:exp SEMIC              {: RESULT = new Affectation(id, exp); :}
             ;
 
 instruction_while ::= WHILE expression_bool:condition

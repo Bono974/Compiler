@@ -10,7 +10,7 @@ public class DoWhile extends While {
         System.out.println(avantDo + ":");
         self.genererCode(avantDo);
 
-        condition.genererJumpCode(suivant, avantDo);
+        condition.genererJumpCode(avantDo, suivant);
     }
 
 }
