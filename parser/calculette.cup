@@ -25,7 +25,7 @@ init with {:
 :}
 
 terminal IF, THEN, ELSE;
-terminal FOR, WHILE;
+terminal FOR, WHILE, DO;
 terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT, TRUE, FALSE;
 terminal PLUS, MINUS, TIMES, DIVIDE, MOD, MINUS_U, NOT_U;
 terminal EQUALS, AFFECT;
@@ -76,11 +76,11 @@ affectation ::= ENUM_TYPE expression_variable:id AFFECT expression_arith:exp SEM
              |  expression_variable:id AFFECT expression_arith:exp SEMIC            {: RESULT = new Affectation(id, exp); :}
              ;
 
-instruction_if ::= IF LRBRA expression_bool:condition RRBRA THEN
+instruction_if ::= IF  expression_bool:condition THEN
                         instruction:blocIf
                         ELSE instruction:blocElse                                   {: RESULT = new IfThenElse(condition, blocIf, blocElse); :}
 
-                |  IF LRBRA expression_bool:condition RRBRA THEN
+                |  IF  expression_bool:condition THEN
                         instruction:blocIf                                          {: RESULT = new IfThen(condition, blocIf); :}
                 ;
 
@@ -91,8 +91,11 @@ instruction_for ::= FOR LRBRA affectation:affect expression_bool:condition SEMIC
 
 //increment ::= ID:id
 
-instruction_while ::= WHILE LRBRA expression_bool:condition RRBRA
+instruction_while ::= WHILE expression_bool:condition
                          instruction:blocWhile                                      {: RESULT = new While(condition, blocWhile); :}
+                   |  DO
+                        instruction:blocWhile
+                      WHILE expression_bool:condition SEMIC                         {: RESULT = new DoWhile(blocWhile, condition); :}
                    ;
 
 bloc_instruction ::= LBRACE liste_instruction:bloc RBRACE                           {: RESULT = new BlocInstruction(bloc); :}
@@ -144,12 +147,12 @@ expression_arithBool ::= expression_arithBool:e1 PLUS   expression_arithBool:e2 
                       |  expression_numerique:exp                                   {: RESULT = exp; :}
                       ;
 
-expression_bool ::= expression_bool:b1 AND      expression_bool:b2                  {:  RESULT = new AndBool(b1, b2);     :}
-                 |  expression_bool:b1 OR       expression_bool:b2                  {:  RESULT = new OrBool(b1, b2);      :}
-                 |  expression_bool:b1 DIFF     expression_bool:b2                  {:  RESULT = new ComparaisonBool(b1, b2, EnumOp.DIFF);    :}
-                 |  expression_bool:b1 EQ       expression_bool:b2                  {:  RESULT = new ComparaisonBool(b1, b2, EnumOp.EQUALS);  :}
+expression_bool ::= expression_bool:b1 AND      expression_bool:b2                  {: RESULT = new AndBool(b1, b2);     :}
+                 |  expression_bool:b1 OR       expression_bool:b2                  {: RESULT = new OrBool(b1, b2);      :}
+                 |  expression_bool:b1 DIFF     expression_bool:b2                  {: RESULT = new ComparaisonBool(b1, b2, EnumOp.DIFF);    :}
+                 |  expression_bool:b1 EQ       expression_bool:b2                  {: RESULT = new ComparaisonBool(b1, b2, EnumOp.EQUALS);  :}
 
-                 |  NOT expression_bool:b                                           {:  RESULT = new NotBool(b); :} %prec NOT_U
+                 |  NOT expression_bool:b                                           {: RESULT = new NotBool(b); :} %prec NOT_U
                  |  LRBRA expression_bool:b RRBRA                                   {: RESULT = b;   :}
 
                  |  expression_arithBool:exp                                        {:  RESULT = exp; :}

@@ -54,6 +54,7 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 "else"   { return new Symbol(CalculetteSymbol.ELSE, yyline, yycolumn);  }
 "for"    { return new Symbol(CalculetteSymbol.FOR, yyline, yycolumn);   }
 "while"  { return new Symbol(CalculetteSymbol.WHILE, yyline, yycolumn); }
+"do"     { return new Symbol(CalculetteSymbol.DO, yyline, yycolumn);    }
 
 /* -------------------------------------------------
         Valeurs

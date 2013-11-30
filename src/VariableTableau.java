@@ -1,4 +1,5 @@
 public class VariableTableau extends Variable {
+
     public Expression taille;
 
     public VariableTableau(String nomVariable, Expression taille) {

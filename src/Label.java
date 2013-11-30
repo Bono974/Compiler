@@ -1,4 +1,5 @@
 public class Label {
+
     private int label;
     private static int labelSuivant = 0;
 
