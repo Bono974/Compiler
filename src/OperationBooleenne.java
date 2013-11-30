@@ -1,5 +1,5 @@
 public abstract class OperationBooleenne extends Expression {
 
-    public Identifiant genererCode() { return null; }
+    public Identifiant genererCode() { return null; };
 }
 

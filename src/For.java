@@ -13,7 +13,7 @@ public class For extends Instruction {
         this.self = self;
     }
 
-    public void genererCode(Label suivant) { 
+    public void genererCode(Label suivant) {
 
         Label avantFor = new Label();
         Label selfLabel = new Label();

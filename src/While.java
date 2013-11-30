@@ -1,6 +1,7 @@
 public class While extends Instruction {
-    private Expression condition;
-    private Instruction self;
+
+    protected Expression condition;
+    protected Instruction self;
 
     public While(Expression condition, Instruction self) {
         this.condition = condition;

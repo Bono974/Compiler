@@ -1,6 +1,6 @@
 public class IfThen extends Instruction {
-    private Expression condition;
 
+    private Expression condition;
     private Instruction self;
 
     public IfThen(Expression condition, Instruction self) {
