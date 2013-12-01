@@ -1,4 +1,8 @@
+
+/* Test commentaire */
+
 do {
     i := k + 1;
 } while (a && k);
 
+// 2eme test des commentaires

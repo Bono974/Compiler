@@ -7,10 +7,13 @@ import java_cup.runtime.Symbol;
 %cupsym CalculetteSymbol
 %cup
 
+LineTerminator = \r|\n|\r\n
+InputCharacter = [^\r\n]
+
 Integer = [[:digit:]]+
 Real = {Integer}(\.{Integer})?([Ee][+-]?{Integer})?
 Id = [a-zA-Z]+([a-zA-Z] | [[:digit:]])*
-Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
+Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {InputCharacter}* {LineTerminator}
 
 %%
 
