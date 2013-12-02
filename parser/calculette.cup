@@ -62,7 +62,8 @@ start with beginning;
 
 beginning ::= beginning instruction:inst {: Label suivant = new Label();
                                             inst.genererCode(suivant);
-                                            System.out.println("\n" + suivant + ":"); :}
+                                            System.out.println("\n" + suivant + ":");
+                                            IdentifiantRegistre.reinitialiser(); :}
             | /* Fin du parsing */
             ;
 

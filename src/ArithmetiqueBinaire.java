@@ -4,6 +4,8 @@ public class ArithmetiqueBinaire extends OperationArithmetique {
     private Expression droite;
     private EnumOp op;
 
+    private Identifiant res;
+
     public ArithmetiqueBinaire(Expression gauche, Expression droite, EnumOp op) {
         this.gauche = gauche;
         this.droite = droite;

@@ -9,7 +9,7 @@ public class IdentifiantVariableTableau implements Identifiant {
     }
 
     public String toString() {
-        return "*(" + this.nom + " + " + this.taille + ")";
+        return this.nom + "[" + this.taille + "]";
     }
 }
 

@@ -12,14 +12,15 @@ public class IfThenElse extends Instruction {
     }
 
     public void genererCode(Label suivant) {
-        Label oui= new Label();
+        Label oui = new Label();
         Label non = new Label();
         condition.genererJumpCode(oui, non);
 
         System.out.println(oui + ":");
         selfIf.genererCode(suivant);
 
-        System.out.println("goto " + suivant + "\n" + non + ":");
+        System.out.println("jump " + suivant +
+                           "\n" + non + ":");
         selfElse.genererCode(suivant);
     }
 }

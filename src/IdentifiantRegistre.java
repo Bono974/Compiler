@@ -7,7 +7,7 @@ public class IdentifiantRegistre implements Identifiant {
         this.self = this.suivant++;
     }
 
-    public void reinitialiser() {
+    public static void reinitialiser() {
         suivant = 0;
     }
 

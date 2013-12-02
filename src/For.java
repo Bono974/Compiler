@@ -14,7 +14,6 @@ public class For extends Instruction {
     }
 
     public void genererCode(Label suivant) {
-
         Label avantFor = new Label();
         Label selfLabel = new Label();
 
@@ -27,8 +26,7 @@ public class For extends Instruction {
         
         if(increment != null)
             increment.genererCode(avantFor);
-        System.out.println("goto "+ avantFor);
-
+        System.out.println("jump "+ avantFor);
     }
 }
 

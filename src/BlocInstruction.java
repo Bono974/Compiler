@@ -10,8 +10,14 @@ public class BlocInstruction extends Instruction {
     }
 
     public void genererCode(Label suivant) {
-    //todo label
-        for (Instruction ptr : this.list)
-            ptr.genererCode(suivant);
+        int tailleListe = this.list.size();
+
+        for (int i = 0; i < tailleListe - 1; i++) {
+            Label suivantInstruction = new Label();
+            list.get(i).genererCode(suivantInstruction);
+            System.out.println(suivantInstruction + ":");
+        }
+
+        list.get(tailleListe - 1).genererCode(suivant);
     }
 }
