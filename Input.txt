@@ -1,14 +1,7 @@
+i := 4 + 3 - k%3;
+i := 4 + 3 - k%3;
+i := 4 + 3 - k%3;
+i := 4 + 3 - k%3;
+i := 4 + 3 - k%3;
+i := 4 + 3 - k%3;
 
-/* Test commentaire */
-
-do {
-    i := k + 1;
-} while (a && k);
-
-// 2eme test des commentaires
-
-
-real bibi := 69;
-
-pointer real bibiPOINTER := &bibi;
-pointer real bibiPOINTER := *bibi;

@@ -17,6 +17,6 @@ public class While extends Instruction {
 
         System.out.println(selfLabel + ":");
         self.genererCode(avantWhile);
-        System.out.println("goto "+ avantWhile);
+        System.out.println("jump "+ avantWhile);
     }
 }

@@ -3,6 +3,8 @@ public class ArithmetiqueUnaire extends OperationArithmetique {
     private Expression exp;
     private EnumOp op;
 
+    private Identifiant res;
+
     public ArithmetiqueUnaire(Expression exp, EnumOp op) {
         this.exp = exp;
         this.op = op;
@@ -16,4 +18,7 @@ public class ArithmetiqueUnaire extends OperationArithmetique {
         return res;
     }
 
+    public String toString() {
+        return this.res.toString();
+    }
 }

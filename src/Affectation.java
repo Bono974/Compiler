@@ -3,7 +3,6 @@ public class Affectation extends Instruction {
     private Expression variable;
     private Expression droite;
 
-    //On verra plus tard les tableaux
     public Affectation(Expression variable, Expression droite){
         this.variable = variable;
         this.droite = droite;

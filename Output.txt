@@ -1,19 +1,36 @@
-L1:
-t0 = k + 1
-i = t0
-if a != 0 goto L2
-goto L0
-L2:
-if k != 0 goto L1
-goto L0
+t0 = 4 + 3
+t1 = k % 3
+t2 = t0 - t1
+i = t2
 
 L0:
-bibi = 69
+t0 = 4 + 3
+t1 = k % 3
+t2 = t0 - t1
+i = t2
+
+L1:
+t0 = 4 + 3
+t1 = k % 3
+t2 = t0 - t1
+i = t2
+
+L2:
+t0 = 4 + 3
+t1 = k % 3
+t2 = t0 - t1
+i = t2
 
 L3:
-bibiPOINTER = &bibi
+t0 = 4 + 3
+t1 = k % 3
+t2 = t0 - t1
+i = t2
 
 L4:
-bibiPOINTER = *bibi
+t0 = 4 + 3
+t1 = k % 3
+t2 = t0 - t1
+i = t2
 
 L5:
