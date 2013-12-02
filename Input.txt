@@ -6,3 +6,9 @@ do {
 } while (a && k);
 
 // 2eme test des commentaires
+
+
+real bibi := 69;
+
+pointer real bibiPOINTER := &bibi;
+pointer real bibiPOINTER := *bibi;

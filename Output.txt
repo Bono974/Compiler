@@ -8,3 +8,12 @@ if k != 0 goto L1
 goto L0
 
 L0:
+bibi = 69
+
+L3:
+bibiPOINTER = &bibi
+
+L4:
+bibiPOINTER = *bibi
+
+L5:

@@ -18,6 +18,14 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {InputCharacter}* {LineTerminat
 %%
 
 /* -------------------------------------------------
+        Variables Pointers
+   ------------------------------------------------- */
+
+("*"|"&"){Id}       { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,
+           yytext()); }
+
+
+/* -------------------------------------------------
         Increments / Decrements
    ------------------------------------------------- */
 
@@ -25,7 +33,7 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {InputCharacter}* {LineTerminat
 "--" { return new Symbol(CalculetteSymbol.DEC, yyline, yycolumn); }
 
 /* -------------------------------------------------
-        Operateurs
+        Operateurs  
    ------------------------------------------------- */
 
 ":="     { return new Symbol(CalculetteSymbol.AFFECT, yyline, yycolumn); }
@@ -59,12 +67,13 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {InputCharacter}* {LineTerminat
 "false"  { return new Symbol(CalculetteSymbol.FALSE, yyline, yycolumn); }
 
 
-"if"     { return new Symbol(CalculetteSymbol.IF, yyline, yycolumn);    }
-"then"   { return new Symbol(CalculetteSymbol.THEN, yyline, yycolumn);  }
-"else"   { return new Symbol(CalculetteSymbol.ELSE, yyline, yycolumn);  }
-"for"    { return new Symbol(CalculetteSymbol.FOR, yyline, yycolumn);   }
-"while"  { return new Symbol(CalculetteSymbol.WHILE, yyline, yycolumn); }
-"do"     { return new Symbol(CalculetteSymbol.DO, yyline, yycolumn);    }
+"if"      { return new Symbol(CalculetteSymbol.IF, yyline, yycolumn);       }
+"then"    { return new Symbol(CalculetteSymbol.THEN, yyline, yycolumn);     }
+"else"    { return new Symbol(CalculetteSymbol.ELSE, yyline, yycolumn);     }
+"for"     { return new Symbol(CalculetteSymbol.FOR, yyline, yycolumn);      }
+"while"   { return new Symbol(CalculetteSymbol.WHILE, yyline, yycolumn);    }
+"do"      { return new Symbol(CalculetteSymbol.DO, yyline, yycolumn);       }
+"pointer" { return new Symbol(CalculetteSymbol.POINTER, yyline, yycolumn);  }
 
 /* -------------------------------------------------
         Valeurs
@@ -79,12 +88,12 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {InputCharacter}* {LineTerminat
         Variables
    ------------------------------------------------- */
 
-"int"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
-				   EnumType.INTEGER); }
-"real"         { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
-				   EnumType.FLOAT); }
-{Id}           { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,
-				   yytext()); }
+"int"           { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
+           EnumType.INTEGER); }
+"real"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
+           EnumType.FLOAT); }
+{Id}            { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,
+           yytext()); }
 
 /* -------------------------------------------------
         Commentaires - Caracteres non pris en compte

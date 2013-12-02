@@ -29,7 +29,7 @@ terminal FOR, WHILE, DO;
 terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT, TRUE, FALSE;
 terminal PLUS, MINUS, TIMES, DIVIDE, MOD, MINUS_U, NOT_U;
 terminal EQUALS, AFFECT;
-terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE, ENUM_OP;
+terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE, ENUM_OP, POINTER;
 terminal RBRACE, LBRACE;
 terminal INC, DEC;
 //Rounded bracket ( ) RBRA
@@ -73,8 +73,9 @@ instruction ::= affectation:affInstruction                      {: RESULT = affI
              |  bloc_instruction:blocInstruction                {: RESULT = blocInstruction; :}
              ;
 
-affectation ::= ENUM_TYPE expression_variable:id AFFECT expression_arith:exp SEMIC  {: RESULT = new Affectation(id, exp); :}
-             |  expression_variable:id AFFECT expression_arith:exp SEMIC            {: RESULT = new Affectation(id, exp); :}
+affectation ::= ENUM_TYPE expression_variable:id AFFECT expression_arith:exp SEMIC          {: RESULT = new Affectation(id, exp); :}
+             |  expression_variable:id AFFECT expression_arith:exp SEMIC                    {: RESULT = new Affectation(id, exp); :}
+             |  POINTER ENUM_TYPE expression_variable:id AFFECT expression_arith:exp SEMIC  {: RESULT = new Affectation(id, exp); :}
              ;
 
 instruction_if ::= IF  expression_bool:condition THEN
