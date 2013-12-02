@@ -12,7 +12,7 @@ InputCharacter = [^\r\n]
 
 Integer = [[:digit:]]+
 Real = {Integer}(\.{Integer})?([Ee][+-]?{Integer})?
-Id = [a-zA-Z]+([a-zA-Z] | [[:digit:]])*
+Id = [a-zA-Z_]+([a-zA-Z_] | [[:digit:]])*
 Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {InputCharacter}* {LineTerminator}
 
 %%
@@ -36,7 +36,7 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {InputCharacter}* {LineTerminat
         Operateurs  
    ------------------------------------------------- */
 
-":="     { return new Symbol(CalculetteSymbol.AFFECT, yyline, yycolumn); }
+"="     { return new Symbol(CalculetteSymbol.AFFECT, yyline, yycolumn); }
 
 "["      { return new Symbol(CalculetteSymbol.LSBRA, yyline, yycolumn); }
 "]"      { return new Symbol(CalculetteSymbol.RSBRA, yyline, yycolumn); }
@@ -68,7 +68,6 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {InputCharacter}* {LineTerminat
 
 
 "if"      { return new Symbol(CalculetteSymbol.IF, yyline, yycolumn);       }
-"then"    { return new Symbol(CalculetteSymbol.THEN, yyline, yycolumn);     }
 "else"    { return new Symbol(CalculetteSymbol.ELSE, yyline, yycolumn);     }
 "for"     { return new Symbol(CalculetteSymbol.FOR, yyline, yycolumn);      }
 "while"   { return new Symbol(CalculetteSymbol.WHILE, yyline, yycolumn);    }
@@ -92,6 +91,8 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {InputCharacter}* {LineTerminat
            EnumType.INTEGER); }
 "real"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
            EnumType.FLOAT); }
+"bool"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
+           EnumType.BOOLEAN); }
 {Id}            { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,
            yytext()); }
 

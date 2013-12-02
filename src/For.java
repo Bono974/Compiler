@@ -24,7 +24,9 @@ public class For extends Instruction {
 
         System.out.println(selfLabel + ":");
         self.genererCode(avantFor);
-        increment.genererCode(avantFor);
+        
+        if(increment != null)
+            increment.genererCode(avantFor);
         System.out.println("goto "+ avantFor);
 
     }

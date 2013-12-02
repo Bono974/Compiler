@@ -10,6 +10,9 @@ public class Affectation extends Instruction {
     }
 
     public void genererCode(Label suivant) {
+        EnumOp droiteType = droite.getType();
+        //System.out.println("Type de l'affectation : " + droiteType);
+
         Identifiant resDroite = droite.genererCode();
         Identifiant resVariable = variable.genererCode();
         System.out.println(resVariable + " = " + resDroite);

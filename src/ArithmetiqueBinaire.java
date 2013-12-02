@@ -19,5 +19,4 @@ public class ArithmetiqueBinaire extends OperationArithmetique {
         System.out.println(result);
         return res;
     }
-
 }

@@ -1,19 +1,146 @@
-L1:
-t0 = k + 1
-i = t0
-if a != 0 goto L2
-goto L0
-L2:
-if k != 0 goto L1
-goto L0
+t0 = 2 * 2
+t1 = t0 / 3
+t2 = 1 + t1
+var_int = t2
 
 L0:
-bibi = 69
+t3 = 3 % 2
+t4 = 47 / 5.6
+t5 = t3 + t4
+var_real = t5
+
+L1:
+t6 = 2 + 3
+t7 = t6 + 4
+t8 = 1 < t7
+var_bool = t8
+
+L2:
+t9 = - 69
+t10 = - 42
+t11 = t9 + t10
+var_int = t11
 
 L3:
-bibiPOINTER = &bibi
+t12 = 666 * 10
+var_int = t12
 
 L4:
-bibiPOINTER = *bibi
+t13 = 6 < 9
+var_bool = t13
 
 L5:
+t14 = 1.6 * 4.2
+var_real = t14
+
+L6:
+*(tab + 2) = 66
+
+L7:
+bibi = 69
+
+L8:
+bibiPOINTER = &bibi
+
+L9:
+newBibi = *bibiPOINTER
+
+L10:
+t15 = 3 % 2
+t16 = 47 / 5.6
+t17 = t16 * 15
+t18 = t15 + t17
+var_real = t18
+
+L11:
+var_bool = null
+
+L12:
+t19 = 2 * 2
+t20 = t19 / 3
+t21 = 1 + t20
+var_int_new = t21
+
+L13:
+t22 = 3 % 2
+t23 = 47 / 5.6
+t24 = t22 + t23
+var_real_new = t24
+
+L14:
+t25 = 2 + 3
+t26 = t25 + 4
+t27 = 1 < t26
+var_bool_new = t27
+
+L15:
+if 1 < 2 goto L17
+goto L18
+L17:
+t28 = 72 + 3
+var_int_new = t28
+goto L16
+L18:
+var_int_new = 29
+
+L16:
+if var_int_new < 447 goto L20
+goto L19
+L20:
+var_int_new = 447
+
+L19:
+i = 22
+
+L21:
+i = 44
+L23:
+if i > 22 goto L24
+goto L22
+L24:
+var_int_new = 12
+t29 = i - 1
+i = t29
+goto L23
+
+L22:
+i = 44
+L26:
+if i > 22 goto L27
+goto L25
+L27:
+var_int_new = 12
+goto L26
+
+L25:
+L29:
+if var_bool_new != 0 goto L30
+goto L31
+L31:
+if 6 != 0 goto L30
+goto L28
+L30:
+t30 = var_int_new + 1
+var_int_new = t30
+goto L29
+
+L28:
+L33:
+t31 = k + 1
+i = t31
+if var_bool_new != 0 goto L33
+goto L32
+
+L32:
+if 2 < 1 goto L35
+goto L36
+L35:
+var_int_new = 666
+goto L34
+L36:
+if 4 >= 1 goto L37
+goto L34
+L37:
+var_int_new = 999
+
+L34:

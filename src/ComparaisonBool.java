@@ -18,4 +18,14 @@ public class ComparaisonBool extends OperationBooleenne {
                      "\ngoto " + non;
         System.out.println(res);
     }
+
+    public Identifiant genererCode(){
+        Identifiant gaucheRes = gauche.genererCode();
+        Identifiant droiteRes = droite.genererCode();
+        Identifiant res = new IdentifiantRegistre();
+
+        String result = res + " = " + gaucheRes + " " + op  + " " +droiteRes;
+        System.out.println(result);
+        return res;
+    }
 }

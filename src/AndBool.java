@@ -14,4 +14,8 @@ public class AndBool extends OperationBooleenne {
         System.out.println(labelDroite + ":");
         droite.genererJumpCode(oui, non);
     }
+
+    public Identifiant genererCode(){
+        return null;
+    }
 }

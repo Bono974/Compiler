@@ -9,4 +9,8 @@ public class NotBool extends OperationBooleenne {
     public void genererJumpCode(Label oui, Label non) {
         this.exp.genererJumpCode(non, oui);
     }
+
+    public Identifiant genererCode(){
+        return null;
+    }
 }

@@ -6,5 +6,9 @@ public abstract class OperationArithmetique extends Expression {
            System.out.println(result);
     }
 
-    public abstract Identifiant genererCode();
+    //public abstract Identifiant genererCode();
+
+    public EnumOp getType(){
+        return EnumOp.OP_ARITHMETIQUE;
+    }
 }
