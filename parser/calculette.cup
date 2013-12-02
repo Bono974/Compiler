@@ -42,9 +42,11 @@ terminal String ID;
 
 non terminal beginning;
 
-non terminal Instruction instruction, bloc_instruction;
-non terminal Instruction affectation, instruction_if, instruction_while, instruction_for, increment;
+non terminal Instruction instruction, bloc_instruction, procedure, affectation;
+non terminal Instruction instruction_if, instruction_while, instruction_for, increment;
+
 non terminal LinkedList<Instruction> liste_instruction;
+non terminal LinkedList<Expression> liste_expression;
 
 non terminal Expression expression_variable, expression_arith, expression_bool, expression_arithBool, expression;
 non terminal Expression expression_numerique;
@@ -72,6 +74,7 @@ instruction ::= affectation:affInstruction                      {: RESULT = affI
              |  instruction_while:whileInstruction              {: RESULT = whileInstruction; :}
              |  instruction_if:ifInstruction                    {: RESULT = ifInstruction; :}
              |  bloc_instruction:blocInstruction                {: RESULT = blocInstruction; :}
+             |  procedure:procedureInstruction                  {: RESULT = procedureInstruction; :}
              ;
 
 affectation ::= ENUM_TYPE expression_variable:id AFFECT expression:exp SEMIC          {: RESULT = new Affectation(id, exp); :}
@@ -107,14 +110,25 @@ instruction_while ::= WHILE expression:condition
                       WHILE expression:condition SEMIC                                {: RESULT = new DoWhile(blocWhile, condition); :}
                    ;
 
+
+procedure ::= ID:nom LRBRA liste_expression:parametres RRBRA
+                      bloc_instruction:blocInstruction                                {: RESULT = new ProcedureDefinition(nom, parametres, blocInstruction); :}
+            | ID:nom LRBRA liste_expression:parametres RRBRA SEMIC                    {: RESULT = new ProcedureAppel(nom, parametres); :}
+            ;
+
+
 bloc_instruction ::= LBRACE liste_instruction:bloc RBRACE                             {: RESULT = new BlocInstruction(bloc); :}
                   ;
 
 liste_instruction ::= liste_instruction:list instruction:nouvelleInstruction          {: list.add(nouvelleInstruction); //append en fin de liste
-                                                                                       RESULT = list;  :}
+                                                                                         RESULT = list;  :}
                    |                                                                  {: RESULT = new LinkedList<Instruction>(); :}
                    ;
 
+liste_expression ::= liste_expression:list expression:nouvelleExpression              {: list.add(nouvelleExpression);
+                                                                                         RESULT = list; :}
+                   |                                                                  {: RESULT = new LinkedList<Expression>(); :}
+                   ;
 
 expression_numerique ::= INT:nb    {: RESULT = new Value(nb); :}
                       |  REAL:nb   {: RESULT = new Value(nb); :}
@@ -188,4 +202,4 @@ expression ::= expression:e1 PLUS   expression:e2     {: RESULT = new Arithmetiq
 
             |  expression_variable:exp                {: RESULT = exp; :}
             |  expression_numerique:exp               {: RESULT = exp; :}
-            ;                
+            ;

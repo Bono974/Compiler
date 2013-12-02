@@ -1,146 +1,184 @@
+param 2
+param 4
+param *f
+param 1
+param 4
+param d
+t0 = 3 % 2
+t1 = 4 + t0
+param t1
+call toto
+
+L0:
+param a
+param b
+param d
+param e
+param f
+t0 = i + 1
+i = t0
+L2:
+b = 3
+L4:
+if b < 10 jump L5
+jump L3
+L5:
+if b != 0 jump L6
+jump L4
+L6:
+t1 = k + 2
+j = t1
+t2 = b + 1
+b = t2
+jump L4
+L3:
+n = u
+t3 = call titi
+
+L1:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int = t2
 
-L0:
+L7:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real = t2
 
-L1:
+L8:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool = t2
 
-L2:
+L9:
 t0 = - 69
 t1 = - 42
 t2 = t0 + t1
 var_int = t2
 
-L3:
+L10:
 t0 = 666 * 10
 var_int = t0
 
-L4:
+L11:
 t0 = 6 < 9
 var_bool = t0
 
-L5:
+L12:
 t0 = 1.6 * 4.2
 var_real = t0
 
-L6:
+L13:
 tab[2] = 66
 
-L7:
+L14:
 bibi = 69
 
-L8:
+L15:
 bibiPOINTER = &bibi
 
-L9:
+L16:
 newBibi = *bibiPOINTER
 
-L10:
+L17:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t1 * 15
 t3 = t0 + t2
 var_real = t3
 
-L11:
+L18:
 var_bool = null
 
-L12:
+L19:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int_new = t2
 
-L13:
+L20:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real_new = t2
 
-L14:
+L21:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool_new = t2
 
-L15:
-if 1 < 2 jump L17
-jump L18
-L17:
+L22:
+if 1 < 2 jump L24
+jump L25
+L24:
 t0 = 72 + 3
 var_int_new = t0
-jump L16
-L18:
+jump L23
+L25:
 var_int_new = 29
 
-L16:
-if var_int_new < 447 jump L20
-jump L19
-L20:
+L23:
+if var_int_new < 447 jump L27
+jump L26
+L27:
 var_int_new = 447
 
-L19:
+L26:
 i = 22
 
-L21:
+L28:
 i = 44
-L23:
-if i > 22 jump L24
-jump L22
-L24:
+L30:
+if i > 22 jump L31
+jump L29
+L31:
 var_int_new = 12
 t0 = i - 1
 i = t0
-jump L23
+jump L30
 
-L22:
-i = 44
-L26:
-if i > 22 jump L27
-jump L25
-L27:
-var_int_new = 12
-jump L26
-
-L25:
 L29:
-if var_bool_new != 0 jump L30
-jump L31
-L31:
-if 6 != 0 jump L30
-jump L28
-L30:
-t0 = var_int_new + 1
-var_int_new = t0
-jump L29
-
-L28:
+i = 44
 L33:
-t0 = k + 1
-i = t0
-if var_bool_new != 0 jump L33
+if i > 22 jump L34
 jump L32
+L34:
+var_int_new = 12
+jump L33
 
 L32:
-if 2 < 1 jump L35
-jump L36
-L35:
-var_int_new = 666
-jump L34
 L36:
-if 4 >= 1 jump L37
-jump L34
+if var_bool_new != 0 jump L37
+jump L38
+L38:
+if 6 != 0 jump L37
+jump L35
 L37:
+t0 = var_int_new + 1
+var_int_new = t0
+jump L36
+
+L35:
+L40:
+t0 = k + 1
+i = t0
+if var_bool_new != 0 jump L40
+jump L39
+
+L39:
+if 2 < 1 jump L42
+jump L43
+L42:
+var_int_new = 666
+jump L41
+L43:
+if 4 >= 1 jump L44
+jump L41
+L44:
 var_int_new = 999
 
-L34:
+L41:
