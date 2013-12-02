@@ -7,13 +7,14 @@ import java_cup.runtime.Symbol;
 %cupsym CalculetteSymbol
 %cup
 
-LineTerminator = \r|\n|\r\n
-InputCharacter = [^\r\n]
+EndOfLine = \r|\n|\r\n
+Characters = [^\r\n]
 
 Integer = [[:digit:]]+
 Real = {Integer}(\.{Integer})?([Ee][+-]?{Integer})?
 Id = [a-zA-Z_]+([a-zA-Z_] | [[:digit:]])*
-Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {InputCharacter}* {LineTerminator}
+Char = [a-zA-Z]
+Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
 
 %%
 
@@ -21,9 +22,8 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {InputCharacter}* {LineTerminat
         Variables Pointers
    ------------------------------------------------- */
 
-("*"|"&"){Id}       { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,
+("*"|"&"){Id} { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,
            yytext()); }
-
 
 /* -------------------------------------------------
         Increments / Decrements
@@ -91,6 +91,8 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {InputCharacter}* {LineTerminat
            EnumType.INTEGER); }
 "real"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
            EnumType.FLOAT); }
+"char"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
+           EnumType.CHARACTER); }
 "bool"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
            EnumType.BOOLEAN); }
 {Id}            { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,

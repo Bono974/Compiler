@@ -38,7 +38,7 @@ terminal INC, DEC;
 
 terminal Integer INT;
 terminal Float REAL;
-terminal String ID;
+terminal String ID, CHAR;
 
 non terminal beginning;
 
@@ -97,7 +97,7 @@ increment ::= /*ID:id INC   //{: RESULT = ; :}
             | ID:id DEC   //{: RESULT = ; :}
             | DEC ID:id   //{: RESULT = ; :}
             | */expression_variable:id AFFECT expression:exp                          {: RESULT = new Affectation(id, exp); :}
-            | {: RESULT = null; :}
+            | /* Rien */ {: RESULT = null; :}
             ;
 
 instruction_while ::= WHILE expression:condition
