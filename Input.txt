@@ -69,6 +69,8 @@ var_real = 1.6 * 4.2;
 // Gestion des chaines de caractères
 
 // A FAIRE <<<<<<<<<<<<<
+char c = 'Q';
+string str = "blablabla";
 
 // ========================
 // Gestion des tableaux à 1 dimension
