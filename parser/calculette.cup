@@ -38,7 +38,7 @@ terminal INC, DEC;
 
 terminal Integer INT;
 terminal Float REAL;
-terminal String ID;
+terminal String ID, CHARACTER, CHARACTERS;
 
 non terminal beginning;
 
@@ -203,4 +203,6 @@ expression ::= expression:e1 PLUS   expression:e2     {: RESULT = new Arithmetiq
 
             |  expression_variable:exp                {: RESULT = exp; :}
             |  expression_numerique:exp               {: RESULT = exp; :}
+            |  CHARACTERS:ch                          {: RESULT = new CharacterMultiple(ch); :}
+            |  CHARACTER:ch                           {: RESULT = new CharacterUnique(ch); :}
             ;

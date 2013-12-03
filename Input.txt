@@ -1,4 +1,8 @@
-toto (4*d);
+
+char c = 'Q';
+string str = "blablabla";
+
+toto (2 4*f 1 -4 d (4+3%2));
 
 //REVOIR POINTEUR !!!
 // 4*f != *f

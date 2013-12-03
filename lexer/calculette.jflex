@@ -93,7 +93,15 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {InputCharacter}* {LineTerminat
            EnumType.FLOAT); }
 "bool"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
            EnumType.BOOLEAN); }
+"char"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
+           EnumType.CHARACTER); }
+"string"        { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
+           EnumType.STRING); }
 {Id}            { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,
+           yytext()); }
+"'"{Id}"'"      { return new Symbol(CalculetteSymbol.CHARACTER, yyline, yycolumn,
+           yytext()); }
+"\""{Id}"\""    { return new Symbol(CalculetteSymbol.CHARACTERS, yyline, yycolumn,
            yytext()); }
 
 /* -------------------------------------------------
