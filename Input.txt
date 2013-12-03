@@ -1,4 +1,4 @@
-toto (2 4*f 1 4 d (4+3%2));
+toto (4*d);
 
 //REVOIR POINTEUR !!!
 // 4*f != *f

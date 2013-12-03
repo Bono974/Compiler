@@ -27,7 +27,7 @@ init with {:
 terminal IF, ELSE;
 terminal FOR, WHILE, DO;
 terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT, TRUE, FALSE;
-terminal PLUS, MINUS, TIMES, DIVIDE, MOD, MINUS_U, NOT_U;
+terminal PLUS, MINUS, TIMES, DIVIDE, MOD, MINUS_U, NOT_U, POINTER_U;
 terminal EQUALS, AFFECT;
 terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE, ENUM_OP, POINTER;
 terminal RBRACE, LBRACE;
@@ -57,7 +57,7 @@ precedence left LT, GT, GE, LE, EQ, DIFF;
 precedence left PLUS, MINUS;
 precedence left TIMES, DIVIDE;
 precedence left MOD;
-precedence left MINUS_U, NOT_U;
+precedence left MINUS_U, NOT_U, POINTER_U;
 precedence right ELSE;
 
 start with beginning;
@@ -198,6 +198,7 @@ expression ::= expression:e1 PLUS   expression:e2     {: RESULT = new Arithmetiq
             |  expression:e1 EQ      expression:e2    {: RESULT = new ComparaisonBool(e1, e2, EnumOp.EQUALS);  :}
 
             |  NOT expression:b                       {: RESULT = new NotBool(b); :} %prec NOT_U
+            |  TIMES ID:id                            {: RESULT = new Variable("*" + id); :} %prec POINTER_U
             |  LRBRA expression:b RRBRA               {: RESULT = b; :}
 
             |  expression_variable:exp                {: RESULT = exp; :}
