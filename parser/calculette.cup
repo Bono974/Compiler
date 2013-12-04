@@ -25,8 +25,8 @@ init with {:
 :}
 
 terminal IF, ELSE;
-terminal FOR, WHILE, DO;
-terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT;
+terminal FOR, WHILE, DO, RETURN;
+terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT, TRUE, FALSE;
 terminal PLUS, MINUS, TIMES, DIVIDE, MOD, MINUS_U, NOT_U, POINTER_U;
 terminal EQUALS, AFFECT;
 terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE, ENUM_OP, POINTER;
@@ -42,14 +42,14 @@ terminal String ID, CHARACTER, CHARACTERS, BOOL;
 
 non terminal beginning;
 
-non terminal Instruction instruction, bloc_instruction, procedure, affectation;
+non terminal Instruction instruction, bloc_instruction, procedure, affectation, declaration;
 non terminal Instruction instruction_if, instruction_while, instruction_for, increment;
 
 non terminal LinkedList<Instruction> liste_instruction;
 non terminal LinkedList<Expression> liste_expression;
 
 non terminal Expression expression_variable, expression_arith, expression_bool, expression_arithBool, expression;
-non terminal Expression expression_numerique;
+non terminal Expression expression_numerique, valeur_retour;
 
 
 precedence left AND, OR;
@@ -62,19 +62,27 @@ precedence right ELSE;
 
 start with beginning;
 
-beginning ::= beginning instruction:inst {: Label suivant = new Label();
-                                            inst.genererCode(suivant);
-                                            System.out.println("\n" + suivant + ":");
-                                            IdentifiantRegistre.reinitialiser(); :}
+beginning ::= beginning instruction:inst {: //Cas d'une déclaration : pas besoin de nouveau Label
+                                            if (inst != null) {
+                                                Label suivant = new Label();
+                                                inst.genererCode(suivant);
+                                                System.out.println("\n" + suivant + ":");
+                                                IdentifiantRegistre.reinitialiser();
+                                            } :}
             | /* Fin du parsing */
             ;
 
-instruction ::= affectation:affInstruction                      {: RESULT = affInstruction; :}
+instruction ::= declaration:declInstruction                     {: RESULT = null; :}
+             |  affectation:affInstruction                      {: RESULT = affInstruction; :}
              |  instruction_for:forInstruction                  {: RESULT = forInstruction; :}
              |  instruction_while:whileInstruction              {: RESULT = whileInstruction; :}
              |  instruction_if:ifInstruction                    {: RESULT = ifInstruction; :}
              |  bloc_instruction:blocInstruction                {: RESULT = blocInstruction; :}
              |  procedure:procedureInstruction                  {: RESULT = procedureInstruction; :}
+             ;
+
+//TODO : rajouter le type dans le constructeur
+declaration ::= ENUM_TYPE expression_variable:id SEMIC                                {: RESULT = new Declaration(id); :}
              ;
 
 affectation ::= ENUM_TYPE expression_variable:id AFFECT expression:exp SEMIC          {: RESULT = new Affectation(id, exp); :}
@@ -95,13 +103,9 @@ instruction_for ::= FOR LRBRA affectation:affect expression:condition SEMIC incr
                         instruction:blocFor                                           {: RESULT = new For(affect, condition, inc, blocFor); :}
                  ;
 
-increment ::= /*ID:id INC   //{: RESULT = ; :}
-            | INC ID:id   //{: RESULT = ; :}
-            | ID:id DEC   //{: RESULT = ; :}
-            | DEC ID:id   //{: RESULT = ; :}
-            | */expression_variable:id AFFECT expression:exp                          {: RESULT = new Affectation(id, exp); :}
-            | /* Rien */ {: RESULT = null; :}
-            ;
+
+increment ::= expression_variable:id AFFECT expression:exp                          {: RESULT = new Affectation(id, exp); :}
+           ;
 
 instruction_while ::= WHILE expression:condition
                          instruction:blocWhile                                        {: RESULT = new While(condition, blocWhile); :}
@@ -112,9 +116,15 @@ instruction_while ::= WHILE expression:condition
 
 
 procedure ::= ID:nom LRBRA liste_expression:parametres RRBRA
-                      bloc_instruction:blocInstruction                                {: RESULT = new ProcedureDefinition(nom, parametres, blocInstruction); :}
+                      bloc_instruction:blocInstruction
+                      valeur_retour:ret                                               {: RESULT = new ProcedureDefinition(nom, parametres, blocInstruction, ret); :}
+            | ID:nom LRBRA liste_expression:parametres RRBRA
+                      bloc_instruction:blocInstruction                                {: RESULT = new ProcedureDefinition(nom, parametres, blocInstruction, null); :}
             | ID:nom LRBRA liste_expression:parametres RRBRA SEMIC                    {: RESULT = new ProcedureAppel(nom, parametres); :}
             ;
+
+valeur_retour ::= RETURN expression:valeur SEMIC                                      {: RESULT = valeur; :}
+               ;
 
 
 bloc_instruction ::= LBRACE liste_instruction:bloc RBRACE                             {: RESULT = new BlocInstruction(bloc); :}

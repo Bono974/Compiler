@@ -1,0 +1,25 @@
+<<<<<<< HEAD
+=======
+toto:
+a = k
+return k
+
+L0:
+toto:
+a = k
+
+L1:
+t0 = 3 + 4.3
+t1 = t0 - 4
+k = t1
+
+L2:
+param 3
+param 3
+param 6
+t0 = k - j
+param t0
+call toto
+
+L3:
+>>>>>>> 1c77563d21483238cb8ff2cdd964fd6aaae37e5e
