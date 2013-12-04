@@ -105,6 +105,7 @@ instruction_for ::= FOR LRBRA affectation:affect expression:condition SEMIC incr
 
 
 increment ::= expression_variable:id AFFECT expression:exp                          {: RESULT = new Affectation(id, exp); :}
+           |
            ;
 
 instruction_while ::= WHILE expression:condition
