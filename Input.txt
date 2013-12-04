@@ -1,6 +1,13 @@
 
-char c = 'Q';
-string str = "blablabla";
+
+
+short u = -8;
+unsigned short p = 95;
+int i = 65535;
+real j = 14.312465;
+unsigned int u = 13;
+unsigned real o = 15.36;
+
 
 toto (2 4*f 1 -4 d (4+3%2));
 

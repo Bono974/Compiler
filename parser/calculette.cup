@@ -26,7 +26,7 @@ init with {:
 
 terminal IF, ELSE;
 terminal FOR, WHILE, DO;
-terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT, TRUE, FALSE;
+terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT;
 terminal PLUS, MINUS, TIMES, DIVIDE, MOD, MINUS_U, NOT_U, POINTER_U;
 terminal EQUALS, AFFECT;
 terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE, ENUM_OP, POINTER;
@@ -38,7 +38,7 @@ terminal INC, DEC;
 
 terminal Integer INT;
 terminal Float REAL;
-terminal String ID, CHARACTER, CHARACTERS;
+terminal String ID, CHARACTER, CHARACTERS, BOOL;
 
 non terminal beginning;
 
@@ -135,6 +135,7 @@ expression_numerique ::= INT:nb    {: RESULT = new Value(nb); :}
                       ;
 
 expression_variable ::= ID:id                                           {: RESULT = new Variable(id); :}
+                     |  BOOL:bool                                       {: RESULT = new Variable("bool"); :}
                      |  ID:id LSBRA expression:exp RSBRA                {: RESULT = new VariableTableau(id, exp); :}
                      ;
 

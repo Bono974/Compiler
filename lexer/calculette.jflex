@@ -63,9 +63,6 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
 "!="     { return new Symbol(CalculetteSymbol.DIFF,  yyline, yycolumn); }
 "%"      { return new Symbol(CalculetteSymbol.MOD,   yyline, yycolumn); }
 "!"      { return new Symbol(CalculetteSymbol.NOT,   yyline, yycolumn); }
-"true"   { return new Symbol(CalculetteSymbol.TRUE,  yyline, yycolumn); }
-"false"  { return new Symbol(CalculetteSymbol.FALSE, yyline, yycolumn); }
-
 
 "if"      { return new Symbol(CalculetteSymbol.IF, yyline, yycolumn);       }
 "else"    { return new Symbol(CalculetteSymbol.ELSE, yyline, yycolumn);     }
@@ -87,24 +84,34 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
         Variables
    ------------------------------------------------- */
 
+// Entier sur 1 octet
+"short"           { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
+           EnumType.SHORT); }
+"unsigned" " "+ "short"           { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
+           EnumType.UNSIGNED_SHORT); }
+
+// Entier sur 2 octets
 "int"           { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
            EnumType.INTEGER); }
+"unsigned" " "+ "int"           { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
+           EnumType.UNSIGNED_INTEGER); }
+
 "real"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
-           EnumType.FLOAT); }
-"char"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
-           EnumType.CHARACTER); }
-"bool"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
-           EnumType.BOOLEAN); }
-"char"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
-           EnumType.CHARACTER); }
-"string"        { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
-           EnumType.STRING); }
-{Id}            { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,
-           yytext()); }
-"'"{Id}"'"      { return new Symbol(CalculetteSymbol.CHARACTER, yyline, yycolumn,
-           yytext()); }
-"\""{Id}"\""    { return new Symbol(CalculetteSymbol.CHARACTERS, yyline, yycolumn,
-           yytext()); }
+           EnumType.REAL); }
+"unsigned" " "+ "real"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
+           EnumType.UNSIGNED_REAL); }
+
+"true"   { return new Symbol(CalculetteSymbol.BOOL,  yyline, yycolumn, yytext()); }
+"false"  { return new Symbol(CalculetteSymbol.BOOL, yyline, yycolumn, yytext()); }
+
+"char"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.CHARACTER); }
+"bool"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.BOOLEAN); }
+"char"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.CHARACTER); }
+"string"        { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.STRING); }
+{Id}            { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn, yytext()); }
+"'"{Id}"'"      { return new Symbol(CalculetteSymbol.CHARACTER, yyline, yycolumn, yytext()); }
+"\""{Id}"\""    { return new Symbol(CalculetteSymbol.CHARACTERS, yyline, yycolumn, yytext()); }
+
 
 /* -------------------------------------------------
         Commentaires - Caracteres non pris en compte
