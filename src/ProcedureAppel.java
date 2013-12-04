@@ -15,8 +15,7 @@ public class ProcedureAppel extends Instruction {
             Identifiant resTmp = e.genererCode();
             System.out.println("param "+ resTmp);
         }
-        System.out.println("call "+ this.nom /*+
-                           "\n"+ suivant*/);
+        System.out.println("call "+ this.nom);
     }
 }
 

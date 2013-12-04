@@ -73,6 +73,7 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {InputCharacter}* {LineTerminat
 "while"   { return new Symbol(CalculetteSymbol.WHILE, yyline, yycolumn);    }
 "do"      { return new Symbol(CalculetteSymbol.DO, yyline, yycolumn);       }
 "pointer" { return new Symbol(CalculetteSymbol.POINTER, yyline, yycolumn);  }
+"return"  { return new Symbol(CalculetteSymbol.RETURN, yyline, yycolumn);  }
 
 /* -------------------------------------------------
         Valeurs

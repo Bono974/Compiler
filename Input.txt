@@ -1,3 +1,16 @@
+toto ( a z a s ) {
+    a = k;
+} return k;
+
+toto ( a z a s ) {
+    a = k;
+}
+
+k = 3 + 4.3 -4;
+toto(3 3 6 k-j);
+
+int toto;
+real toto;
 
 char c = 'Q';
 string str = "blablabla";
