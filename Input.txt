@@ -1,4 +1,20 @@
 
+char c = 'Q';
+string str = "blablabla";
+
+toto (2 4*f 1 -4 d (4+3%2));
+
+//REVOIR POINTEUR !!!
+// 4*f != *f
+
+titi (a b d e f) {
+    i = i + 1;
+    for (b = 3; b < 10; b = b + 1)
+        if (b)
+            j = k + 2;
+    n = u;
+}
+
 /* =====================
    Fichier INPUT de test 
    ===================== */
@@ -53,6 +69,8 @@ var_real = 1.6 * 4.2;
 // Gestion des chaines de caractères
 
 // A FAIRE <<<<<<<<<<<<<
+char c = 'Q';
+string str = "blablabla";
 
 // ========================
 // Gestion des tableaux à 1 dimension

@@ -1,146 +1,234 @@
+Type de l'affectation : CHARACTER
+c = 'Q'
+
+L0:
+Type de l'affectation : CHARACTERS
+str = "blablabla"
+
+L1:
+param 2
+t0 = 4 * f
+param t0
+t1 = 1 - 4
+param t1
+param d
+t2 = 3 % 2
+t3 = 4 + t2
+param t3
+call toto
+
+L2:
+param a
+param b
+param d
+param e
+param f
+Type de l'affectation : OP_ARITHMETIQUE
+t0 = i + 1
+i = t0
+L4:
+Type de l'affectation : OP_ARITHMETIQUE
+b = 3
+L6:
+if b < 10 jump L7
+jump L5
+L7:
+if b != 0 jump L8
+jump L6
+L8:
+Type de l'affectation : OP_ARITHMETIQUE
+t1 = k + 2
+j = t1
+Type de l'affectation : OP_ARITHMETIQUE
+t2 = b + 1
+b = t2
+jump L6
+L5:
+Type de l'affectation : OP_ARITHMETIQUE
+n = u
+t3 = call titi
+
+L3:
+Type de l'affectation : OP_ARITHMETIQUE
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int = t2
 
-L0:
+L9:
+Type de l'affectation : OP_ARITHMETIQUE
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real = t2
 
-L1:
+L10:
+Type de l'affectation : OP_BOOL
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool = t2
 
-L2:
+L11:
+Type de l'affectation : OP_ARITHMETIQUE
 t0 = - 69
 t1 = - 42
 t2 = t0 + t1
 var_int = t2
 
-L3:
+L12:
+Type de l'affectation : OP_ARITHMETIQUE
 t0 = 666 * 10
 var_int = t0
 
-L4:
+L13:
+Type de l'affectation : OP_BOOL
 t0 = 6 < 9
 var_bool = t0
 
-L5:
+L14:
+Type de l'affectation : OP_ARITHMETIQUE
 t0 = 1.6 * 4.2
 var_real = t0
 
-L6:
+L15:
+Type de l'affectation : CHARACTER
+c = 'Q'
+
+L16:
+Type de l'affectation : CHARACTERS
+str = "blablabla"
+
+L17:
+Type de l'affectation : OP_ARITHMETIQUE
 tab[2] = 66
 
-L7:
+L18:
+Type de l'affectation : OP_ARITHMETIQUE
 bibi = 69
 
-L8:
+L19:
+Type de l'affectation : OP_ARITHMETIQUE
 bibiPOINTER = &bibi
 
-L9:
+L20:
+Type de l'affectation : OP_ARITHMETIQUE
 newBibi = *bibiPOINTER
 
-L10:
+L21:
+Type de l'affectation : OP_ARITHMETIQUE
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t1 * 15
 t3 = t0 + t2
 var_real = t3
 
-L11:
+L22:
+Type de l'affectation : OP_BOOL
 var_bool = null
 
-L12:
+L23:
+Type de l'affectation : OP_ARITHMETIQUE
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int_new = t2
 
-L13:
+L24:
+Type de l'affectation : OP_ARITHMETIQUE
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real_new = t2
 
-L14:
+L25:
+Type de l'affectation : OP_BOOL
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool_new = t2
 
-L15:
-if 1 < 2 jump L17
-jump L18
-L17:
+L26:
+if 1 < 2 jump L28
+jump L29
+L28:
+Type de l'affectation : OP_ARITHMETIQUE
 t0 = 72 + 3
 var_int_new = t0
-jump L16
-L18:
+jump L27
+L29:
+Type de l'affectation : OP_ARITHMETIQUE
 var_int_new = 29
 
-L16:
-if var_int_new < 447 jump L20
-jump L19
-L20:
+L27:
+if var_int_new < 447 jump L31
+jump L30
+L31:
+Type de l'affectation : OP_ARITHMETIQUE
 var_int_new = 447
 
-L19:
+L30:
+Type de l'affectation : OP_ARITHMETIQUE
 i = 22
 
-L21:
+L32:
+Type de l'affectation : OP_ARITHMETIQUE
 i = 44
-L23:
-if i > 22 jump L24
-jump L22
-L24:
+L34:
+if i > 22 jump L35
+jump L33
+L35:
+Type de l'affectation : OP_ARITHMETIQUE
 var_int_new = 12
+Type de l'affectation : OP_ARITHMETIQUE
 t0 = i - 1
 i = t0
-jump L23
+jump L34
 
-L22:
+L33:
+Type de l'affectation : OP_ARITHMETIQUE
 i = 44
-L26:
-if i > 22 jump L27
-jump L25
-L27:
+L37:
+if i > 22 jump L38
+jump L36
+L38:
+Type de l'affectation : OP_ARITHMETIQUE
 var_int_new = 12
-jump L26
+jump L37
 
-L25:
-L29:
-if var_bool_new != 0 jump L30
-jump L31
-L31:
-if 6 != 0 jump L30
-jump L28
-L30:
+L36:
+L40:
+if var_bool_new != 0 jump L41
+jump L42
+L42:
+if 6 != 0 jump L41
+jump L39
+L41:
+Type de l'affectation : OP_ARITHMETIQUE
 t0 = var_int_new + 1
 var_int_new = t0
-jump L29
+jump L40
 
-L28:
-L33:
+L39:
+L44:
+Type de l'affectation : OP_ARITHMETIQUE
 t0 = k + 1
 i = t0
-if var_bool_new != 0 jump L33
-jump L32
+if var_bool_new != 0 jump L44
+jump L43
 
-L32:
-if 2 < 1 jump L35
-jump L36
-L35:
+L43:
+if 2 < 1 jump L46
+jump L47
+L46:
+Type de l'affectation : OP_ARITHMETIQUE
 var_int_new = 666
-jump L34
-L36:
-if 4 >= 1 jump L37
-jump L34
-L37:
+jump L45
+L47:
+if 4 >= 1 jump L48
+jump L45
+L48:
+Type de l'affectation : OP_ARITHMETIQUE
 var_int_new = 999
 
-L34:
+L45:

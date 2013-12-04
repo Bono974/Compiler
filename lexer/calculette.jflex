@@ -22,21 +22,21 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
         Variables Pointers
    ------------------------------------------------- */
 
-("*"|"&"){Id} { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,
+"&"{Id}         { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,
            yytext()); }
 
 /* -------------------------------------------------
         Increments / Decrements
    ------------------------------------------------- */
-
+/*
 "++" { return new Symbol(CalculetteSymbol.INC, yyline, yycolumn); }
-"--" { return new Symbol(CalculetteSymbol.DEC, yyline, yycolumn); }
+"--" { return new Symbol(CalculetteSymbol.DEC, yyline, yycolumn); }*/
 
 /* -------------------------------------------------
         Operateurs  
    ------------------------------------------------- */
 
-"="     { return new Symbol(CalculetteSymbol.AFFECT, yyline, yycolumn); }
+"="      { return new Symbol(CalculetteSymbol.AFFECT, yyline, yycolumn); }
 
 "["      { return new Symbol(CalculetteSymbol.LSBRA, yyline, yycolumn); }
 "]"      { return new Symbol(CalculetteSymbol.RSBRA, yyline, yycolumn); }
@@ -95,7 +95,15 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
            EnumType.CHARACTER); }
 "bool"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
            EnumType.BOOLEAN); }
+"char"          { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
+           EnumType.CHARACTER); }
+"string"        { return new Symbol(CalculetteSymbol.ENUM_TYPE, yyline, yycolumn,
+           EnumType.STRING); }
 {Id}            { return new Symbol(CalculetteSymbol.ID, yyline, yycolumn,
+           yytext()); }
+"'"{Id}"'"      { return new Symbol(CalculetteSymbol.CHARACTER, yyline, yycolumn,
+           yytext()); }
+"\""{Id}"\""    { return new Symbol(CalculetteSymbol.CHARACTERS, yyline, yycolumn,
            yytext()); }
 
 /* -------------------------------------------------

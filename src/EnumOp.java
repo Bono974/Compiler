@@ -9,7 +9,8 @@ public enum EnumOp {
     //Opérateur d'affectation
     AFFECT("NOT DEFINED => EnumOp"),
 
-    OP_ARITHMETIQUE("OP_ARITHMETIQUE"), OP_BOOL("OP_BOOL");
+    OP_ARITHMETIQUE("OP_ARITHMETIQUE"), OP_BOOL("OP_BOOL"),
+    CHARACTER("CHARACTER"), CHARACTERS("CHARACTERS");
 
     private String name = "";
 
