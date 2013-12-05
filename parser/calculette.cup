@@ -46,7 +46,7 @@ non terminal Instruction instruction, bloc_instruction, procedure, affectation, 
 non terminal Instruction instruction_if, instruction_while, instruction_for, increment;
 
 non terminal LinkedList<Instruction> liste_instruction;
-non terminal LinkedList<Expression> liste_expression;
+non terminal LinkedList<Expression> liste_expression, un_plusieurs_expression;
 
 non terminal Expression expression_variable, expression;
 non terminal Expression expression_numerique, valeur_retour;
@@ -136,23 +136,12 @@ liste_instruction ::= liste_instruction:list instruction:nouvelleInstruction    
                    |                                                                  {: RESULT = new LinkedList<Instruction>(); :}
                    ;
 
-
-liste_expression ::= liste_expression:list expression:nouvelleExpression              {: list.add(nouvelleExpression);
-                                                                                         RESULT = list; :}
-                   |                                                                  {: RESULT = new LinkedList<Expression>(); :}
-                   //| COMMA expression
-                   ;
-
-// A NE PAS SUPPRIMER, c'est pour des tests
-
-/*liste_expression ::= ID liste_expression:list               {: :}
-                   | ID                                                                 {: RESULT = new LinkedList<Expression>(); :}
-                   ;*/
-
-/*param_fonction  : NAME ',' {printf("%s, ", $1);} param_fonction
-                | NAME {printf("%s", $1);}
-                | VOID
-                ;*/
+liste_expression ::= liste_expression:list COMMA expression:exp                      {: list.add(exp);
+                                                                                        RESULT = list; :}
+                  |  expression:exp                                                  {: LinkedList l = new LinkedList<Expression>();
+                                                                                       l.add(exp);
+                                                                                       RESULT = l; :}
+                  ;
 
 expression_numerique ::= INT:nb    {: RESULT = new Value(nb); :}
                       |  REAL:nb   {: RESULT = new Value(nb); :}

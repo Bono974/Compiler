@@ -1,13 +1,13 @@
-toto ( a z a s ) {
+toto (a, q) {
     a = k;
 } return k;
 
-toto ( a z a s ) {
+toto (a) {
     a = k;
 }
 
 k = 3 + 4.3 -4;
-toto(3 3 6 k-j);
+toto(3,3,6,k-j);
 
 int toto;
 real toto;
@@ -22,18 +22,18 @@ unsigned int u = 13;
 unsigned real o = 15.36;
 
 
-toto (2 4*f 1 -4 d (4+3%2));
+//toto (2 4*f 1 -4 d (4+3%2));
 
 //REVOIR POINTEUR !!!
 // 4*f != *f
 
-titi (a b d e f) {
+/*titi (a b d e f) {
     i = i + 1;
     for (b = 3; b < 10; b = b + 1)
         if (b)
             j = k + 2;
     n = u;
-}
+}*/
 
 /* =====================
    Fichier INPUT de test 
