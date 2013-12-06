@@ -1,4 +1,5 @@
 import java_cup.runtime.Symbol;
+import tac.EnumType;
 
 %%
 %class CalculetteLexer

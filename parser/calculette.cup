@@ -1,6 +1,10 @@
 import java_cup.runtime.*;
 import java.lang.Number;
 import java.util.*;
+import expression.*;
+import identifiant.*;
+import instruction.*;
+import tac.*;
 
 parser code {:
     public void syntax_error(Symbol cur_token) {
@@ -90,6 +94,7 @@ affectation ::= ENUM_TYPE expression_variable:id AFFECT expression:exp SEMIC    
              |  POINTER ENUM_TYPE expression_variable:id AFFECT expression:exp SEMIC  {: RESULT = new Affectation(id, exp); :}
              ;
 
+
 instruction_if ::= IF  expression:condition
                         instruction:blocIf
                         ELSE instruction:blocElse                                     {: RESULT = new IfThenElse(condition, blocIf, blocElse); :}
@@ -139,16 +144,16 @@ liste_instruction ::= liste_instruction:list instruction:nouvelleInstruction    
 liste_expression ::= liste_expression:list COMMA expression:exp                      {: list.add(exp);
                                                                                         RESULT = list; :}
                   |  expression:exp                                                  {: LinkedList l = new LinkedList<Expression>();
-                                                                                       l.add(exp);
-                                                                                       RESULT = l; :}
+                                                                                        l.add(exp);
+                                                                                        RESULT = l; :}
                   ;
 
 expression_numerique ::= INT:nb    {: RESULT = new Value(nb); :}
                       |  REAL:nb   {: RESULT = new Value(nb); :}
+                      |  BOOL:bool {: RESULT = new Value(Boolean.parseBoolean(bool)); :}
                       ;
 
 expression_variable ::= ID:id                                           {: RESULT = new Variable(id); :}
-                     |  BOOL:bool                                       {: RESULT = new Variable("bool"); :}
                      |  ID:id LSBRA expression:exp RSBRA                {: RESULT = new VariableTableau(id, exp); :}
                      ;
 

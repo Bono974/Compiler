@@ -1,9 +1,11 @@
 toto:
+func toto
 a = k
 return k
 
 L0:
 toto:
+func toto
 a = k
 
 L1:
