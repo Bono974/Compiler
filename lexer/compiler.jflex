@@ -14,7 +14,6 @@ Characters = [^\r\n]
 Integer = [[:digit:]]+
 Real = {Integer}(\.{Integer})?([Ee][+-]?{Integer})?
 Id = [a-zA-Z_]+([a-zA-Z_] | [[:digit:]])*
-Char = [a-zA-Z]
 Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
 
 %%
@@ -34,7 +33,7 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
 "--" { return new Symbol(CompilerSymbol.DEC, yyline, yycolumn); }*/
 
 /* -------------------------------------------------
-        Operateurs  
+        Operateurs
    ------------------------------------------------- */
 
 "="      { return new Symbol(CompilerSymbol.AFFECT, yyline, yycolumn); }

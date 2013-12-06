@@ -30,12 +30,11 @@ init with {:
 
 terminal IF, ELSE;
 terminal FOR, WHILE, DO, RETURN;
-terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT, TRUE, FALSE;
-terminal PLUS, MINUS, TIMES, DIVIDE, MOD, MINUS_U, NOT_U, POINTER_U;
-terminal EQUALS, AFFECT;
-terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE, ENUM_OP, POINTER;
+terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT;
+terminal PLUS, MINUS, TIMES, DIVIDE, MOD, NOT_U, POINTER_U;
+terminal /*EQUALS,*/ AFFECT;
+terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE, POINTER;
 terminal RBRACE, LBRACE;
-terminal INC, DEC;
 //Rounded bracket ( ) RBRA
 //Square bracket [ ]  SBRA
 //Brace  { } BRACES
@@ -46,14 +45,15 @@ terminal String ID, CHARACTER, CHARACTERS, BOOL;
 
 non terminal beginning;
 
-non terminal Instruction instruction, bloc_instruction, procedure, affectation, declaration;
-non terminal Instruction instruction_if, instruction_while, instruction_for, increment;
-
+non terminal Instruction instruction, affectation, declaration,
+                         bloc_instruction, procedure, increment,
+                         instruction_if, instruction_while, instruction_for;
 non terminal LinkedList<Instruction> liste_instruction;
-non terminal LinkedList<Expression> liste_expression, un_plusieurs_expression;
 
-non terminal Expression expression_variable, expression;
-non terminal Expression expression_numerique, valeur_retour;
+non terminal Expression expression,
+                        expression_variable, expression_valeur,
+                        valeur_retour;
+non terminal LinkedList<Expression> liste_expression;
 
 
 precedence left AND, OR;
@@ -61,7 +61,7 @@ precedence left LT, GT, GE, LE, EQ, DIFF;
 precedence left PLUS, MINUS;
 precedence left TIMES, DIVIDE;
 precedence left MOD;
-precedence left MINUS_U, NOT_U, POINTER_U;
+precedence left NOT_U, POINTER_U;
 precedence right ELSE;
 
 start with beginning;
@@ -148,9 +148,11 @@ liste_expression ::= liste_expression:list COMMA expression:exp                 
                                                                                         RESULT = l; :}
                   ;
 
-expression_numerique ::= INT:nb    {: RESULT = new Value(nb); :}
-                      |  REAL:nb   {: RESULT = new Value(nb); :}
-                      |  BOOL:bool {: RESULT = new Value(Boolean.parseBoolean(bool)); :}
+expression_valeur ::= INT:nb                       {: RESULT = new Value(nb); :}
+                      |  REAL:nb                      {: RESULT = new Value(nb); :}
+                      |  BOOL:bool                    {: RESULT = new Value(Boolean.parseBoolean(bool)); :}
+                      |  CHARACTERS:ch                {: RESULT = new CharacterMultiple(ch); :}
+                      |  CHARACTER:ch                 {: RESULT = new CharacterUnique(ch); :}
                       ;
 
 expression_variable ::= ID:id                                           {: RESULT = new Variable(id); :}
@@ -178,7 +180,5 @@ expression ::= expression:e1 PLUS   expression:e2     {: RESULT = new Arithmetiq
             |  LRBRA expression:b RRBRA               {: RESULT = b; :}
 
             |  expression_variable:exp                {: RESULT = exp; :}
-            |  expression_numerique:exp               {: RESULT = exp; :}
-            |  CHARACTERS:ch                          {: RESULT = new CharacterMultiple(ch); :}
-            |  CHARACTER:ch                           {: RESULT = new CharacterUnique(ch); :}
+            |  expression_valeur:exp               {: RESULT = exp; :}
             ;
