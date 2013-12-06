@@ -65,6 +65,7 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
 "!"      { return new Symbol(CompilerSymbol.NOT,   yyline, yycolumn); }
 
 "if"      { return new Symbol(CompilerSymbol.IF, yyline, yycolumn);      }
+"then"    { return new Symbol(CompilerSymbol.THEN, yyline, yycolumn);    }
 "else"    { return new Symbol(CompilerSymbol.ELSE, yyline, yycolumn);    }
 "for"     { return new Symbol(CompilerSymbol.FOR, yyline, yycolumn);     }
 "while"   { return new Symbol(CompilerSymbol.WHILE, yyline, yycolumn);   }
@@ -86,23 +87,23 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
    ------------------------------------------------- */
 
 // Entier sur 1 octet
-"short"        { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.SHORT); }
-"unsigned" " "+ "short"           { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.UNSIGNED_SHORT); }
+"short"                  { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.SHORT); }
+"unsigned" " "+ "short"  { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.UNSIGNED_SHORT); }
 
 // Entier sur 2 octets
-"int"          { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.INTEGER); }
-"unsigned" " "+ "int"           { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.UNSIGNED_INTEGER); }
+"int"                    { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.INTEGER); }
+"unsigned" " "+ "int"    { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.UNSIGNED_INTEGER); }
 
-"real"         { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.REAL); }
-"unsigned" " "+ "real"          { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.UNSIGNED_REAL); }
+"real"                   { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.REAL); }
+"unsigned" " "+ "real"   { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.UNSIGNED_REAL); }
 
 "true"         { return new Symbol(CompilerSymbol.BOOL,  yyline, yycolumn, yytext()); }
 "false"        { return new Symbol(CompilerSymbol.BOOL, yyline, yycolumn, yytext()); }
 
-"char"         { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.CHARACTER); }
 "bool"         { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.BOOLEAN); }
 "char"         { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.CHARACTER); }
 "string"       { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.STRING); }
+"enum"         { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.ENUM); }
 {Id}           { return new Symbol(CompilerSymbol.ID, yyline, yycolumn, yytext()); }
 "'"{Id}"'"     { return new Symbol(CompilerSymbol.CHARACTER, yyline, yycolumn, yytext()); }
 "\""{Id}"\""   { return new Symbol(CompilerSymbol.CHARACTERS, yyline, yycolumn, yytext()); }
