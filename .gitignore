@@ -4,8 +4,10 @@
 
 Error.txt
 Output.txt
-src/CalculetteParser.java
-src/CalculetteSymbol.java
+src/CompilerParser.java
+src/CompilerSymbol.java
+src/CompilerSymbol.java~
+src/CompilerSymbol.java~
 
 # Fichier temporaire de Mac #
 .DS_Store
