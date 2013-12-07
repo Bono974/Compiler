@@ -1,0 +1,270 @@
+\documentclass[16pts]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{hmargin=2.5cm,vmargin=1.5cm}
+\usepackage{etoolbox}
+
+
+\usepackage{listings}
+
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstset{escapechar=@,style=customc}
+
+\lstset{language=C++,texcl=true}
+\makeatletter
+% First, modify the \@endpart macro.
+\def\@endpart{}
+
+% Next, copy the \chapter macro to \nonewpagechapter, and ...
+% ... suppress page-breaking instructions in the modified macro
+\let\nonewpagechapter\chapter
+\patchcmd\nonewpagechapter{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+
+\title{Rapport du Projet\\ Compilation}
+\author{Aupetit Jordan, Thiaolayel Bruno}
+\date{10 décembre 2013}
+
+
+\begin{document}
+
+\maketitle
+\clearpage
+
+\chapter{Spécifications}
+
+\section{Conventions}
+
+\begin{lstlisting}
+/********  Types simples  ********/
+int a;              //Entier signé codé sur 2 octets
+short a;            //Entier signé codé sur 1 octet
+
+unsigned int a;     //Entier non-signé codé sur 2 octets
+unsigned short a;   //Entier non-signé codé sur 1 octet
+
+bool a;             //Booléen codé sur 1 octet
+
+char a = 'a';             //Caractère codé sur 4 octets
+float a;            //Réel sur 4 octets
+
+enum couleur {rouge, vert, bleu} //Enumération sur 1 octet
+
+
+/******** Types complexes ********/
+int t[4..3]; //Intervalles matchés mais non générés. (cf plus loin)
+string a = "bonjour"; //Chaîne de 'n' caractère
+
+type tab[n]; //Avec 'type' quelconque, et 'n' sa taille en entier
+
+type* a; //Avec 'type' quelconque
+\end{lstlisting}
+
+
+\begin{lstlisting}
+/******** Exemple de fichier input ********/
+
+//Déclaration et affectations
+int a = 0;
+int b, c, d, e;
+b = 2;
+c = 3 - 2%2 + 4/23;
+d = 4;
+e = 5;
+f = true;
+
+//Tests et boucles
+if (b < (c || f)) {
+    for (int w = 30; w > 10; w = w - 10) {
+        j = j + 1;
+    }
+} else if (c && d)
+    while(true)
+        e = e + 1;
+
+bool test = true;
+//Blocs
+{
+    int tutu;
+    int k = 4;
+    while(k)
+        for (int j= 0; test; j = j + 3);
+            test = !test;
+
+    {
+        int tutu;
+        int k = 4;
+        while(k)
+            for (int j= 0; !test; j = j + 3);
+                test = !test;
+    }
+}
+
+/*****/
+
+// Procédure
+
+//Ne renvoyant rien :
+toto(int a, float b, char c, int* d) {
+    //TODO
+    do{
+        j = k; //TODO
+    }while (true);
+
+}
+
+//Renvoyant une valeur :
+titi(int a, float b, char c, int* d) {
+    //TODO
+
+} return b;
+
+toto(a, b, c, d); //TODO
+
+\end{lstlisting}
+
+
+
+
+\section{Grammaire sous forme de Backus-Naur}
+
+\begin{lstlisting}
+start with beginning;
+
+beginning ::= beginning instruction
+            | /* Fin du parsing */
+            ;
+
+instruction ::= declaration
+             |  affectation
+             |  enumeration
+             |  instruction_for
+             |  instruction_while
+             |  instruction_if
+             |  bloc_instruction
+             |  procedure
+             ;
+
+declaration ::= ENUM_TYPE liste_expression
+             ;
+
+affectation ::= ENUM_TYPE expression_variable:id AFFECT expression:exp SEMIC
+             |  expression_variable:id AFFECT expression:exp SEMIC
+
+             |  POINTER ENUM_TYPE expression_variable:id AFFECT expression:exp SEMIC
+             ;
+
+enumeration ::= ENUM_TYPE expression_variable:id LBRACE liste_expression:list RBRACE SEMIC
+             ;
+
+instruction_if ::= IF expression:condition THEN
+                      instruction:blocIf
+                      ELSE instruction:blocElse
+
+                |  IF expression:condition THEN
+                      instruction:blocIf
+                ;
+
+instruction_for ::= FOR LRBRA affectation:affect expression:condition SEMIC increment:inc RRBRA
+                        instruction:blocFor
+                 ;
+
+
+increment ::= expression_variable:id AFFECT expression:exp
+           |
+           ;
+
+instruction_while ::= WHILE expression:condition
+                         instruction:blocWhile
+                   |  DO
+                        instruction:blocWhile
+                      WHILE expression:condition SEMIC
+                   ;
+
+
+procedure ::= ID:nom LRBRA liste_expression:parametres RRBRA
+                      bloc_instruction:blocInstruction
+                      valeur_retour:ret
+            | ID:nom LRBRA liste_expression:parametres RRBRA
+                      bloc_instruction:blocInstruction
+            | ID:nom LRBRA liste_expression:parametres RRBRA SEMIC
+            ;
+
+valeur_retour ::= RETURN expression SEMIC
+               ;
+
+bloc_instruction ::= LBRACE liste_instruction RBRACE
+                  ;
+
+liste_instruction ::= liste_instruction instruction
+                   |
+                   ;
+
+liste_expression ::= liste_expression COMMA expression
+                  |  expression
+                  ;
+
+expression ::= expression PLUS   expression
+            |  expression MINUS  expression
+            |  expression TIMES  expression
+            |  expression DIVIDE expression
+            |  expression MOD    expression
+            |  MINUS expression
+
+            |  expression AND     expression
+            |  expression OR      expression
+            |  expression DIFF    expression
+            |  expression LT      expression
+            |  expression GT      expression
+            |  expression GE      expression
+            |  expression LE      expression
+            |  expression EQ      expression
+
+            |  NOT expression
+            |  LRBRA expression RRBRA
+
+            |  expression_variable
+            |  expression_valeur
+            ;
+
+expression_valeur ::= INT
+                   |  REAL
+                   |  BOOL
+                   |  CHARACTERS
+                   |  CHARACTER
+                   ;
+
+expression_variable ::= ID
+                     |  ID LSBRA expression RSBRA
+                     |  ID LSBRA expression INTER expression RSBRA
+                     |  TIMES ID //Pointeur
+                     ;
+
+\end{lstlisting}
+A noter : JUMPBOOL : optimisation des sauts conditionnels : arret des tests au premier faux.
+
+
+
+
+
+
+
+\end{document}
