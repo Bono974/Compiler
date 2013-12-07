@@ -36,6 +36,7 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
         Operateurs
    ------------------------------------------------- */
 
+".."     { return new Symbol(CompilerSymbol.INTER, yyline, yycolumn); }
 "="      { return new Symbol(CompilerSymbol.AFFECT, yyline, yycolumn); }
 
 "["      { return new Symbol(CompilerSymbol.LSBRA, yyline, yycolumn); }

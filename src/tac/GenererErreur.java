@@ -12,7 +12,7 @@ public class GenererErreur {
                 System.out.println("Veuillez préciser un \"Type\" car votre variable n'a pas été déclarée.");
                 System.out.println("===============*/");
             } else {
-                return true;
+                return false;
                 //System.out.println("\nLa variable : " + nomVariable + " a été ajouté." + hm);
             }
 
@@ -24,6 +24,6 @@ public class GenererErreur {
             }
         }
 
-        return false;
+        return true;
     }
 }

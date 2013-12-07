@@ -32,6 +32,7 @@ terminal PLUS, MINUS, TIMES, DIVIDE, MOD, NOT_U, POINTER_U;
 terminal /*EQUALS,*/ AFFECT;
 terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE, POINTER;
 terminal RBRACE, LBRACE;
+terminal INTER;
 //Rounded bracket ( ) RBRA
 //Square bracket [ ]  SBRA
 //Brace  { } BRACES
@@ -52,7 +53,6 @@ non terminal Expression expression,
                         expression_variable, expression_valeur,
                         valeur_retour;
 non terminal LinkedList<Expression> liste_expression;
-
 
 precedence left AND, OR;
 precedence left LT, GT, GE, LE, EQ, DIFF;
@@ -85,8 +85,8 @@ instruction ::= declaration:declInstruction                     {: RESULT = null
              |  procedure:procedureInstruction                  {: RESULT = procedureInstruction; :}
              ;
 
-//TODO : rajouter le type dans le constructeur
-declaration ::= ENUM_TYPE:type expression_variable:id SEMIC                                {: RESULT = new Declaration((EnumType)type, id); :}
+//TODO : rajouter le type dans le constructeur, test si liste_expression ne contient que des "type.variable"
+declaration ::= ENUM_TYPE:type liste_expression:liste SEMIC                                {: RESULT = new Declaration((EnumType)type, liste); :}
              ;
 
 affectation ::= ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMIC          {: RESULT = new Affectation((EnumType)type, id, exp); :}
@@ -143,24 +143,12 @@ liste_instruction ::= liste_instruction:list instruction:nouvelleInstruction    
                    |                                                                  {: RESULT = new LinkedList<Instruction>(); :}
                    ;
 
-liste_expression ::= liste_expression:list COMMA expression:exp                       {: list.add(exp);
+liste_expression ::= liste_expression:list COMMA expression:exp                       {: list.add(exp); //append en fin de liste
                                                                                          RESULT = list; :}
                   |  expression:exp                                                   {: LinkedList l = new LinkedList<Expression>();
                                                                                          l.add(exp);
                                                                                          RESULT = l; :}
                   ;
-
-
-expression_valeur ::= INT:nb                       {: RESULT = new Value(nb); :}
-                   |  REAL:nb                      {: RESULT = new Value(nb); :}
-                   |  BOOL:bool                    {: RESULT = new Value(Boolean.parseBoolean(bool)); :}
-                   |  CHARACTERS:ch                {: RESULT = new CharacterMultiple(ch); :}
-                   |  CHARACTER:ch                 {: RESULT = new CharacterUnique(ch); :}
-                   ;
-
-expression_variable ::= ID:id                                           {: RESULT = new Variable(id); :}
-                     |  ID:id LSBRA expression:exp RSBRA                {: RESULT = new VariableTableau(id, exp); :}
-                     ;
 
 expression ::= expression:e1 PLUS   expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.PLUS); :}
             |  expression:e1 MINUS  expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.MINUS); :}
@@ -178,10 +166,23 @@ expression ::= expression:e1 PLUS   expression:e2     {: RESULT = new Arithmetiq
             |  expression:e1 LE      expression:e2    {: RESULT = new ComparaisonBool(e1, e2, EnumOp.LE);      :}
             |  expression:e1 EQ      expression:e2    {: RESULT = new ComparaisonBool(e1, e2, EnumOp.EQUALS);  :}
 
-            |  NOT expression:b                       {: RESULT = new NotBool(b); :}         %prec NOT_U
-            |  TIMES ID:id                            {: RESULT = new Variable("*" + id); :} %prec POINTER_U
+            |  NOT expression:b                       {: RESULT = new NotBool(b); :} %prec NOT_U
             |  LRBRA expression:b RRBRA               {: RESULT = b; :}
 
             |  expression_variable:exp                {: RESULT = exp; :}
             |  expression_valeur:exp                  {: RESULT = exp; :}
             ;
+
+expression_valeur ::= INT:nb                       {: RESULT = new Value(nb); :}
+                   |  REAL:nb                      {: RESULT = new Value(nb); :}
+                   |  BOOL:bool                    {: RESULT = new Value(Boolean.parseBoolean(bool)); :}
+                   |  CHARACTERS:ch                {: RESULT = new CharacterMultiple(ch); :}
+                   |  CHARACTER:ch                 {: RESULT = new CharacterUnique(ch); :}
+                   ;
+
+expression_variable ::= ID:id                                                   {: RESULT = new Variable(id); :}
+                     |  ID:id LSBRA expression:exp RSBRA                        {: RESULT = new VariableTableau(id, exp); :}
+                     |  ID:id LSBRA expression:exp1 INTER expression:exp2 RSBRA {: RESULT = new VariableIntervalle(id, exp1, exp2); :}
+                     |  TIMES ID:id                                             {: RESULT = new Variable("*" + id); :} %prec POINTER_U
+                     ;
+

@@ -1,3 +1,11 @@
+bool e = !a;
+
+//int toto;
+//Intervalle matché
+int toto[4+2+1+2+33..b];
+
+
+//int toto, ttyty, eee;
 enum couleur { blanc, noir };
 
 toto (a, q) {

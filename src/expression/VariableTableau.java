@@ -1,6 +1,7 @@
 package expression;
 
 import identifiant.*;
+import tac.EnumOp;
 
 public class VariableTableau extends Variable {
 
@@ -14,5 +15,9 @@ public class VariableTableau extends Variable {
     public Identifiant genererCode() {
         Identifiant res = this.taille.genererCode();
         return new IdentifiantVariableTableau(this.nomVariable, res);
+    }
+
+    public EnumOp getType(){
+        return EnumOp.TABLEAU;
     }
 }

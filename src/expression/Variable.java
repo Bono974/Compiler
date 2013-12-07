@@ -1,6 +1,7 @@
 package expression;
 
 import identifiant.*;
+import tac.EnumOp;
 
 public class Variable extends OperationArithmetique {
 
@@ -12,6 +13,10 @@ public class Variable extends OperationArithmetique {
 
     public Identifiant genererCode(){
         return new IdentifiantVariable(this.nomVariable);
+    }
+
+    public EnumOp getType(){
+        return EnumOp.VARIABLE;
     }
 }
 
