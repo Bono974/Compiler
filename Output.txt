@@ -1,19 +1,23 @@
-toto:
-func toto
-a = k
-return k
+t0 = !a
+e = t0
 
 L0:
 toto:
 func toto
 a = k
+return k
 
 L1:
+toto:
+func toto
+a = k
+
+L2:
 t0 = 3 + 4.3
 t1 = t0 - 4
 k = t1
 
-L2:
+L3:
 param 3
 param 3
 param 6
@@ -21,175 +25,175 @@ t0 = k - j
 param t0
 call toto
 
-L3:
+L4:
 t0 = - 8
 u = t0
 
-L4:
+L5:
 p = 95
 
-L5:
+L6:
 i = 65535
 
-L6:
+L7:
 j = 14.312465
 
-L7:
+L8:
 u = 13
 
-L8:
+L9:
 o = 15.36
 
-L9:
+L10:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int = t2
 
-L10:
+L11:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real = t2
 
-L11:
+L12:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool = t2
 
-L12:
+L13:
 t0 = - 69
 t1 = - 42
 t2 = t0 + t1
 var_int = t2
 
-L13:
+L14:
 t0 = 666 * 10
 var_int = t0
 
-L14:
+L15:
 t0 = 6 < 9
 var_bool = t0
 
-L15:
+L16:
 t0 = 1.6 * 4.2
 var_real = t0
 
-L16:
+L17:
 c = 'Q'
 
-L17:
+L18:
 str = "blablabla"
 
-L18:
+L19:
 tab[2] = 66
 
-L19:
+L20:
 bibi = 69
 
-L20:
+L21:
 bibiPOINTER = &bibi
 
-L21:
+L22:
 newBibi = *bibiPOINTER
 
-L22:
+L23:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t1 * 15
 t3 = t0 + t2
 var_real = t3
 
-L23:
+L24:
 var_bool = null
 
-L24:
+L25:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int_new = t2
 
-L25:
+L26:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real_new = t2
 
-L26:
+L27:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool_new = t2
 
-L27:
-if 1 < 2 jump L29
-jump L30
-L29:
+L28:
+if 1 < 2 jump L30
+jump L31
+L30:
 t0 = 72 + 3
 var_int_new = t0
-jump L28
-L30:
+jump L29
+L31:
 var_int_new = 29
 
-L28:
-if var_int_new < 447 jump L32
-jump L31
-L32:
+L29:
+if var_int_new < 447 jump L33
+jump L32
+L33:
 var_int_new = 447
 
-L31:
+L32:
 i = 22
-
-L33:
-i = 44
-L35:
-if i > 22 jump L36
-jump L34
-L36:
-var_int_new = 12
-t0 = i - 1
-i = t0
-jump L35
 
 L34:
 i = 44
-L38:
-if i > 22 jump L39
-jump L37
-L39:
-var_int_new = 12
-jump L38
-
+L36:
+if i > 22 jump L37
+jump L35
 L37:
-L41:
-if var_bool_new != 0 jump L42
-jump L43
-L43:
-if 6 != 0 jump L42
-jump L40
+var_int_new = 12
+t0 = i - 1
+i = t0
+jump L36
+
+L35:
+i = 44
+L39:
+if i > 22 jump L40
+jump L38
+L40:
+var_int_new = 12
+jump L39
+
+L38:
 L42:
+if var_bool_new != 0 jump L43
+jump L44
+L44:
+if 6 != 0 jump L43
+jump L41
+L43:
 t0 = var_int_new + 1
 var_int_new = t0
-jump L41
+jump L42
 
-L40:
-L45:
+L41:
+L46:
 t0 = k + 1
 i = t0
-if var_bool_new != 0 jump L45
-jump L44
+if var_bool_new != 0 jump L46
+jump L45
 
-L44:
-if 2 < 1 jump L47
-jump L48
-L47:
-var_int_new = 666
-jump L46
+L45:
+if 2 < 1 jump L48
+jump L49
 L48:
-if 4 >= 1 jump L49
-jump L46
+var_int_new = 666
+jump L47
 L49:
+if 4 >= 1 jump L50
+jump L47
+L50:
 var_int_new = 999
 
-L46:
+L47:

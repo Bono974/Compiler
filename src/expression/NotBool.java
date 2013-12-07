@@ -1,7 +1,7 @@
 package expression;
 
 import tac.Label;
-import identifiant.Identifiant;
+import identifiant.*;
 
 public class NotBool extends OperationBooleenne {
 
@@ -16,6 +16,10 @@ public class NotBool extends OperationBooleenne {
     }
 
     public Identifiant genererCode() {
-        return null;
+        Identifiant operande = exp.genererCode();
+        Identifiant res = new IdentifiantRegistre();
+        String result = res + " = ! " + operande;
+        System.out.println(result);
+        return res;
     }
 }
