@@ -1,5 +1,6 @@
 package instruction;
 
+import java.util.*;
 import expression.Expression;
 import tac.Label;
 
@@ -18,19 +19,19 @@ public class For extends Instruction {
         this.self = self;
     }
 
-    public void genererCode(Label suivant) {
+    public void genererCode(Label suivant, Stack pileTableVariable) {
         Label avantFor = new Label();
         Label selfLabel = new Label();
 
-        affectation.genererCode(avantFor);
+        affectation.genererCode(avantFor, pileTableVariable);
         System.out.println(avantFor + ":");
         condition.genererJumpCode(selfLabel, suivant);
 
         System.out.println(selfLabel + ":");
-        self.genererCode(avantFor);
+        self.genererCode(avantFor, pileTableVariable);
 
         if(increment != null)
-            increment.genererCode(avantFor);
+            increment.genererCode(avantFor, pileTableVariable);
         System.out.println("jump "+ avantFor);
     }
 }

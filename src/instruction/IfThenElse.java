@@ -1,5 +1,6 @@
 package instruction;
 
+import java.util.*;
 import expression.Expression;
 import tac.Label;
 
@@ -16,16 +17,16 @@ public class IfThenElse extends Instruction {
         this.selfElse = selfElse;
     }
 
-    public void genererCode(Label suivant) {
+    public void genererCode(Label suivant, Stack pileTableVariable) {
         Label oui = new Label();
         Label non = new Label();
         condition.genererJumpCode(oui, non);
 
         System.out.println(oui + ":");
-        selfIf.genererCode(suivant);
+        selfIf.genererCode(suivant, pileTableVariable);
 
         System.out.println("jump " + suivant +
                            "\n" + non + ":");
-        selfElse.genererCode(suivant);
+        selfElse.genererCode(suivant, pileTableVariable);
     }
 }

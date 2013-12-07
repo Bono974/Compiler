@@ -19,13 +19,11 @@ parser code {:
 :}
 
 action code {:
+  HashMap tableVariable = new HashMap();
+  Stack pileTableVariable = new Stack();
 :}
 
-init with {:
-//Liste d'Instructions
-//Table de variables HashMap <variable, type>
-//Pile de HashMap<ListeInstruction, HashMap<variable, type>> à voir en détail
-:}
+init with {: :}
 
 terminal IF, THEN, ELSE;
 terminal FOR, WHILE, DO, RETURN;
@@ -69,17 +67,17 @@ start with beginning;
 beginning ::= beginning instruction:inst {: //Cas d'une déclaration : pas besoin de nouveau Label
                                             if (inst != null) {
                                                 Label suivant = new Label();
-                                                inst.genererCode(suivant);
+                                                inst.genererCode(suivant, pileTableVariable);
                                                 System.out.println("\n" + suivant + ":");
-                                                IdentifiantRegistre.reinitialiser();
+                                                IdentifiantRegistre.reinitialiser(); 
                                             } :}
-            | /* Fin du parsing */
+            | /* Fin du parsing */       {: pileTableVariable.push(tableVariable); :}
             ;
 
 //Les instructions.genererCode(null), permettent la gestion de type/vérification.
-instruction ::= declaration:declInstruction                     {: RESULT = null; declInstruction.genererCode(null); :}
+instruction ::= declaration:declInstruction                     {: RESULT = null; declInstruction.genererCode(null, pileTableVariable); :}
              |  affectation:affInstruction                      {: RESULT = affInstruction; :}
-             |  enumeration:affEnumeration                      {: RESULT = null; affEnumeration.genererCode(null); :}
+             |  enumeration:affEnumeration                      {: RESULT = null; affEnumeration.genererCode(null, pileTableVariable); :}
              |  instruction_for:forInstruction                  {: RESULT = forInstruction; :}
              |  instruction_while:whileInstruction              {: RESULT = whileInstruction; :}
              |  instruction_if:ifInstruction                    {: RESULT = ifInstruction; :}
@@ -88,17 +86,17 @@ instruction ::= declaration:declInstruction                     {: RESULT = null
              ;
 
 //TODO : rajouter le type dans le constructeur
-declaration ::= ENUM_TYPE expression_variable:id SEMIC                                {: RESULT = new Declaration(id); :}
+declaration ::= ENUM_TYPE:type expression_variable:id SEMIC                                {: RESULT = new Declaration((EnumType)type, id); :}
              ;
 
-affectation ::= ENUM_TYPE expression_variable:id AFFECT expression:exp SEMIC          {: RESULT = new Affectation(id, exp); :}
-             |  expression_variable:id AFFECT expression:exp SEMIC                    {: RESULT = new Affectation(id, exp); :}
+affectation ::= ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMIC          {: RESULT = new Affectation((EnumType)type, id, exp); :}
+             |  expression_variable:id AFFECT expression:exp SEMIC                    {: RESULT = new Affectation(null, id, exp); :}
 
-             |  POINTER ENUM_TYPE expression_variable:id AFFECT expression:exp SEMIC  {: RESULT = new Affectation(id, exp); :}
+             |  POINTER ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMIC  {: RESULT = new Affectation((EnumType)type, id, exp); :}
              ;
 
 //Vérification de ENUM_TYPE == enum
-enumeration ::= ENUM_TYPE expression_variable:id LBRACE liste_expression:list RBRACE SEMIC {: RESULT = new EnumerationOwn(id, list); :}
+enumeration ::= ENUM_TYPE:type expression_variable:id LBRACE liste_expression:list RBRACE SEMIC {: RESULT = new EnumerationOwn((EnumType)type, id, list); :}
              ;
 
 instruction_if ::= IF expression:condition THEN
@@ -114,7 +112,7 @@ instruction_for ::= FOR LRBRA affectation:affect expression:condition SEMIC incr
                  ;
 
 
-increment ::= expression_variable:id AFFECT expression:exp                            {: RESULT = new Affectation(id, exp); :}
+increment ::= expression_variable:id AFFECT expression:exp                            {: RESULT = new Affectation(null, id, exp); :}
            |
            ;
 

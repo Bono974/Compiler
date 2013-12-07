@@ -105,7 +105,7 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
 "string"       { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.STRING); }
 "enum"         { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.ENUM); }
 {Id}           { return new Symbol(CompilerSymbol.ID, yyline, yycolumn, yytext()); }
-"'"{Id}"'"     { return new Symbol(CompilerSymbol.CHARACTER, yyline, yycolumn, yytext()); }
+"'"([a-zA-Z] | [[:digit:]])"'"     { return new Symbol(CompilerSymbol.CHARACTER, yyline, yycolumn, yytext()); }
 "\""{Id}"\""   { return new Symbol(CompilerSymbol.CHARACTERS, yyline, yycolumn, yytext()); }
 
 

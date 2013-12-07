@@ -1,6 +1,6 @@
 package instruction;
 
-import java.util.LinkedList;
+import java.util.*;
 import expression.Expression;
 import identifiant.Identifiant;
 import tac.Label;
@@ -15,7 +15,9 @@ public class ProcedureAppel extends Instruction {
         this.listeExpression = list;
     }
 
-    public void genererCode(Label suivant) {
+    public void genererCode(Label suivant, Stack pileTableVariable) {
+        HashMap hm = (HashMap)pileTableVariable.peek();
+        
         for (Expression e: this.listeExpression) {
             Identifiant resTmp = e.genererCode();
             System.out.println("param "+ resTmp);

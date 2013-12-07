@@ -1,5 +1,6 @@
 package instruction;
 
+import java.util.*;
 import expression.Expression;
 import tac.Label;
 
@@ -13,14 +14,14 @@ public class IfThen extends Instruction {
         this.self = self;
     }
 
-    public void genererCode(Label suivant) {
+    public void genererCode(Label suivant, Stack pileTableVariable) {
         Label selfLabel = new Label();
         condition.genererJumpCode(selfLabel, suivant);
 
         String result = selfLabel + ":";
         System.out.println(result);
 
-        self.genererCode(suivant);
+        self.genererCode(suivant, pileTableVariable);
     }
 }
 

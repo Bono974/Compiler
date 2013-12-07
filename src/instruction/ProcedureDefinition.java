@@ -1,6 +1,6 @@
 package instruction;
 
-import java.util.LinkedList;
+import java.util.*;
 import expression.Expression;
 import tac.Label;
 import identifiant.Identifiant;
@@ -19,11 +19,11 @@ public class ProcedureDefinition extends Instruction {
         this.valeurRetour = valeurRetour;
     }
 
-    public void genererCode(Label suivant) {
+    public void genererCode(Label suivant, Stack pileTableVariable) {
         System.out.println(this.nom + ":");
         System.out.println("func "+ this.nom);
 
-        blocInstruction.genererCode(suivant);
+        blocInstruction.genererCode(suivant, pileTableVariable);
 
         if (this.valeurRetour != null) {
             Identifiant res = this.valeurRetour.genererCode();

@@ -1,14 +1,26 @@
 toto:
 func toto
+
+/*===============
+Veuillez préciser un "Type" car votre variable n'a pas été déclarée.
+===============*/
 a = k
 return k
 
 L0:
 toto:
 func toto
+
+/*===============
+Veuillez préciser un "Type" car votre variable n'a pas été déclarée.
+===============*/
 a = k
 
 L1:
+
+/*===============
+Veuillez préciser un "Type" car votre variable n'a pas été déclarée.
+===============*/
 t0 = 3 + 4.3
 t1 = t0 - 4
 k = t1
@@ -22,6 +34,10 @@ param t0
 call toto
 
 L3:
+
+/*===============
+La variable : toto a déjà été déclarée !!
+===============*/
 t0 = - 8
 u = t0
 
@@ -35,161 +51,192 @@ L6:
 j = 14.312465
 
 L7:
+
+/*===============
+La variable : u a déjà été déclarée !!
+===============*/
 u = 13
 
 L8:
 o = 15.36
 
 L9:
+x = 6
+
+L10:
+
+/*===============
+La variable : x a déjà été déclarée !!
+===============*/
+x = 22
+
+L11:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int = t2
 
-L10:
+L12:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real = t2
 
-L11:
+L13:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool = t2
 
-L12:
+L14:
 t0 = - 69
 t1 = - 42
 t2 = t0 + t1
 var_int = t2
 
-L13:
+L15:
 t0 = 666 * 10
 var_int = t0
 
-L14:
+L16:
 t0 = 6 < 9
 var_bool = t0
 
-L15:
+L17:
+var_bool = true
+
+L18:
+var_bool = false
+
+L19:
+var_char = 'a'
+
+L20:
 t0 = 1.6 * 4.2
 var_real = t0
 
-L16:
+L21:
 c = 'Q'
 
-L17:
+L22:
 str = "blablabla"
 
-L18:
+L23:
+
+/*===============
+Veuillez préciser un "Type" car votre variable n'a pas été déclarée.
+===============*/
 tab[2] = 66
 
-L19:
+L24:
 bibi = 69
 
-L20:
+L25:
 bibiPOINTER = &bibi
 
-L21:
+L26:
 newBibi = *bibiPOINTER
 
-L22:
+L27:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t1 * 15
 t3 = t0 + t2
 var_real = t3
 
-L23:
+L28:
 var_bool = null
 
-L24:
+L29:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int_new = t2
 
-L25:
+L30:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real_new = t2
 
-L26:
+L31:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool_new = t2
 
-L27:
-if 1 < 2 jump L29
-jump L30
-L29:
+L32:
+if 1 < 2 jump L34
+jump L35
+L34:
 t0 = 72 + 3
 var_int_new = t0
-jump L28
-L30:
+jump L33
+L35:
 var_int_new = 29
 
-L28:
-if var_int_new < 447 jump L32
-jump L31
-L32:
+L33:
+if var_int_new < 447 jump L37
+jump L36
+L37:
 var_int_new = 447
 
-L31:
+L36:
+
+/*===============
+La variable : i a déjà été déclarée !!
+===============*/
 i = 22
 
-L33:
+L38:
 i = 44
-L35:
-if i > 22 jump L36
-jump L34
-L36:
+L40:
+if i > 22 jump L41
+jump L39
+L41:
 var_int_new = 12
 t0 = i - 1
 i = t0
-jump L35
-
-L34:
-i = 44
-L38:
-if i > 22 jump L39
-jump L37
-L39:
-var_int_new = 12
-jump L38
-
-L37:
-L41:
-if var_bool_new != 0 jump L42
-jump L43
-L43:
-if 6 != 0 jump L42
 jump L40
+
+L39:
+i = 44
+L43:
+if i > 22 jump L44
+jump L42
+L44:
+var_int_new = 12
+jump L43
+
 L42:
+L46:
+if var_bool_new != 0 jump L47
+jump L48
+L48:
+if 6 != 0 jump L47
+jump L45
+L47:
 t0 = var_int_new + 1
 var_int_new = t0
-jump L41
+jump L46
 
-L40:
 L45:
+L50:
 t0 = k + 1
 i = t0
-if var_bool_new != 0 jump L45
-jump L44
+if var_bool_new != 0 jump L50
+jump L49
 
-L44:
-if 2 < 1 jump L47
-jump L48
-L47:
-var_int_new = 666
-jump L46
-L48:
-if 4 >= 1 jump L49
-jump L46
 L49:
+if 2 < 1 jump L52
+jump L53
+L52:
+var_int_new = 666
+jump L51
+L53:
+if 4 >= 1 jump L54
+jump L51
+L54:
 var_int_new = 999
 
-L46:
+L51:

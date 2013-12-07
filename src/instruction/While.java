@@ -1,5 +1,6 @@
 package instruction;
 
+import java.util.*;
 import expression.Expression;
 import tac.Label;
 
@@ -13,7 +14,7 @@ public class While extends Instruction {
         this.self = self;
     }
 
-    public void genererCode(Label suivant) {
+    public void genererCode(Label suivant, Stack pileTableVariable) {
         Label avantWhile = new Label();
         Label selfLabel = new Label();
 
@@ -21,7 +22,7 @@ public class While extends Instruction {
         condition.genererJumpCode(selfLabel, suivant);
 
         System.out.println(selfLabel + ":");
-        self.genererCode(avantWhile);
+        self.genererCode(avantWhile, pileTableVariable);
         System.out.println("jump "+ avantWhile);
     }
 }

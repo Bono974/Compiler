@@ -4,28 +4,28 @@ import java.util.*;
 
 import expression.*;
 import identifiant.*;
-import tac.Label;
-//import tac.EnumOp;
+import tac.*;
 
 public class EnumerationOwn extends Instruction {
 
     private Expression variable;
     private List<Expression> valeurs;
+    private EnumType type;
 
-    public EnumerationOwn (Expression variable, List<Expression> valeurs) {
+    public EnumerationOwn (EnumType type, Expression variable, List<Expression> valeurs) {
         this.variable = variable;
         this.valeurs = valeurs;
+        this.type = type;
     }
 
-    public void genererCode(Label suivant) {
+    public void genererCode(Label suivant, Stack pileTableVariable) {
         //Pas de code à générer.
         //EnumOp droiteType = droite.getType();
 
-        for (Expression ptr: this.valeurs) {
-            //ADD dans table des variables
-            //tableVariable.add(EnumTypr.ENUM, this.variable, ptr);
-        }
+        HashMap hm = (HashMap)pileTableVariable.peek();
 
+        if(GenererErreur.genErreur(hm, type, variable.genererCode().toString()))
+            hm.put(variable.genererCode().toString(), type);
     }
 }
 

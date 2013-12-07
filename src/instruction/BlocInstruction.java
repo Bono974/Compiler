@@ -1,6 +1,6 @@
 package instruction;
 
-import java.util.LinkedList;
+import java.util.*;
 import tac.Label;
 
 
@@ -13,15 +13,15 @@ public class BlocInstruction extends Instruction {
         this.list = list;
     }
 
-    public void genererCode(Label suivant) {
+    public void genererCode(Label suivant, Stack pileTableVariable) {
         int tailleListe = this.list.size();
 
         for (int i = 0; i < tailleListe - 1; i++) {
             Label suivantInstruction = new Label();
-            list.get(i).genererCode(suivantInstruction);
+            list.get(i).genererCode(suivantInstruction, pileTableVariable);
             System.out.println(suivantInstruction + ":");
         }
 
-        list.get(tailleListe - 1).genererCode(suivant);
+        list.get(tailleListe - 1).genererCode(suivant, pileTableVariable);
     }
 }
