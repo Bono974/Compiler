@@ -34,6 +34,7 @@ terminal PLUS, MINUS, TIMES, DIVIDE, MOD, NOT_U, POINTER_U;
 terminal /*EQUALS,*/ AFFECT;
 terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE, POINTER;
 terminal RBRACE, LBRACE;
+terminal INTER;
 //Rounded bracket ( ) RBRA
 //Square bracket [ ]  SBRA
 //Brace  { } BRACES
@@ -181,8 +182,9 @@ expression_valeur ::= INT:nb                       {: RESULT = new Value(nb); :}
                    |  CHARACTER:ch                 {: RESULT = new CharacterUnique(ch); :}
                    ;
 
-expression_variable ::= ID:id                                           {: RESULT = new Variable(id); :}
-                     |  ID:id LSBRA expression:exp RSBRA                {: RESULT = new VariableTableau(id, exp); :}
-                     |  TIMES ID:id                                     {: RESULT = new Variable("*" + id); :} %prec POINTER_U
+expression_variable ::= ID:id                                                   {: RESULT = new Variable(id); :}
+                     |  ID:id LSBRA expression:exp RSBRA                        {: RESULT = new VariableTableau(id, exp); :}
+                     |  ID:id LSBRA expression:exp1 INTER expression:exp2 RSBRA {: RESULT = new VariableIntervalle(id, exp1, exp2); :}
+                     |  TIMES ID:id                                             {: RESULT = new Variable("*" + id); :} %prec POINTER_U
                      ;
 
