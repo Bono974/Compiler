@@ -9,5 +9,10 @@ src/CompilerSymbol.java
 src/CompilerSymbol.java~
 src/CompilerSymbol.java~
 
+RapportCompilation.pdf
+RapportCompilation.aux
+RapportCompilation.log
+RapportCompilation.syntec.gz
+
 # Fichier temporaire de Mac #
 .DS_Store
