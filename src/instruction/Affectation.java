@@ -20,11 +20,19 @@ public class Affectation extends Instruction {
 
     public void genererCode(Label suivant, Stack pileTableVariable) {
         EnumOp droiteType = droite.getType();
+        String expName;
         //System.out.println("Type de gauche : " + type + " Variable : " + variable.genererCode() +  " -- Type de droite : " + droiteType);
-        /*HashMap hm = (HashMap)pileTableVariable.peek();
+        HashMap hm = (HashMap)pileTableVariable.peek();
 
-        if(!GenererErreur.genErreur(hm, type, variable.genererCode().toString()))
-            hm.put(variable.genererCode().toString(), type);*/
+        if(variable.getType() == EnumOp.INTERVALLE)
+            expName = variable.getNomVariable();
+        else
+            expName = variable.genererCode().toString();
+
+        if(!GenererErreur.genErreur(hm, type, expName))
+            hm.put(expName, type);
+
+        
 
         Identifiant resDroite = droite.genererCode();
         Identifiant resVariable = variable.genererCode();

@@ -10,5 +10,6 @@ public abstract class Expression {
     public abstract void genererJumpCode (Label oui, Label non);
 
     public abstract EnumOp getType ();
+    public String getNomVariable() { return "ErreurGetNomVariable"; }
 }
 

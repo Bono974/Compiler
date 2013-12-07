@@ -22,6 +22,10 @@ public class VariableIntervalle extends OperationArithmetique {
         return new IdentifiantVariableTableau(this.nomVariable, inf);
     }
 
+    public String getNomVariable(){
+        return nomVariable;
+    }
+
     public EnumOp getType(){
         return EnumOp.INTERVALLE;
     }

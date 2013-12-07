@@ -2,22 +2,45 @@ t0 = ! a
 e = t0
 
 L0:
-toto:
-func toto
-a = k
-return k
+
+/*===============
+La variable : toto a déjà été déclarée !!
+===============*/
+t0 = 4 + 2
+t1 = t0 + 1
+t2 = t1 + 2
+t3 = t2 + 33
+toto[t3] = 6
 
 L1:
 toto:
 func toto
+
+/*===============
+Veuillez préciser un "Type" car votre variable n'a pas été déclarée.
+===============*/
 a = k
+return k
 
 L2:
+toto:
+func toto
+
+/*===============
+Veuillez préciser un "Type" car votre variable n'a pas été déclarée.
+===============*/
+a = k
+
+L3:
+
+/*===============
+Veuillez préciser un "Type" car votre variable n'a pas été déclarée.
+===============*/
 t0 = 3 + 4.3
 t1 = t0 - 4
 k = t1
 
-L3:
+L4:
 param 3
 param 3
 param 6
@@ -25,190 +48,214 @@ t0 = k - j
 param t0
 call toto
 
-L4:
+L5:
+
+/*===============
+La variable : toto a déjà été déclarée !!
+===============*/
+
+/*===============
+La variable : toto a déjà été déclarée !!
+===============*/
 t0 = - 8
 u = t0
 
-L5:
+L6:
 p = 95
 
-L6:
+L7:
 i = 65535
 
-L7:
+L8:
 j = 14.312465
 
-L8:
+L9:
+
+/*===============
+La variable : u a déjà été déclarée !!
+===============*/
 u = 13
 
-L9:
+L10:
 o = 15.36
 
-L10:
+L11:
 x = 6
 
-L11:
+L12:
+
+/*===============
+La variable : x a déjà été déclarée !!
+===============*/
 x = 22
 
-L12:
+L13:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int = t2
 
-L13:
+L14:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real = t2
 
-L14:
+L15:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool = t2
 
-L15:
+L16:
 t0 = - 69
 t1 = - 42
 t2 = t0 + t1
 var_int = t2
 
-L16:
+L17:
 t0 = 666 * 10
 var_int = t0
 
-L17:
+L18:
 t0 = 6 < 9
 var_bool = t0
 
-L18:
+L19:
 var_bool = true
 
-L19:
+L20:
 var_bool = false
 
-L20:
+L21:
 var_char = 'a'
 
-L21:
+L22:
 t0 = 1.6 * 4.2
 var_real = t0
 
-L22:
+L23:
 c = 'Q'
 
-L23:
+L24:
 str = "blablabla"
 
-L24:
+L25:
+
+/*===============
+Veuillez préciser un "Type" car votre variable n'a pas été déclarée.
+===============*/
 tab[2] = 66
 
-L25:
+L26:
 bibi = 69
 
-L26:
+L27:
 bibiPOINTER = &bibi
 
-L27:
+L28:
 newBibi = *bibiPOINTER
 
-L28:
+L29:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t1 * 15
 t3 = t0 + t2
 var_real = t3
 
-L29:
+L30:
 var_bool = null
 
-L30:
+L31:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int_new = t2
 
-L31:
+L32:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real_new = t2
 
-L32:
+L33:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool_new = t2
 
-L33:
-if 1 < 2 jump L35
-jump L36
-L35:
+L34:
+if 1 < 2 jump L36
+jump L37
+L36:
 t0 = 72 + 3
 var_int_new = t0
-jump L34
-L36:
+jump L35
+L37:
 var_int_new = 29
 
-L34:
-if var_int_new < 447 jump L38
-jump L37
-L38:
+L35:
+if var_int_new < 447 jump L39
+jump L38
+L39:
 var_int_new = 447
 
-L37:
-i = 22
+L38:
 
-L39:
-i = 44
-L41:
-if i > 22 jump L42
-jump L40
-L42:
-var_int_new = 12
-t0 = i - 1
-i = t0
-jump L41
+/*===============
+La variable : i a déjà été déclarée !!
+===============*/
+i = 22
 
 L40:
 i = 44
-L44:
-if i > 22 jump L45
-jump L43
-L45:
-var_int_new = 12
-jump L44
-
+L42:
+if i > 22 jump L43
+jump L41
 L43:
-L47:
-if var_bool_new != 0 jump L48
-jump L49
-L49:
-if 6 != 0 jump L48
-jump L46
+var_int_new = 12
+t0 = i - 1
+i = t0
+jump L42
+
+L41:
+i = 44
+L45:
+if i > 22 jump L46
+jump L44
+L46:
+var_int_new = 12
+jump L45
+
+L44:
 L48:
+if var_bool_new != 0 jump L49
+jump L50
+L50:
+if 6 != 0 jump L49
+jump L47
+L49:
 t0 = var_int_new + 1
 var_int_new = t0
-jump L47
+jump L48
 
-L46:
-L51:
+L47:
+L52:
 t0 = k + 1
 i = t0
-if var_bool_new != 0 jump L51
-jump L50
+if var_bool_new != 0 jump L52
+jump L51
 
-L50:
-if 2 < 1 jump L53
-jump L54
-L53:
-var_int_new = 666
-jump L52
+L51:
+if 2 < 1 jump L54
+jump L55
 L54:
-if 4 >= 1 jump L55
-jump L52
+var_int_new = 666
+jump L53
 L55:
+if 4 >= 1 jump L56
+jump L53
+L56:
 var_int_new = 999
 
-L52:
+L53:
