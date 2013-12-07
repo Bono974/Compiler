@@ -1,3 +1,4 @@
+int toto, ttyty, eee;
 enum couleur { blanc, noir };
 
 toto (a, q) {
