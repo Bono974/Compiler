@@ -99,6 +99,10 @@ public class GenererErreur {
                 if(typeDroite == EnumType.ENUM) erreur = true;
                 if(typeDroite == EnumType.CHARACTER) erreur = true;
                 if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                if(typeDroite == EnumType.POINTER_INT) erreur = true;
+                if(typeDroite == EnumType.POINTER_REAL) erreur = true;
+                if(typeDroite == EnumType.POINTER_CHARACTER) erreur = true;
+                if(typeDroite == EnumType.POINTER_CHARACTERS) erreur = true;
                 break;
             case UNSIGNED_SHORT:
                 if(typeDroite == EnumType.INTEGER) erreur = true;
@@ -110,6 +114,10 @@ public class GenererErreur {
                 if(typeDroite == EnumType.ENUM) erreur = true;
                 if(typeDroite == EnumType.CHARACTER) erreur = true;
                 if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                if(typeDroite == EnumType.POINTER_INT) erreur = true;
+                if(typeDroite == EnumType.POINTER_REAL) erreur = true;
+                if(typeDroite == EnumType.POINTER_CHARACTER) erreur = true;
+                if(typeDroite == EnumType.POINTER_CHARACTERS) erreur = true;
                 break;
             case INTEGER:
                 if(typeDroite == EnumType.OP_BOOL) erreur = true;
@@ -117,6 +125,10 @@ public class GenererErreur {
                 if(typeDroite == EnumType.ENUM) erreur = true;
                 if(typeDroite == EnumType.CHARACTER) erreur = true;
                 if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                if(typeDroite == EnumType.POINTER_INT) erreur = true;
+                if(typeDroite == EnumType.POINTER_REAL) erreur = true;
+                if(typeDroite == EnumType.POINTER_CHARACTER) erreur = true;
+                if(typeDroite == EnumType.POINTER_CHARACTERS) erreur = true;
                 break;
             case UNSIGNED_INTEGER:
                 if(typeDroite == EnumType.OP_BOOL) erreur = true;
@@ -124,6 +136,10 @@ public class GenererErreur {
                 if(typeDroite == EnumType.ENUM) erreur = true;
                 if(typeDroite == EnumType.CHARACTER) erreur = true;
                 if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                if(typeDroite == EnumType.POINTER_INT) erreur = true;
+                if(typeDroite == EnumType.POINTER_REAL) erreur = true;
+                if(typeDroite == EnumType.POINTER_CHARACTER) erreur = true;
+                if(typeDroite == EnumType.POINTER_CHARACTERS) erreur = true;
                 break;
             case REAL:
                 if(typeDroite == EnumType.OP_BOOL) erreur = true;
@@ -131,6 +147,10 @@ public class GenererErreur {
                 if(typeDroite == EnumType.ENUM) erreur = true;
                 if(typeDroite == EnumType.CHARACTER) erreur = true;
                 if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                if(typeDroite == EnumType.POINTER_INT) erreur = true;
+                if(typeDroite == EnumType.POINTER_REAL) erreur = true;
+                if(typeDroite == EnumType.POINTER_CHARACTER) erreur = true;
+                if(typeDroite == EnumType.POINTER_CHARACTERS) erreur = true;
                 break;
             case UNSIGNED_REAL:
                 if(typeDroite == EnumType.OP_BOOL) erreur = true;
@@ -138,6 +158,10 @@ public class GenererErreur {
                 if(typeDroite == EnumType.ENUM) erreur = true;
                 if(typeDroite == EnumType.CHARACTER) erreur = true;
                 if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                if(typeDroite == EnumType.POINTER_INT) erreur = true;
+                if(typeDroite == EnumType.POINTER_REAL) erreur = true;
+                if(typeDroite == EnumType.POINTER_CHARACTER) erreur = true;
+                if(typeDroite == EnumType.POINTER_CHARACTERS) erreur = true;
                 break;
             case BOOLEAN:
                 if(typeDroite == EnumType.REAL) erreur = true;
@@ -145,6 +169,10 @@ public class GenererErreur {
                 if(typeDroite == EnumType.ENUM) erreur = true;
                 if(typeDroite == EnumType.CHARACTER) erreur = true;
                 if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                if(typeDroite == EnumType.POINTER_INT) erreur = true;
+                if(typeDroite == EnumType.POINTER_REAL) erreur = true;
+                if(typeDroite == EnumType.POINTER_CHARACTER) erreur = true;
+                if(typeDroite == EnumType.POINTER_CHARACTERS) erreur = true;
                 break;
             case ENUM:
                 if(typeDroite != EnumType.ENUM) erreur = true;
@@ -154,6 +182,36 @@ public class GenererErreur {
                 break;
             case CHARACTERS:
                 if(typeDroite != EnumType.CHARACTERS) erreur = true;
+                break;
+            case POINTER_INT:
+                if(typeDroite == EnumType.OP_BOOL) erreur = true;
+                if(typeDroite == EnumType.BOOLEAN) erreur = true;
+                if(typeDroite == EnumType.ENUM) erreur = true;
+                if(typeDroite == EnumType.CHARACTER) erreur = true;
+                if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                if(typeDroite == EnumType.POINTER_REAL) erreur = true;
+                break;
+            case POINTER_REAL:
+                if(typeDroite == EnumType.OP_BOOL) erreur = true;
+                if(typeDroite == EnumType.BOOLEAN) erreur = true;
+                if(typeDroite == EnumType.ENUM) erreur = true;
+                if(typeDroite == EnumType.CHARACTER) erreur = true;
+                if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                if(typeDroite == EnumType.POINTER_INT) erreur = true;
+                break;
+            case POINTER_CHARACTER:
+                if(typeDroite == EnumType.OP_BOOL) erreur = true;
+                if(typeDroite == EnumType.BOOLEAN) erreur = true;
+                if(typeDroite == EnumType.ENUM) erreur = true;
+                if(typeDroite == EnumType.POINTER_INT) erreur = true;
+                if(typeDroite == EnumType.POINTER_REAL) erreur = true;
+                break;
+            case POINTER_CHARACTERS:
+                if(typeDroite == EnumType.OP_BOOL) erreur = true;
+                if(typeDroite == EnumType.BOOLEAN) erreur = true;
+                if(typeDroite == EnumType.ENUM) erreur = true;
+                if(typeDroite == EnumType.POINTER_INT) erreur = true;
+                if(typeDroite == EnumType.POINTER_REAL) erreur = true;
                 break;
             default:
                 System.out.println("Le type : " + typeGauche + " n'est pas un type valide.");

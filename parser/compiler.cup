@@ -28,7 +28,7 @@ init with {: :}
 terminal IF, THEN, ELSE;
 terminal FOR, WHILE, DO, RETURN;
 terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT;
-terminal PLUS, MINUS, TIMES, DIVIDE, MOD, NOT_U, POINTER_U;
+terminal PLUS, MINUS, TIMES, DIVIDE, MOD, AMPERSAND, NOT_U, POINTER_U;
 terminal /*EQUALS,*/ AFFECT;
 terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE, POINTER;
 terminal RBRACE, LBRACE;
@@ -91,8 +91,7 @@ declaration ::= ENUM_TYPE:type liste_expression:liste SEMIC                     
 
 affectation ::= ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMIC          {: RESULT = new Affectation((EnumType)type, id, exp); :}
              |  expression_variable:id AFFECT expression:exp SEMIC                    {: RESULT = new Affectation(null, id, exp); :}
-
-             |  POINTER ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMIC  {: RESULT = new Affectation((EnumType)type, id, exp); :}
+             //|  POINTER ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMIC  {: RESULT = new Affectation((EnumType)type, id, exp); :}
              ;
 
 //Vérification de ENUM_TYPE == enum
@@ -183,6 +182,7 @@ expression_valeur ::= INT:nb                       {: RESULT = new Value(nb); :}
 expression_variable ::= ID:id                                                   {: RESULT = new Variable(id); :}
                      |  ID:id LSBRA expression:exp RSBRA                        {: RESULT = new VariableTableau(id, exp); :}
                      |  ID:id LSBRA expression:exp1 INTER expression:exp2 RSBRA {: RESULT = new VariableIntervalle(id, exp1, exp2); :}
-                     |  TIMES ID:id                                             {: RESULT = new Variable("*" + id); :} %prec POINTER_U
+                     |  TIMES ID:id                                             {: RESULT = new VariablePointeur(id, "*"); :} %prec POINTER_U
+                     |  AMPERSAND ID:id                                         {: RESULT = new VariablePointeur(id, "&"); :} %prec POINTER_U
                      ;
 

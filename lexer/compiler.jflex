@@ -19,13 +19,6 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
 %%
 
 /* -------------------------------------------------
-        Variables Pointers
-   ------------------------------------------------- */
-
-"&"{Id}         { return new Symbol(CompilerSymbol.ID, yyline, yycolumn,
-           yytext()); }
-
-/* -------------------------------------------------
         Increments / Decrements
    ------------------------------------------------- */
 /*
@@ -64,6 +57,7 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
 "!="     { return new Symbol(CompilerSymbol.DIFF,  yyline, yycolumn); }
 "%"      { return new Symbol(CompilerSymbol.MOD,   yyline, yycolumn); }
 "!"      { return new Symbol(CompilerSymbol.NOT,   yyline, yycolumn); }
+"&"      { return new Symbol(CompilerSymbol.AMPERSAND,   yyline, yycolumn); }
 
 "if"      { return new Symbol(CompilerSymbol.IF, yyline, yycolumn);      }
 "then"    { return new Symbol(CompilerSymbol.THEN, yyline, yycolumn);    }
@@ -71,7 +65,7 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
 "for"     { return new Symbol(CompilerSymbol.FOR, yyline, yycolumn);     }
 "while"   { return new Symbol(CompilerSymbol.WHILE, yyline, yycolumn);   }
 "do"      { return new Symbol(CompilerSymbol.DO, yyline, yycolumn);      }
-"pointer" { return new Symbol(CompilerSymbol.POINTER, yyline, yycolumn); }
+//"pointer" { return new Symbol(CompilerSymbol.POINTER, yyline, yycolumn); }
 "return"  { return new Symbol(CompilerSymbol.RETURN, yyline, yycolumn);  }
 
 /* -------------------------------------------------
@@ -108,6 +102,12 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
 {Id}           { return new Symbol(CompilerSymbol.ID, yyline, yycolumn, yytext()); }
 "'"([a-zA-Z] | [[:digit:]])"'"     { return new Symbol(CompilerSymbol.CHARACTER, yyline, yycolumn, yytext()); }
 "\""{Id}"\""   { return new Symbol(CompilerSymbol.CHARACTERS, yyline, yycolumn, yytext()); }
+
+"pointer int"     { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.POINTER_INT); }
+"pointer real"    { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.POINTER_REAL); }
+"pointer char"    { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.POINTER_CHARACTER); }
+"pointer string"  { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.POINTER_CHARACTERS); }
+
 
 
 /* -------------------------------------------------

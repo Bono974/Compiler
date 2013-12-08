@@ -1,7 +1,7 @@
-//bool e = !a;
+bool e = !a;
 
-//int tata[4+2+1+2+33..b];
-//int toto[4+2+1+2+33..b] = 6; // FAUX
+int tata[4+2+1+2+33..b];
+int toto[4+2+1+2+33..b] = 6; // << Erreur, Pas d'affectation dans un intervalle
 
 int j = 15 + 3;
 int i;
@@ -35,8 +35,6 @@ toto(3,3,6,k-j);
 
 int toto;
 real toto;
-
-
 
 short u = -8;
 unsigned short p = 95;
@@ -107,12 +105,12 @@ var_real = 1.6 * 4.2;
 // ========================
 // Gestion des énumérations
 
-// A FAIRE <<<<<<<<<<<<<
+enum couleur { blanc, noir }; // << ERREUR deja déclaré
 
 // ========================
 // Gestion des intervalles
 
-// A FAIRE <<<<<<<<<<<<<
+int tata[4+2+1+2+33..b];
 
 // ========================
 // Gestion des chaines de caractères
@@ -130,9 +128,11 @@ tab[2] = 66;
 // Gestion des pointeurs
 
 real bibi = 69;
+char xx = 'x';
 
+pointer real realpointer = &xx;  // <<< Mauvaise affectation
 pointer real bibiPOINTER = &bibi;
-real newBibi = *bibiPOINTER;
+pointer real newBibi = *bibiPOINTER;
 
 // ================================================
 // Gestion des opérations arithmétiques et logiques
@@ -143,7 +143,7 @@ var_bool = 1 < 2 > (3 + 4); /* && (4 || -2);*/  // ERREUR <<<< !!!!!
 // ========================
 // Les appels de procédures
 
-// A FAIRE <<<<<<<<<<<<<
+toto(3,3,6,k-j);
 
 // ================
 // Les affectations

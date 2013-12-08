@@ -1,37 +1,48 @@
+t0 = ! a
+e = t0
+
+L0:
+
+/*===============
+La variable : "toto" est un tableau avec intervalle.
+Il n'est pas possible d'affecter une valeur à un intervalle.
+===============*/
+
+L1:
 t0 = 15 + 3
 j = t0
 
-L0:
+L2:
 c = 'a'
 
-L1:
+L3:
 i = j
 
-L2:
-if j < 20 jump L4
-jump L3
 L4:
+if j < 20 jump L6
+jump L5
+L6:
 newJ = 60
 
-L3:
+L5:
 newJ = 25
 
 /*===============
 La variable : "newJ" n'a pas été déclarée précédemment.
 ===============*/
 
-L5:
+L7:
 toto:
 func toto
 a = k
 return k
 
-L6:
+L8:
 toto:
 func toto
 a = k
 
-L7:
+L9:
 t0 = 3 + 4.3
 t1 = t0 - 4
 k = t1
@@ -40,7 +51,7 @@ k = t1
 La variable : "k" n'a pas été déclarée précédemment.
 ===============*/
 
-L8:
+L10:
 param 3
 param 3
 param 6
@@ -48,7 +59,11 @@ t0 = k - j
 param t0
 call toto
 
-L9:
+L11:
+
+/*===============
+La variable : "toto" a déjà été déclarée !!
+===============*/
 
 /*===============
 La variable : "toto" a déjà été déclarée !!
@@ -56,205 +71,225 @@ La variable : "toto" a déjà été déclarée !!
 t0 = - 8
 u = t0
 
-L10:
+L12:
 p = 95
 
-L11:
+L13:
 i = 65535
 
-L12:
+L14:
 j = 14.312465
 
-L13:
+L15:
 u = 13
 
-L14:
+L16:
 o = 15.36
 
-L15:
+L17:
 x = 6
 
-L16:
+L18:
 x = 22
 
-L17:
+L19:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int = t2
 
-L18:
+L20:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real = t2
 
-L19:
+L21:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool = t2
 
-L20:
+L22:
 t0 = - 69
 t1 = - 42
 t2 = t0 + t1
 var_int = t2
 
-L21:
+L23:
 t0 = 666 * 10
 var_int = t0
 
-L22:
+L24:
 t0 = 6 < 9
 var_bool = t0
 
-L23:
+L25:
 var_bool = true
 
-L24:
+L26:
 t0 = ! true
 var_bool = t0
 
-L25:
+L27:
 var_bool = false
 
-L26:
+L28:
 var_char = 'a'
 
-L27:
+L29:
 t0 = 1.6 * 4.2
 var_real = t0
 
-L28:
+L30:
+
+/*===============
+La variable : "couleur" a déjà été déclarée !!
+===============*/
+
+/*===============
+La variable : "tata" a déjà été déclarée !!
+===============*/
 c = 'Q'
 
-L29:
+L31:
 str = "blablabla"
 
-L30:
+L32:
 tab[2] = 66
 
 /*===============
 La variable : "tab" n'a pas été déclarée précédemment.
 ===============*/
 
-L31:
+L33:
 bibi = 69
 
-L32:
+L34:
+xx = 'x'
+
+L35:
+realpointer = &xx
+
+/*===============
+Affectation impossible avec la variable : "realpointer"
+L'élément à gauche est de type : POINTER_REAL
+Alors que celui de "xx" est de type : CHARACTER
+===============*/
+
+L36:
 bibiPOINTER = &bibi
 
-/*===============
-La variable : "&bibi" n'a pas été déclarée précédemment.
-===============*/
-
-L33:
+L37:
 newBibi = *bibiPOINTER
 
-/*===============
-La variable : "*bibiPOINTER" n'a pas été déclarée précédemment.
-===============*/
-
-L34:
+L38:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t1 * 15
 t3 = t0 + t2
 var_real = t3
 
-L35:
+L39:
 t0 = 1 < 2
 t1 = 3 + 4
 t2 = t0 > t1
 var_bool = t2
 
-L36:
+L40:
+param 3
+param 3
+param 6
+t0 = k - j
+param t0
+call toto
+
+L41:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int_new = t2
 
-L37:
+L42:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real_new = t2
 
-L38:
+L43:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool_new = t2
 
-L39:
-if 1 < 2 jump L41
-jump L42
-L41:
+L44:
+if 1 < 2 jump L46
+jump L47
+L46:
 t0 = 72 + 3
 var_int_new = t0
-jump L40
-L42:
+jump L45
+L47:
 var_int_new = 29
 
-L40:
-if var_int_new < 447 jump L44
-jump L43
-L44:
+L45:
+if var_int_new < 447 jump L49
+jump L48
+L49:
 var_int_new = 447
 
-L43:
+L48:
 i = 22
 
-L45:
+L50:
 i = 44
-L47:
-if i > 22 jump L48
-jump L46
-L48:
+L52:
+if i > 22 jump L53
+jump L51
+L53:
 var_int_new = 12
 t0 = i - 1
 i = t0
-jump L47
-
-L46:
-i = 44
-L50:
-if i > 22 jump L51
-jump L49
-L51:
-var_int_new = 12
-jump L50
-
-L49:
-L53:
-if var_bool_new != 0 jump L54
-jump L55
-L55:
-if 6 != 0 jump L54
 jump L52
+
+L51:
+i = 44
+L55:
+if i > 22 jump L56
+jump L54
+L56:
+var_int_new = 12
+jump L55
+
 L54:
+L58:
+if var_bool_new != 0 jump L59
+jump L60
+L60:
+if 6 != 0 jump L59
+jump L57
+L59:
 t0 = var_int_new + 1
 var_int_new = t0
-jump L53
+jump L58
 
-L52:
 L57:
+L62:
 t0 = k + 1
 i = t0
-if var_bool_new != 0 jump L57
-jump L56
+if var_bool_new != 0 jump L62
+jump L61
 
-L56:
-if 2 < 1 jump L59
-jump L60
-L59:
-var_int_new = 666
-jump L58
-L60:
-if 4 >= 1 jump L61
-jump L58
 L61:
+if 2 < 1 jump L64
+jump L65
+L64:
+var_int_new = 666
+jump L63
+L65:
+if 4 >= 1 jump L66
+jump L63
+L66:
 var_int_new = 999
 
-L58:
+L63:
