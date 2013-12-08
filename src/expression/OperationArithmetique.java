@@ -1,7 +1,7 @@
 package expression;
 
 import tac.*;
-import identifiant.Identifiant;
+import identifiant.*;
 
 public abstract class OperationArithmetique extends Expression {
 
@@ -11,8 +11,6 @@ public abstract class OperationArithmetique extends Expression {
                            "\njump " + non;
            System.out.println(result);
     }
-
-    //public abstract Identifiant genererCode();
 
     public EnumType getType() {
         return EnumType.OP_ARITHMETIQUE;

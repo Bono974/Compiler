@@ -174,7 +174,7 @@ expression ::= expression:e1 PLUS   expression:e2     {: RESULT = new Arithmetiq
 
 expression_valeur ::= INT:nb                       {: RESULT = new Value(nb); :}
                    |  REAL:nb                      {: RESULT = new Value(nb); :}
-                   |  BOOL:bool                    {: RESULT = new Value(Boolean.parseBoolean(bool)); :}
+                   |  BOOL:bool                    {: RESULT = new ValueBool(Boolean.parseBoolean(bool)); :}
                    |  CHARACTERS:ch                {: RESULT = new CharacterMultiple(ch); :}
                    |  CHARACTER:ch                 {: RESULT = new CharacterUnique(ch); :}
                    ;

@@ -123,6 +123,16 @@ public class GenererErreur {
         }
     }
 
+    public static void genErreurOperation(EnumType typeGauche, EnumType typeDroite) {
+        if((typeGauche == EnumType.OP_BOOL) && (typeDroite != EnumType.OP_BOOL)
+            || (typeGauche != EnumType.OP_BOOL) && (typeDroite == EnumType.OP_BOOL)) {
+            System.out.println("\n/*===============");
+            System.out.println("Il n'est pas autorisé de faire une opération arithmétique");
+            System.out.println("entre des nombres et des booléens.");
+            System.out.println("===============*/");
+        }
+    }
+
     public static boolean comparerType(EnumType typeGauche, EnumType typeDroite) {
 
         boolean erreur = false;

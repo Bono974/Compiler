@@ -8,7 +8,8 @@ int i;
 
 char c = 'a';
 i = j;
-int i = 6 + true;
+int i = 6 + 4 < 5 + true;
+int i = true + 7;
 
 if (j < 20) then {
     int newJ = 60;

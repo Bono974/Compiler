@@ -1,7 +1,6 @@
 package expression;
 
-import tac.Label;
-import tac.EnumOp;
+import tac.*;
 import identifiant.*;
 
 public class ArithmetiqueBinaire extends OperationArithmetique {
@@ -22,6 +21,8 @@ public class ArithmetiqueBinaire extends OperationArithmetique {
         Identifiant gaucheRes = gauche.genererCode();
         Identifiant droiteRes = droite.genererCode();
         Identifiant res = new IdentifiantRegistre();
+
+        GenererErreur.genErreurOperation(gauche.getType(), droite.getType());
 
         String result = res + " = " + gaucheRes + " " + op  + " " + droiteRes;
         System.out.println(result);
