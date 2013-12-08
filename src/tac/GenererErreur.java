@@ -7,6 +7,10 @@ public class GenererErreur {
 
     public static boolean genErreurDeclaration(HashMap hm, EnumType type, String nomVariable) {
 
+        // Si on se trouve dans une procédure, on ne test pas les types des variables
+        if(GenererErreur.inProcedure)
+            return false;
+
         if(!hm.containsKey(nomVariable)) { // Si la variable n'a pas encore été déclarée
 
             if(type == null) {

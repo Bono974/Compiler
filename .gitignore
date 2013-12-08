@@ -7,7 +7,8 @@ Output.txt
 src/CompilerParser.java
 src/CompilerSymbol.java
 src/CompilerSymbol.java~
-src/CompilerSymbol.java~
+src/CompilerLexer.java
+src/CompilerLexer.java~
 
 RapportCompilation.pdf
 RapportCompilation.aux
