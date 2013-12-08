@@ -4,6 +4,7 @@ import java.util.*;
 public class GenererErreur {
 
     public static boolean inProcedure = false;
+    public static String currentProcedure = null;
 
     public static boolean genErreurDeclaration(HashMap hm, EnumType type, String nomVariable) {
 
@@ -15,20 +16,44 @@ public class GenererErreur {
 
             if(type == null) {
                 System.out.println("\n/*===============");
-                System.out.println("La variable : \"" + nomVariable + "\" n'a pas été déclarée précédemment.");
+                System.out.println("La variable/procédure : \"" + nomVariable + "\" n'a pas été déclarée précédemment.");
                 System.out.println("===============*/");
             }
 
         } else { // Si la variable est deja dans la table des variables
             if(type != null) {
                 System.out.println("\n/*===============");
-                System.out.println("La variable : \"" + nomVariable + "\" a déjà été déclarée !!");
+                System.out.println("La variable/procédure : \"" + nomVariable + "\" a déjà été déclarée !!");
                 System.out.println("===============*/");
             }
         }
 
         // Il n'y a pas eu d'erreurs, on peut ajouter la variable et son type à la Table
         hm.put(nomVariable, type);
+        return false;
+    }
+
+    public static boolean genErreurProcedure(HashMap hm, String nomVariable) {
+
+        // Si on se trouve dans une procédure, on ne test pas les types des variables
+        if(GenererErreur.inProcedure)
+            return false;
+
+        if(!hm.containsKey(nomVariable)) { // Si la variable n'a pas encore été déclarée
+
+            System.out.println("\n/*===============");
+            System.out.println("La variable/procédure : \"" + nomVariable + "\" n'a pas été déclarée précédemment.");
+            System.out.println("===============*/");
+
+        } else { // Si la variable est deja dans la table des variables
+            
+            if((EnumType)hm.get(nomVariable) != EnumType.PROCEDURE) {
+                System.out.println("\n/*===============");
+                System.out.println("La variable/procédure : \"" + nomVariable + "\" n'a pas été déclarée en tant que procédure.");
+                System.out.println("===============*/");
+            }
+        }
+
         return false;
     }
 
@@ -86,6 +111,16 @@ public class GenererErreur {
         System.out.println("La variable : \"" + nomVariable + "\" est un tableau avec intervalle.");
         System.out.println("Il n'est pas possible d'affecter une valeur à un intervalle.");
         System.out.println("===============*/");
+    }
+
+    public static void genErreurProcRecursive(String nomProc, String nomProcCalled) {
+        if(!nomProc.equals(nomProcCalled)) {
+            System.out.println("\n/*===============");
+            System.out.println("Il est interdit d'appeler une procédure dans le corps d'une procédure");
+            System.out.println("en dehors d'elle même.");
+            System.out.println("La procédure : " + nomProcCalled + " a été appelée dans : " + nomProc);
+            System.out.println("===============*/");
+        }
     }
 
     public static boolean comparerType(EnumType typeGauche, EnumType typeDroite) {

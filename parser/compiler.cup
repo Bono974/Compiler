@@ -25,12 +25,12 @@ action code {:
 
 init with {: :}
 
-terminal IF, THEN, ELSE;
+terminal IF, THEN, ELSE, DEF;
 terminal FOR, WHILE, DO, RETURN;
 terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT;
 terminal PLUS, MINUS, TIMES, DIVIDE, MOD, AMPERSAND, NOT_U, POINTER_U;
 terminal /*EQUALS,*/ AFFECT;
-terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE, POINTER;
+terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE;
 terminal RBRACE, LBRACE;
 terminal INTER;
 //Rounded bracket ( ) RBRA
@@ -123,10 +123,10 @@ instruction_while ::= WHILE expression:condition
                    ;
 
 
-procedure ::= ID:nom LRBRA liste_expression:parametres RRBRA
+procedure ::= DEF ID:nom LRBRA liste_expression:parametres RRBRA
                       bloc_instruction:blocInstruction
                       valeur_retour:ret                                               {: RESULT = new ProcedureDefinition(nom, parametres, blocInstruction, ret); :}
-            | ID:nom LRBRA liste_expression:parametres RRBRA
+            | DEF ID:nom LRBRA liste_expression:parametres RRBRA
                       bloc_instruction:blocInstruction                                {: RESULT = new ProcedureDefinition(nom, parametres, blocInstruction, null); :}
             | ID:nom LRBRA liste_expression:parametres RRBRA SEMIC                    {: RESULT = new ProcedureAppel(nom, parametres); :}
             ;

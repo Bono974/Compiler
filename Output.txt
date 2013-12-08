@@ -19,30 +19,57 @@ L3:
 i = j
 
 L4:
-if j < 20 jump L6
-jump L5
-L6:
-newJ = 60
+t0 = 6 + true
+i = t0
 
 L5:
+if j < 20 jump L7
+jump L6
+L7:
+newJ = 60
+
+L6:
 newJ = 25
 
 /*===============
 La variable : "newJ" n'a pas été déclarée précédemment.
 ===============*/
 
-L7:
-toto:
-func toto
+L8:
+
+/*===============
+La variable/procédure : "tutu" a déjà été déclarée !!
+===============*/
+tutu:
+func tutu
 a = k
+L10:
+param q
+param 26
+call tutu
 return k
 
-L8:
-toto:
-func toto
-a = k
-
 L9:
+tyty:
+func tyty
+a = k
+L12:
+
+/*===============
+Il est interdit d'appeler une procédure dans le corps d'une procédure
+en dehors d'elle même.
+La procédure : tutu a été appelée dans : tyty
+===============*/
+param a
+param 10
+call tutu
+
+L11:
+param 6
+param 23
+call tutu
+
+L13:
 t0 = 3 + 4.3
 t1 = t0 - 4
 k = t1
@@ -51,7 +78,11 @@ k = t1
 La variable : "k" n'a pas été déclarée précédemment.
 ===============*/
 
-L10:
+L14:
+
+/*===============
+La variable/procédure : "toto" n'a pas été déclarée en tant que procédure.
+===============*/
 param 3
 param 3
 param 6
@@ -59,116 +90,121 @@ t0 = k - j
 param t0
 call toto
 
-L11:
+L15:
 
 /*===============
-La variable : "toto" a déjà été déclarée !!
+La variable/procédure : "txtx" n'a pas été déclarée précédemment.
+===============*/
+param 15
+param 20
+call txtx
+
+L16:
+
+/*===============
+La variable/procédure : "toto" a déjà été déclarée !!
 ===============*/
 
 /*===============
-La variable : "toto" a déjà été déclarée !!
+La variable/procédure : "toto" a déjà été déclarée !!
 ===============*/
 t0 = - 8
 u = t0
 
-L12:
+L17:
 p = 95
 
-L13:
+L18:
 i = 65535
 
-L14:
+L19:
 j = 14.312465
 
-L15:
+L20:
 u = 13
 
-L16:
+L21:
 o = 15.36
 
-L17:
+L22:
 x = 6
 
-L18:
+L23:
 x = 22
 
-L19:
+L24:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int = t2
 
-L20:
+L25:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real = t2
 
-L21:
+L26:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool = t2
 
-L22:
+L27:
 t0 = - 69
 t1 = - 42
 t2 = t0 + t1
 var_int = t2
 
-L23:
+L28:
 t0 = 666 * 10
 var_int = t0
 
-L24:
+L29:
 t0 = 6 < 9
 var_bool = t0
 
-L25:
+L30:
 var_bool = true
 
-L26:
+L31:
 t0 = ! true
 var_bool = t0
 
-L27:
+L32:
 var_bool = false
 
-L28:
+L33:
 var_char = 'a'
 
-L29:
+L34:
 t0 = 1.6 * 4.2
 var_real = t0
 
-L30:
+L35:
 
 /*===============
-La variable : "couleur" a déjà été déclarée !!
-===============*/
-
-/*===============
-La variable : "tata" a déjà été déclarée !!
+La variable/procédure : "couleur" a déjà été déclarée !!
 ===============*/
 c = 'Q'
 
-L31:
+L36:
 str = "blablabla"
 
-L32:
+L37:
 tab[2] = 66
 
 /*===============
 La variable : "tab" n'a pas été déclarée précédemment.
 ===============*/
 
-L33:
+L38:
 bibi = 69
 
-L34:
+L39:
 xx = 'x'
 
-L35:
+L40:
 realpointer = &xx
 
 /*===============
@@ -177,26 +213,30 @@ L'élément à gauche est de type : POINTER_REAL
 Alors que celui de "xx" est de type : CHARACTER
 ===============*/
 
-L36:
+L41:
 bibiPOINTER = &bibi
 
-L37:
+L42:
 newBibi = *bibiPOINTER
 
-L38:
+L43:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t1 * 15
 t3 = t0 + t2
 var_real = t3
 
-L39:
+L44:
 t0 = 1 < 2
 t1 = 3 + 4
 t2 = t0 > t1
 var_bool = t2
 
-L40:
+L45:
+
+/*===============
+La variable/procédure : "toto" n'a pas été déclarée en tant que procédure.
+===============*/
 param 3
 param 3
 param 6
@@ -204,92 +244,92 @@ t0 = k - j
 param t0
 call toto
 
-L41:
+L46:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int_new = t2
 
-L42:
+L47:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real_new = t2
 
-L43:
+L48:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool_new = t2
 
-L44:
-if 1 < 2 jump L46
-jump L47
-L46:
+L49:
+if 1 < 2 jump L51
+jump L52
+L51:
 t0 = 72 + 3
 var_int_new = t0
-jump L45
-L47:
+jump L50
+L52:
 var_int_new = 29
 
-L45:
-if var_int_new < 447 jump L49
-jump L48
-L49:
+L50:
+if var_int_new < 447 jump L54
+jump L53
+L54:
 var_int_new = 447
 
-L48:
+L53:
 i = 22
 
-L50:
+L55:
 i = 44
-L52:
-if i > 22 jump L53
-jump L51
-L53:
+L57:
+if i > 22 jump L58
+jump L56
+L58:
 var_int_new = 12
 t0 = i - 1
 i = t0
-jump L52
-
-L51:
-i = 44
-L55:
-if i > 22 jump L56
-jump L54
-L56:
-var_int_new = 12
-jump L55
-
-L54:
-L58:
-if var_bool_new != 0 jump L59
-jump L60
-L60:
-if 6 != 0 jump L59
 jump L57
+
+L56:
+i = 44
+L60:
+if i > 22 jump L61
+jump L59
+L61:
+var_int_new = 12
+jump L60
+
 L59:
+L63:
+if var_bool_new != 0 jump L64
+jump L65
+L65:
+if 6 != 0 jump L64
+jump L62
+L64:
 t0 = var_int_new + 1
 var_int_new = t0
-jump L58
+jump L63
 
-L57:
 L62:
+L67:
 t0 = k + 1
 i = t0
-if var_bool_new != 0 jump L62
-jump L61
+if var_bool_new != 0 jump L67
+jump L66
 
-L61:
-if 2 < 1 jump L64
-jump L65
-L64:
-var_int_new = 666
-jump L63
-L65:
-if 4 >= 1 jump L66
-jump L63
 L66:
+if 2 < 1 jump L69
+jump L70
+L69:
+var_int_new = 666
+jump L68
+L70:
+if 4 >= 1 jump L71
+jump L68
+L71:
 var_int_new = 999
 
-L63:
+L68:

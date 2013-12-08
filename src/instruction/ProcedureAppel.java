@@ -16,9 +16,16 @@ public class ProcedureAppel extends Instruction {
     }
 
     public void genererCode(Label suivant, Stack pileTableVariable) {
-        ModifierStack.pushTV(pileTableVariable);
-        //HashMap hm = (HashMap)pileTableVariable.peek();
         
+        HashMap hm = (HashMap)pileTableVariable.peek();
+        GenererErreur.genErreurProcedure(hm, this.nom);
+
+        ModifierStack.pushTV(pileTableVariable);
+        
+        if(GenererErreur.inProcedure) {
+            GenererErreur.genErreurProcRecursive(GenererErreur.currentProcedure, this.nom);
+        }
+
         for (Expression e: this.listeExpression) {
             Identifiant resTmp = e.genererCode();
             System.out.println("param "+ resTmp);

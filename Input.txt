@@ -1,6 +1,6 @@
 bool e = !a;
 
-int tata[4+2+1+2+33..b];
+int tutu[4+2+1+2+33..b];
 int toto[4+2+1+2+33..b] = 6; // << Erreur, Pas d'affectation dans un intervalle
 
 int j = 15 + 3;
@@ -8,30 +8,33 @@ int i;
 
 char c = 'a';
 i = j;
-//int i = c + 6;
+int i = 6 + true;
 
 if (j < 20) then {
     int newJ = 60;
 }
 
-
 newJ = 25; // <<< Doit générer une erreur : "Non déclarée"
-
-
 
 //int toto, ttyty, eee, ttyty, toto;
 enum couleur { blanc, noir };
 
-toto (a, q) {
+def tutu (a, q) {
     a = k;
+    tutu(q, 26);
 } return k;
 
-toto (a) {
+def tyty (a) {
     a = k;
+    tutu(a, 10);
 }
+
+tutu(6, 23);
 
 k = 3 + 4.3 -4;
 toto(3,3,6,k-j);
+
+txtx(15,20);
 
 int toto;
 real toto;

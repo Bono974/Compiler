@@ -67,6 +67,7 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
 "do"      { return new Symbol(CompilerSymbol.DO, yyline, yycolumn);      }
 //"pointer" { return new Symbol(CompilerSymbol.POINTER, yyline, yycolumn); }
 "return"  { return new Symbol(CompilerSymbol.RETURN, yyline, yycolumn);  }
+"def"     { return new Symbol(CompilerSymbol.DEF, yyline, yycolumn);  }
 
 /* -------------------------------------------------
         Valeurs

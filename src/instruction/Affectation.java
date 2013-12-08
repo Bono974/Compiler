@@ -25,12 +25,9 @@ public class Affectation extends Instruction {
         expName = variable.getNomVariable();
 
         if(variable.getType() == EnumType.INTERVALLE) {
-            //expName = variable.getNomVariable();
             GenererErreur.genErreurIntervalle(expName);
         }
         else {
-            //expName = variable.genererCode().toString();
-
             Identifiant resDroite = droite.genererCode();
             Identifiant resVariable = variable.genererCode();
             System.out.println(resVariable + " = " + resDroite);
@@ -40,9 +37,6 @@ public class Affectation extends Instruction {
         // System.out.println("Type de gauche : " + type + " Variable : " + expName +  " -- Type de droite : " + droiteType);
         // System.out.println("AFFECTATION -- Type Variable : " + variable.getType());
         // System.out.println("===============*/");
-
-        // if(!GenererErreur.genErreurAffectation(hm, type, droiteType, expName, droite.getNomVariable()))
-        //     hm.put(expName, type);
 
         GenererErreur.genErreurAffectation(hm, type, droiteType, expName, droite.getNomVariable());
     }
