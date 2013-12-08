@@ -2,7 +2,7 @@ package instruction;
 
 import java.util.*;
 import expression.Expression;
-import tac.Label;
+import tac.*;
 
 public class For extends Instruction {
 
@@ -22,6 +22,7 @@ public class For extends Instruction {
     public void genererCode(Label suivant, Stack pileTableVariable) {
         Label avantFor = new Label();
         Label selfLabel = new Label();
+        ModifierStack.pushTV(pileTableVariable);
 
         affectation.genererCode(avantFor, pileTableVariable);
         System.out.println(avantFor + ":");
@@ -33,6 +34,7 @@ public class For extends Instruction {
         if(increment != null)
             increment.genererCode(avantFor, pileTableVariable);
         System.out.println("jump "+ avantFor);
+        ModifierStack.popTV(pileTableVariable);
     }
 }
 

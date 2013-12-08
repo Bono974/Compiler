@@ -3,7 +3,7 @@ package instruction;
 import java.util.*;
 import expression.Expression;
 import identifiant.Identifiant;
-import tac.Label;
+import tac.*;
 
 public class ProcedureAppel extends Instruction {
 
@@ -16,13 +16,15 @@ public class ProcedureAppel extends Instruction {
     }
 
     public void genererCode(Label suivant, Stack pileTableVariable) {
-        HashMap hm = (HashMap)pileTableVariable.peek();
+        ModifierStack.pushTV(pileTableVariable);
+        //HashMap hm = (HashMap)pileTableVariable.peek();
         
         for (Expression e: this.listeExpression) {
             Identifiant resTmp = e.genererCode();
             System.out.println("param "+ resTmp);
         }
         System.out.println("call "+ this.nom);
+        ModifierStack.popTV(pileTableVariable);
     }
 }
 

@@ -2,7 +2,7 @@ package instruction;
 
 import java.util.*;
 import expression.Expression;
-import tac.Label;
+import tac.*;
 
 public class IfThenElse extends Instruction {
 
@@ -20,6 +20,7 @@ public class IfThenElse extends Instruction {
     public void genererCode(Label suivant, Stack pileTableVariable) {
         Label oui = new Label();
         Label non = new Label();
+        ModifierStack.pushTV(pileTableVariable);
         condition.genererJumpCode(oui, non);
 
         System.out.println(oui + ":");
@@ -28,5 +29,6 @@ public class IfThenElse extends Instruction {
         System.out.println("jump " + suivant +
                            "\n" + non + ":");
         selfElse.genererCode(suivant, pileTableVariable);
+        ModifierStack.popTV(pileTableVariable);
     }
 }

@@ -2,7 +2,7 @@ package instruction;
 
 import java.util.*;
 import expression.Expression;
-import tac.Label;
+import tac.*;
 
 public class DoWhile extends While {
 
@@ -12,11 +12,13 @@ public class DoWhile extends While {
 
     public void genererCode(Label suivant, Stack pileTableVariable) {
         Label avantDo = new Label();
+        ModifierStack.pushTV(pileTableVariable);
 
         System.out.println(avantDo + ":");
         self.genererCode(avantDo, pileTableVariable);
 
         condition.genererJumpCode(avantDo, suivant);
+        ModifierStack.popTV(pileTableVariable);
     }
 
 }

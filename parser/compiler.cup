@@ -99,12 +99,12 @@ affectation ::= ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMI
 enumeration ::= ENUM_TYPE:type expression_variable:id LBRACE liste_expression:list RBRACE SEMIC {: RESULT = new EnumerationOwn((EnumType)type, id, list); :}
              ;
 
-instruction_if ::= IF expression:condition THEN
+instruction_if ::= IF expression:condition THEN                                       
                       instruction:blocIf
                       ELSE instruction:blocElse                                       {: RESULT = new IfThenElse(condition, blocIf, blocElse); :}
 
                 |  IF expression:condition THEN
-                      instruction:blocIf                                              {: RESULT = new IfThen(condition, blocIf); :}
+                      instruction:blocIf                                              {: System.out.println("DEBUT DU IF"); RESULT = new IfThen(condition, blocIf); :}
                 ;
 
 instruction_for ::= FOR LRBRA affectation:affect expression:condition SEMIC increment:inc RRBRA

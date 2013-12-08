@@ -2,11 +2,7 @@ t0 = 15 + 3
 j = t0
 
 /*===============
-La variable : "j" n'a pas été déclarée précédemment.
-===============*/
-
-/*===============
-Type de gauche : null Variable : j -- Type de droite : OP_ARITHMETIQUE
+Type de gauche : INTEGER Variable : j -- Type de droite : OP_ARITHMETIQUE
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
@@ -23,15 +19,35 @@ L1:
 i = j
 
 /*===============
-La variable : "j" n'a pas été déclarée précédemment.
-===============*/
-
-/*===============
 Type de gauche : null Variable : i -- Type de droite : VARIABLE
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
 L2:
+DEBUT DU IF
+if j < 20 jump L4
+jump L3
+L4:
+newJ = 60
+
+/*===============
+Type de gauche : INTEGER Variable : newJ -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
+
+L3:
+newJ = 25
+
+/*===============
+La variable : "newJ" n'a pas été déclarée précédemment.
+===============*/
+
+/*===============
+Type de gauche : null Variable : newJ -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
+
+L5:
 toto:
 func toto
 a = k
@@ -46,7 +62,7 @@ AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 return k
 
-L3:
+L6:
 toto:
 func toto
 a = k
@@ -60,7 +76,7 @@ Type de gauche : null Variable : a -- Type de droite : VARIABLE
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
-L4:
+L7:
 t0 = 3 + 4.3
 t1 = t0 - 4
 k = t1
@@ -74,7 +90,7 @@ Type de gauche : null Variable : k -- Type de droite : OP_ARITHMETIQUE
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
-L5:
+L8:
 param 3
 param 3
 param 6
@@ -82,7 +98,7 @@ t0 = k - j
 param t0
 call toto
 
-L6:
+L9:
 Type Variable : VARIABLE
 Type Variable : VARIABLE
 
@@ -97,7 +113,7 @@ Type de gauche : SHORT Variable : u -- Type de droite : OP_ARITHMETIQUE
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
-L7:
+L10:
 p = 95
 
 /*===============
@@ -105,7 +121,7 @@ Type de gauche : UNSIGNED_SHORT Variable : p -- Type de droite : OP_ARITHMETIQUE
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
-L8:
+L11:
 i = 65535
 
 /*===============
@@ -113,7 +129,7 @@ Type de gauche : INTEGER Variable : i -- Type de droite : OP_ARITHMETIQUE
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
-L9:
+L12:
 j = 14.312465
 
 /*===============
@@ -121,7 +137,7 @@ Type de gauche : REAL Variable : j -- Type de droite : OP_ARITHMETIQUE
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
-L10:
+L13:
 u = 13
 
 /*===============
@@ -129,7 +145,7 @@ Type de gauche : UNSIGNED_INTEGER Variable : u -- Type de droite : OP_ARITHMETIQ
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
-L11:
+L14:
 o = 15.36
 
 /*===============
@@ -137,7 +153,7 @@ Type de gauche : UNSIGNED_REAL Variable : o -- Type de droite : OP_ARITHMETIQUE
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
-L12:
+L15:
 x = 6
 
 /*===============
@@ -145,7 +161,7 @@ Type de gauche : INTEGER Variable : x -- Type de droite : OP_ARITHMETIQUE
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
-L13:
+L16:
 x = 22
 
 /*===============
@@ -153,7 +169,7 @@ Type de gauche : INTEGER Variable : x -- Type de droite : OP_ARITHMETIQUE
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
-L14:
+L17:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
@@ -164,7 +180,7 @@ Type de gauche : INTEGER Variable : var_int -- Type de droite : OP_ARITHMETIQUE
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
-L15:
+L18:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
@@ -175,7 +191,7 @@ Type de gauche : REAL Variable : var_real -- Type de droite : OP_ARITHMETIQUE
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
-L16:
+L19:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
@@ -186,7 +202,7 @@ Type de gauche : BOOLEAN Variable : var_bool -- Type de droite : OP_BOOL
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
-L17:
+L20:
 t0 = - 69
 t1 = - 42
 t2 = t0 + t1
@@ -197,7 +213,7 @@ Type de gauche : null Variable : var_int -- Type de droite : OP_ARITHMETIQUE
 AFFECTATION -- Type Variable : VARIABLE
 ===============*/
 
-L18:
+L21:
 t0 = 666 * 10
 var_int = t0
 parse error

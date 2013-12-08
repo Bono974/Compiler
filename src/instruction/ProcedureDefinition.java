@@ -2,7 +2,7 @@ package instruction;
 
 import java.util.*;
 import expression.Expression;
-import tac.Label;
+import tac.*;
 import identifiant.Identifiant;
 
 public class ProcedureDefinition extends Instruction {
@@ -22,6 +22,7 @@ public class ProcedureDefinition extends Instruction {
     public void genererCode(Label suivant, Stack pileTableVariable) {
         System.out.println(this.nom + ":");
         System.out.println("func "+ this.nom);
+        ModifierStack.pushTV(pileTableVariable);
 
         blocInstruction.genererCode(suivant, pileTableVariable);
 
@@ -29,5 +30,6 @@ public class ProcedureDefinition extends Instruction {
             Identifiant res = this.valeurRetour.genererCode();
             System.out.println("return " + res);
         }
+        ModifierStack.popTV(pileTableVariable);
     }
 }

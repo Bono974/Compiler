@@ -2,7 +2,7 @@ package instruction;
 
 import java.util.*;
 import expression.Expression;
-import tac.Label;
+import tac.*;
 
 public class While extends Instruction {
 
@@ -17,6 +17,7 @@ public class While extends Instruction {
     public void genererCode(Label suivant, Stack pileTableVariable) {
         Label avantWhile = new Label();
         Label selfLabel = new Label();
+        ModifierStack.pushTV(pileTableVariable);
 
         System.out.println(avantWhile + ":");
         condition.genererJumpCode(selfLabel, suivant);
@@ -24,5 +25,6 @@ public class While extends Instruction {
         System.out.println(selfLabel + ":");
         self.genererCode(avantWhile, pileTableVariable);
         System.out.println("jump "+ avantWhile);
+        ModifierStack.popTV(pileTableVariable);
     }
 }

@@ -3,12 +3,19 @@
 //int tata[4+2+1+2+33..b];
 //int toto[4+2+1+2+33..b] = 6; // FAUX
 
-j = 15 + 3;
+int j = 15 + 3;
 int i;
 
 char c = 'a';
 i = j;
 //int i = c + 6;
+
+if (j < 20) then {
+    int newJ = 60;
+}
+
+newJ = 25; // <<< Doit générer une erreur : "Non déclarée"
+
 
 
 //int toto, ttyty, eee, ttyty, toto;

@@ -1,7 +1,7 @@
 package instruction;
 
 import java.util.*;
-import tac.Label;
+import tac.*;
 
 public class Increment extends Instruction {
 
@@ -13,7 +13,7 @@ public class Increment extends Instruction {
     }
 
     public void genererCode(Label suivant, Stack pileTableVariable) {
-        HashMap hm = (HashMap)pileTableVariable.peek();
+        //HashMap hm = (HashMap)pileTableVariable.peek();
         /*Identifiant resDroite = droite.genererCode();
         Identifiant resVariable = variable.genererCode();
         System.out.println(resVariable + " = " + resDroite);*/

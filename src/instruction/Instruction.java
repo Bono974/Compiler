@@ -1,7 +1,7 @@
 package instruction;
 
 import java.util.*;
-import tac.Label;
+import tac.*;
 
 public abstract class Instruction {
 
