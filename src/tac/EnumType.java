@@ -3,7 +3,7 @@ package tac;
 public enum EnumType {
 	// types simples
 	SHORT, UNSIGNED_SHORT, INTEGER, UNSIGNED_INTEGER, 
-	REAL, UNSIGNED_REAL, STRING, BOOLEAN, ENUM,
+	REAL, UNSIGNED_REAL, BOOLEAN, ENUM,
 	
 	// types complexes
 	POINTER, FUNCTION, TIMES, 

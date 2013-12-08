@@ -20,18 +20,20 @@ public class Declaration extends Instruction {
         //tableVariable.add(this.type, this.variable);
         String expName;
 
-        for (Expression exp: variable ) {
+        for (int i = 0; i < variable.size(); i++){
             HashMap hm = (HashMap)pileTableVariable.peek();
-            System.out.println("Type Variable : " + exp.getType());
+            //System.out.println("Type Variable : " + exp.getType());
+            expName = variable.get(i).getNomVariable();
 
-            if(exp.getType() == EnumType.INTERVALLE)
+            /*if(exp.getType() == EnumType.INTERVALLE)
                 expName = exp.getNomVariable();
             else
-                expName = exp.genererCode().toString();
+                expName = exp.genererCode().toString();*/
 
+            // if(!GenererErreur.genErreurDeclaration(hm, type, expName))
+            //     hm.put(expName, type);
 
-            if(!GenererErreur.genErreurDeclaration(hm, type, expName)) {}
-                hm.put(expName, type);
+            GenererErreur.genErreurDeclaration(hm, type, expName);
         }
     }
 }

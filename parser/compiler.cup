@@ -104,7 +104,7 @@ instruction_if ::= IF expression:condition THEN
                       ELSE instruction:blocElse                                       {: RESULT = new IfThenElse(condition, blocIf, blocElse); :}
 
                 |  IF expression:condition THEN
-                      instruction:blocIf                                              {: System.out.println("DEBUT DU IF"); RESULT = new IfThen(condition, blocIf); :}
+                      instruction:blocIf                                              {: RESULT = new IfThen(condition, blocIf); :}
                 ;
 
 instruction_for ::= FOR LRBRA affectation:affect expression:condition SEMIC increment:inc RRBRA

@@ -14,6 +14,7 @@ if (j < 20) then {
     int newJ = 60;
 }
 
+
 newJ = 25; // <<< Doit générer une erreur : "Non déclarée"
 
 
@@ -83,14 +84,14 @@ var_int = -69 + -42;
 // ==============================
 // Gestion des entiers non signés
 
-var_int = 666 * 10;
+int var_int = 666 * 10;
 
 // ====================
 // Gestion des booléens
 
 var_bool = 6 < 9;
 var_bool = true;
-//var_bool = !true;
+var_bool = !true;
 var_bool = false;
 
 // ======================
@@ -116,14 +117,13 @@ var_real = 1.6 * 4.2;
 // ========================
 // Gestion des chaines de caractères
 
-// A FAIRE <<<<<<<<<<<<<
 char c = 'Q';
 string str = "blablabla";
 
 // ========================
 // Gestion des tableaux à 1 dimension
 
-//int tab[10];
+//int tab[10] = 12;
 tab[2] = 66;
 
 // ========================
@@ -137,8 +137,8 @@ real newBibi = *bibiPOINTER;
 // ================================================
 // Gestion des opérations arithmétiques et logiques
 
-var_real = (3 % 2) + 47 / 5.6 * 15;
-var_bool = 1 < 2 > (3 + 4) && (4 || -2);
+real var_real = (3 % 2) + 47 / 5.6 * 15;
+var_bool = 1 < 2 > (3 + 4); /* && (4 || -2);*/  // ERREUR <<<< !!!!!
 
 // ========================
 // Les appels de procédures
@@ -155,9 +155,9 @@ bool var_bool_new = 1 < 2 + 3 + 4;
 // =========
 // Les tests
 if(1 < 2) then
-	var_int_new = 72 + 3;
+	int var_int_new = 72 + 3;
 else
-	var_int_new = 29;
+	int var_int_new = 29;
 
 if(var_int_new < 447) then
 	var_int_new = 447;
@@ -167,16 +167,17 @@ if(var_int_new < 447) then
 
 int i = 22;
 
-for(i = 44; i > 22; i = i - 1) {
-	var_int_new = 12;
-}
+
+for(i = 44; i > 22; i = i - 1)
+	int var_int_new = 12;
+
 
 for(i = 44; i > 22;) {
-	var_int_new = 12;
+	int var_int_new = 12;
 }
 
 while (var_bool_new || 6)
-	var_int_new = var_int_new + 1;
+	int var_int_new = var_int_new + 1;
 
 do {
     i = k + 1;

@@ -23,6 +23,7 @@ public class ProcedureDefinition extends Instruction {
         System.out.println(this.nom + ":");
         System.out.println("func "+ this.nom);
         ModifierStack.pushTV(pileTableVariable);
+        GenererErreur.inProcedure = true;
 
         blocInstruction.genererCode(suivant, pileTableVariable);
 
@@ -30,6 +31,8 @@ public class ProcedureDefinition extends Instruction {
             Identifiant res = this.valeurRetour.genererCode();
             System.out.println("return " + res);
         }
+
+        GenererErreur.inProcedure = false;
         ModifierStack.popTV(pileTableVariable);
     }
 }

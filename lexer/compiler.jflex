@@ -103,7 +103,7 @@ Comment = "/*" [^*] ~"*/" | "/*" "*"+ "/" | "//" {Characters}* {EndOfLine}
 
 "bool"         { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.BOOLEAN); }
 "char"         { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.CHARACTER); }
-"string"       { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.STRING); }
+"string"       { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.CHARACTERS); }
 "enum"         { return new Symbol(CompilerSymbol.ENUM_TYPE, yyline, yycolumn, EnumType.ENUM); }
 {Id}           { return new Symbol(CompilerSymbol.ID, yyline, yycolumn, yytext()); }
 "'"([a-zA-Z] | [[:digit:]])"'"     { return new Symbol(CompilerSymbol.CHARACTER, yyline, yycolumn, yytext()); }

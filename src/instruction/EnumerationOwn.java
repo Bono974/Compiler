@@ -24,8 +24,7 @@ public class EnumerationOwn extends Instruction {
 
         HashMap hm = (HashMap)pileTableVariable.peek();
 
-        if(!GenererErreur.genErreurDeclaration(hm, type, variable.getNomVariable()))
-            hm.put(variable.genererCode().toString(), type);
+        GenererErreur.genErreurDeclaration(hm, type, variable.getNomVariable());
     }
 }
 

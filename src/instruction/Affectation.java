@@ -22,28 +22,28 @@ public class Affectation extends Instruction {
         EnumType droiteType = droite.getType();
         String expName;
         HashMap hm = (HashMap)pileTableVariable.peek();
+        expName = variable.getNomVariable();
 
         if(variable.getType() == EnumType.INTERVALLE) {
-            expName = variable.getNomVariable();
+            //expName = variable.getNomVariable();
             GenererErreur.genErreurIntervalle(expName);
         }
         else {
-            expName = variable.genererCode().toString();
+            //expName = variable.genererCode().toString();
 
             Identifiant resDroite = droite.genererCode();
             Identifiant resVariable = variable.genererCode();
             System.out.println(resVariable + " = " + resDroite);
         }
 
-        if(!GenererErreur.genErreurAffectation(hm, type, droiteType, expName, droite.getNomVariable()))
-            hm.put(expName, type);
+        // System.out.println("\n/*===============");
+        // System.out.println("Type de gauche : " + type + " Variable : " + expName +  " -- Type de droite : " + droiteType);
+        // System.out.println("AFFECTATION -- Type Variable : " + variable.getType());
+        // System.out.println("===============*/");
 
-        /*if(!GenererErreur.genErreur(hm, type, expName))
-                hm.put(expName, type);*/
+        // if(!GenererErreur.genErreurAffectation(hm, type, droiteType, expName, droite.getNomVariable()))
+        //     hm.put(expName, type);
 
-        System.out.println("\n/*===============");
-        System.out.println("Type de gauche : " + type + " Variable : " + expName +  " -- Type de droite : " + droiteType);
-        System.out.println("AFFECTATION -- Type Variable : " + variable.getType());
-        System.out.println("===============*/");
+        GenererErreur.genErreurAffectation(hm, type, droiteType, expName, droite.getNomVariable());
     }
 }
