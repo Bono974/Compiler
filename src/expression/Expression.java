@@ -1,7 +1,6 @@
 package expression;
 
-import tac.EnumOp;
-import tac.Label;
+import tac.*;
 import identifiant.Identifiant;
 
 public abstract class Expression {
@@ -9,7 +8,7 @@ public abstract class Expression {
     public abstract Identifiant genererCode ();
     public abstract void genererJumpCode (Label oui, Label non);
 
-    public abstract EnumOp getType ();
+    public abstract EnumType getType ();
     public String getNomVariable() { return "ErreurGetNomVariable"; }
 }
 

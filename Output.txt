@@ -1,46 +1,80 @@
-t0 = ! a
-e = t0
+t0 = 15 + 3
+j = t0
+
+/*===============
+La variable : "j" n'a pas été déclarée précédemment.
+===============*/
+
+/*===============
+Type de gauche : null Variable : j -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
 
 L0:
+Type Variable : VARIABLE
+c = 'a'
 
 /*===============
-La variable : toto a déjà été déclarée !!
+Type de gauche : CHARACTER Variable : c -- Type de droite : CHARACTER
+AFFECTATION -- Type Variable : VARIABLE
 ===============*/
-t0 = 4 + 2
-t1 = t0 + 1
-t2 = t1 + 2
-t3 = t2 + 33
-toto[t3] = 6
 
 L1:
-toto:
-func toto
+i = j
 
 /*===============
-Veuillez préciser un "Type" car votre variable n'a pas été déclarée.
+La variable : "j" n'a pas été déclarée précédemment.
 ===============*/
-a = k
-return k
+
+/*===============
+Type de gauche : null Variable : i -- Type de droite : VARIABLE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
 
 L2:
 toto:
 func toto
-
-/*===============
-Veuillez préciser un "Type" car votre variable n'a pas été déclarée.
-===============*/
 a = k
 
-L3:
+/*===============
+La variable : "a" n'a pas été déclarée précédemment.
+===============*/
 
 /*===============
-Veuillez préciser un "Type" car votre variable n'a pas été déclarée.
+Type de gauche : null Variable : a -- Type de droite : VARIABLE
+AFFECTATION -- Type Variable : VARIABLE
 ===============*/
+return k
+
+L3:
+toto:
+func toto
+a = k
+
+/*===============
+La variable : "a" n'a pas été déclarée précédemment.
+===============*/
+
+/*===============
+Type de gauche : null Variable : a -- Type de droite : VARIABLE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
+
+L4:
 t0 = 3 + 4.3
 t1 = t0 - 4
 k = t1
 
-L4:
+/*===============
+La variable : "k" n'a pas été déclarée précédemment.
+===============*/
+
+/*===============
+Type de gauche : null Variable : k -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
+
+L5:
 param 3
 param 3
 param 6
@@ -48,214 +82,122 @@ t0 = k - j
 param t0
 call toto
 
-L5:
+L6:
+Type Variable : VARIABLE
+Type Variable : VARIABLE
 
 /*===============
-La variable : toto a déjà été déclarée !!
-===============*/
-
-/*===============
-La variable : toto a déjà été déclarée !!
+La variable : "toto" a déjà été déclarée !!
 ===============*/
 t0 = - 8
 u = t0
 
-L6:
-p = 95
+/*===============
+Type de gauche : SHORT Variable : u -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
 
 L7:
-i = 65535
+p = 95
+
+/*===============
+Type de gauche : UNSIGNED_SHORT Variable : p -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
 
 L8:
-j = 14.312465
+i = 65535
+
+/*===============
+Type de gauche : INTEGER Variable : i -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
 
 L9:
+j = 14.312465
 
 /*===============
-La variable : u a déjà été déclarée !!
+Type de gauche : REAL Variable : j -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
 ===============*/
-u = 13
 
 L10:
-o = 15.36
-
-L11:
-x = 6
-
-L12:
+u = 13
 
 /*===============
-La variable : x a déjà été déclarée !!
+Type de gauche : UNSIGNED_INTEGER Variable : u -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
 ===============*/
-x = 22
+
+L11:
+o = 15.36
+
+/*===============
+Type de gauche : UNSIGNED_REAL Variable : o -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
+
+L12:
+x = 6
+
+/*===============
+Type de gauche : INTEGER Variable : x -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
 
 L13:
+x = 22
+
+/*===============
+Type de gauche : INTEGER Variable : x -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
+
+L14:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int = t2
 
-L14:
+/*===============
+Type de gauche : INTEGER Variable : var_int -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
+
+L15:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real = t2
 
-L15:
+/*===============
+Type de gauche : REAL Variable : var_real -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
+
+L16:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool = t2
 
-L16:
+/*===============
+Type de gauche : BOOLEAN Variable : var_bool -- Type de droite : OP_BOOL
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
+
+L17:
 t0 = - 69
 t1 = - 42
 t2 = t0 + t1
 var_int = t2
 
-L17:
-t0 = 666 * 10
-var_int = t0
+/*===============
+Type de gauche : null Variable : var_int -- Type de droite : OP_ARITHMETIQUE
+AFFECTATION -- Type Variable : VARIABLE
+===============*/
 
 L18:
-t0 = 6 < 9
-var_bool = t0
-
-L19:
-var_bool = true
-
-L20:
-var_bool = false
-
-L21:
-var_char = 'a'
-
-L22:
-t0 = 1.6 * 4.2
-var_real = t0
-
-L23:
-c = 'Q'
-
-L24:
-str = "blablabla"
-
-L25:
-
-/*===============
-Veuillez préciser un "Type" car votre variable n'a pas été déclarée.
-===============*/
-tab[2] = 66
-
-L26:
-bibi = 69
-
-L27:
-bibiPOINTER = &bibi
-
-L28:
-newBibi = *bibiPOINTER
-
-L29:
-t0 = 3 % 2
-t1 = 47 / 5.6
-t2 = t1 * 15
-t3 = t0 + t2
-var_real = t3
-
-L30:
-var_bool = null
-
-L31:
-t0 = 2 * 2
-t1 = t0 / 3
-t2 = 1 + t1
-var_int_new = t2
-
-L32:
-t0 = 3 % 2
-t1 = 47 / 5.6
-t2 = t0 + t1
-var_real_new = t2
-
-L33:
-t0 = 2 + 3
-t1 = t0 + 4
-t2 = 1 < t1
-var_bool_new = t2
-
-L34:
-if 1 < 2 jump L36
-jump L37
-L36:
-t0 = 72 + 3
-var_int_new = t0
-jump L35
-L37:
-var_int_new = 29
-
-L35:
-if var_int_new < 447 jump L39
-jump L38
-L39:
-var_int_new = 447
-
-L38:
-
-/*===============
-La variable : i a déjà été déclarée !!
-===============*/
-i = 22
-
-L40:
-i = 44
-L42:
-if i > 22 jump L43
-jump L41
-L43:
-var_int_new = 12
-t0 = i - 1
-i = t0
-jump L42
-
-L41:
-i = 44
-L45:
-if i > 22 jump L46
-jump L44
-L46:
-var_int_new = 12
-jump L45
-
-L44:
-L48:
-if var_bool_new != 0 jump L49
-jump L50
-L50:
-if 6 != 0 jump L49
-jump L47
-L49:
-t0 = var_int_new + 1
-var_int_new = t0
-jump L48
-
-L47:
-L52:
-t0 = k + 1
-i = t0
-if var_bool_new != 0 jump L52
-jump L51
-
-L51:
-if 2 < 1 jump L54
-jump L55
-L54:
-var_int_new = 666
-jump L53
-L55:
-if 4 >= 1 jump L56
-jump L53
-L56:
-var_int_new = 999
-
-L53:
+t0 = 666 * 10
+var_int = t0
+parse error

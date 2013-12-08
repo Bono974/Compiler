@@ -1,6 +1,6 @@
 package expression;
 
-import tac.EnumOp;
+import tac.*;
 
 public class CharacterMultiple extends Variable {
 
@@ -8,7 +8,7 @@ public class CharacterMultiple extends Variable {
         super(nomVariable);
     }
 
-    public EnumOp getType() {
-        return EnumOp.CHARACTERS;
+    public EnumType getType() {
+        return EnumType.CHARACTERS;
     }
 }

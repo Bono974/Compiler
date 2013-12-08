@@ -19,23 +19,31 @@ public class Affectation extends Instruction {
     }
 
     public void genererCode(Label suivant, Stack pileTableVariable) {
-        EnumOp droiteType = droite.getType();
+        EnumType droiteType = droite.getType();
         String expName;
-        //System.out.println("Type de gauche : " + type + " Variable : " + variable.genererCode() +  " -- Type de droite : " + droiteType);
         HashMap hm = (HashMap)pileTableVariable.peek();
 
-        if(variable.getType() == EnumOp.INTERVALLE)
+        if(variable.getType() == EnumType.INTERVALLE) {
             expName = variable.getNomVariable();
-        else
+            GenererErreur.genErreurIntervalle(expName);
+        }
+        else {
             expName = variable.genererCode().toString();
 
-        if(!GenererErreur.genErreur(hm, type, expName))
+            Identifiant resDroite = droite.genererCode();
+            Identifiant resVariable = variable.genererCode();
+            System.out.println(resVariable + " = " + resDroite);
+        }
+
+        if(!GenererErreur.genErreurAffectation(hm, type, droiteType, expName, droite.getNomVariable()))
             hm.put(expName, type);
 
-        
+        /*if(!GenererErreur.genErreur(hm, type, expName))
+                hm.put(expName, type);*/
 
-        Identifiant resDroite = droite.genererCode();
-        Identifiant resVariable = variable.genererCode();
-        System.out.println(resVariable + " = " + resDroite);
+        System.out.println("\n/*===============");
+        System.out.println("Type de gauche : " + type + " Variable : " + expName +  " -- Type de droite : " + droiteType);
+        System.out.println("AFFECTATION -- Type Variable : " + variable.getType());
+        System.out.println("===============*/");
     }
 }

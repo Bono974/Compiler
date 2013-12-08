@@ -1,7 +1,7 @@
 package expression;
 
 import identifiant.*;
-import tac.EnumOp;
+import tac.*;
 
 public class VariableTableau extends Variable {
 
@@ -17,7 +17,7 @@ public class VariableTableau extends Variable {
         return new IdentifiantVariableTableau(this.nomVariable, res);
     }
 
-    public EnumOp getType(){
-        return EnumOp.TABLEAU;
+    public EnumType getType(){
+        return EnumType.TABLEAU;
     }
 }

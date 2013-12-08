@@ -1,7 +1,7 @@
 package expression;
 
 import identifiant.*;
-import tac.EnumOp;
+import tac.*;
 
 public class VariableIntervalle extends OperationArithmetique {
 
@@ -26,8 +26,8 @@ public class VariableIntervalle extends OperationArithmetique {
         return nomVariable;
     }
 
-    public EnumOp getType(){
-        return EnumOp.INTERVALLE;
+    public EnumType getType(){
+        return EnumType.INTERVALLE;
     }
 }
 

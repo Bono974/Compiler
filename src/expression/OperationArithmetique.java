@@ -1,7 +1,6 @@
 package expression;
 
-import tac.EnumOp;
-import tac.Label;
+import tac.*;
 import identifiant.Identifiant;
 
 public abstract class OperationArithmetique extends Expression {
@@ -15,7 +14,7 @@ public abstract class OperationArithmetique extends Expression {
 
     //public abstract Identifiant genererCode();
 
-    public EnumOp getType() {
-        return EnumOp.OP_ARITHMETIQUE;
+    public EnumType getType() {
+        return EnumType.OP_ARITHMETIQUE;
     }
 }

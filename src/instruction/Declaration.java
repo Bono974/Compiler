@@ -22,14 +22,15 @@ public class Declaration extends Instruction {
 
         for (Expression exp: variable ) {
             HashMap hm = (HashMap)pileTableVariable.peek();
-            
-            if(exp.getType() == EnumOp.INTERVALLE)
+            System.out.println("Type Variable : " + exp.getType());
+
+            if(exp.getType() == EnumType.INTERVALLE)
                 expName = exp.getNomVariable();
             else
                 expName = exp.genererCode().toString();
 
 
-            if(GenererErreur.genErreur(hm, type, expName)) {}
+            if(!GenererErreur.genErreurDeclaration(hm, type, expName)) {}
                 hm.put(expName, type);
         }
     }

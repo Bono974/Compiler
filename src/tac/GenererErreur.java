@@ -3,27 +3,144 @@ import java.util.*;
 
 public class GenererErreur {
 
-    public static boolean genErreur(HashMap hm, EnumType type, String nomVariable) {
+    public static boolean genErreurDeclaration(HashMap hm, EnumType type, String nomVariable) {
 
         if(!hm.containsKey(nomVariable)) { // Si la variable n'a pas encore été déclarée
 
             if(type == null) {
                 System.out.println("\n/*===============");
-                System.out.println("Veuillez préciser un \"Type\" car votre variable n'a pas été déclarée.");
+                System.out.println("La variable : \"" + nomVariable + "\" n'a pas été déclarée précédemment.");
                 System.out.println("===============*/");
             } else {
-                return false;
-                //System.out.println("\nLa variable : " + nomVariable + " a été ajouté." + hm);
+                return true;
+                //System.out.println("\nLa variable : \"" + nomVariable + "\" a été ajouté." + hm);
             }
 
         } else { // Si la variable est deja dans la table des variables
             if(type != null) {
                 System.out.println("\n/*===============");
-                System.out.println("La variable : " + nomVariable + " a déjà été déclarée !!");
+                System.out.println("La variable : \"" + nomVariable + "\" a déjà été déclarée !!");
                 System.out.println("===============*/");
             }
         }
 
-        return true;
+        return false;
+    }
+
+    public static boolean genErreurAffectation(HashMap hm, EnumType typeGauche, EnumType typeDroite, String nomVariableGauche, String nomVariableDroite) {
+
+        if(typeGauche == null) {
+            if(hm.containsKey(nomVariableGauche)) {
+                typeGauche = (EnumType)hm.get(nomVariableGauche);
+            } else {
+                System.out.println("\n/*===============");
+                System.out.println("La variable : \"" + nomVariableGauche + "\" n'a pas été déclarée précédemment.");
+                System.out.println("===============*/");
+
+                return true;
+            }
+        }
+
+        if(typeDroite == EnumType.VARIABLE) {
+            if(hm.containsKey(nomVariableDroite)) {
+                typeDroite = (EnumType)hm.get(nomVariableDroite);
+            } else {
+                System.out.println("\n/*===============");
+                System.out.println("La variable : \"" + nomVariableDroite + "\" n'a pas été déclarée précédemment.");
+                System.out.println("===============*/");
+
+                return true;
+            }
+        }
+
+        if(comparerType(typeGauche, typeDroite)){
+            System.out.println("\n/*===============");
+            System.out.println("Affectation impossible avec la variable : \"" + nomVariableGauche + "\"");
+            System.out.println("L'élément à gauche est de type : " + typeGauche);
+            System.out.println("Alors que celui de \"" + nomVariableDroite + "\" est de type : " + typeDroite);
+            System.out.println("===============*/");  
+        }
+
+        return false;
+    }
+
+    public static void genErreurIntervalle(String nomVariable) {
+        System.out.println("\n/*===============");
+        System.out.println("La variable : \"" + nomVariable + "\" est un tableau avec intervalle.");
+        System.out.println("Il n'est pas possible d'affecter une valeur à un intervalle.");
+        System.out.println("===============*/");
+    }
+
+    public static boolean comparerType(EnumType typeGauche, EnumType typeDroite) {
+
+        boolean erreur = false;
+
+        switch(typeGauche) {
+            case SHORT:
+                if(typeDroite == EnumType.INTEGER) erreur = true;
+                if(typeDroite == EnumType.UNSIGNED_INTEGER) erreur = true;
+                if(typeDroite == EnumType.REAL) erreur = true;
+                if(typeDroite == EnumType.UNSIGNED_REAL) erreur = true;
+                if(typeDroite == EnumType.BOOLEAN) erreur = true;
+                if(typeDroite == EnumType.ENUM) erreur = true;
+                if(typeDroite == EnumType.CHARACTER) erreur = true;
+                if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                break;
+            case UNSIGNED_SHORT:
+                if(typeDroite == EnumType.INTEGER) erreur = true;
+                if(typeDroite == EnumType.UNSIGNED_INTEGER) erreur = true;
+                if(typeDroite == EnumType.REAL) erreur = true;
+                if(typeDroite == EnumType.UNSIGNED_REAL) erreur = true;
+                if(typeDroite == EnumType.BOOLEAN) erreur = true;
+                if(typeDroite == EnumType.ENUM) erreur = true;
+                if(typeDroite == EnumType.CHARACTER) erreur = true;
+                if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                break;
+            case INTEGER:
+                if(typeDroite == EnumType.BOOLEAN) erreur = true;
+                if(typeDroite == EnumType.ENUM) erreur = true;
+                if(typeDroite == EnumType.CHARACTER) erreur = true;
+                if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                break;
+            case UNSIGNED_INTEGER:
+                if(typeDroite == EnumType.BOOLEAN) erreur = true;
+                if(typeDroite == EnumType.ENUM) erreur = true;
+                if(typeDroite == EnumType.CHARACTER) erreur = true;
+                if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                break;
+            case REAL:
+                if(typeDroite == EnumType.BOOLEAN) erreur = true;
+                if(typeDroite == EnumType.ENUM) erreur = true;
+                if(typeDroite == EnumType.CHARACTER) erreur = true;
+                if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                break;
+            case UNSIGNED_REAL:
+                if(typeDroite == EnumType.BOOLEAN) erreur = true;
+                if(typeDroite == EnumType.ENUM) erreur = true;
+                if(typeDroite == EnumType.CHARACTER) erreur = true;
+                if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                break;
+            case BOOLEAN:
+                if(typeDroite == EnumType.REAL) erreur = true;
+                if(typeDroite == EnumType.UNSIGNED_REAL) erreur = true;
+                if(typeDroite == EnumType.ENUM) erreur = true;
+                if(typeDroite == EnumType.CHARACTER) erreur = true;
+                if(typeDroite == EnumType.CHARACTERS) erreur = true;
+                break;
+            case ENUM:
+                if(typeDroite != EnumType.ENUM) erreur = true;
+                break;
+            case CHARACTER:
+                if(typeDroite != EnumType.CHARACTER) erreur = true;
+                break;
+            case CHARACTERS:
+                if(typeDroite != EnumType.CHARACTERS) erreur = true;
+                break;
+            default:
+                System.out.println("Le type : " + typeGauche + " n'est pas un type valide.");
+                erreur = true;
+        }
+
+        return erreur;
     }
 }
