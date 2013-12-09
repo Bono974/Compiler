@@ -19,6 +19,12 @@ newJ = 25; // <<< Doit générer une erreur : "Non déclarée"
 
 //int toto, ttyty, eee, ttyty, toto;
 enum couleur { blanc, noir };
+enum couleur2 { blanc, rouge };
+
+/*
+couleur c1 = blanc;
+couleur2 c2 = blanc;
+*/
 
 def tutu (a, q) {
     a = k;

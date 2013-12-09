@@ -96,7 +96,7 @@ public class GenererErreur {
             System.out.println("\n/*===============");
             System.out.println("Affectation impossible avec la variable : \"" + nomVariableGauche + "\"");
             System.out.println("L'élément à gauche est de type : " + typeGauche);
-            System.out.println("Alors que celui de \"" + nomVariableDroite + "\" est de type : " + typeDroite);
+            System.out.println("Alors que celui de droite est de type : " + typeDroite);
             System.out.println("===============*/");  
         }
 
