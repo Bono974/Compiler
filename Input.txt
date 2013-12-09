@@ -142,7 +142,7 @@ pointer real newBibi = *bibiPOINTER;
 // Gestion des opérations arithmétiques et logiques
 
 real var_real = (3 % 2) + 47 / 5.6 * 15;
-var_bool = 1 < 2 > (3 + 4); /* && (4 || -2);*/  // ERREUR <<<< !!!!!
+var_bool = 1 < 2 > (3 + 4);
 
 // ========================
 // Les appels de procédures

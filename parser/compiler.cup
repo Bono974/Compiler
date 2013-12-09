@@ -86,16 +86,16 @@ instruction ::= declaration:declInstruction                     {: RESULT = null
              ;
 
 //TODO : rajouter le type dans le constructeur, test si liste_expression ne contient que des "type.variable"
-declaration ::= ENUM_TYPE:type liste_expression:liste SEMIC                                {: RESULT = new Declaration((EnumType)type, liste); :}
+declaration ::= ENUM_TYPE:type liste_expression:liste SEMIC:token                                {: RESULT = new Declaration((EnumType)type, liste, new InfosErreur(tokenleft, tokenright)); :}
              ;
 
-affectation ::= ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMIC          {: RESULT = new Affectation((EnumType)type, id, exp); :}
-             |  expression_variable:id AFFECT expression:exp SEMIC                    {: RESULT = new Affectation(null, id, exp); :}
+affectation ::= ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMIC:token           {: RESULT = new Affectation((EnumType)type, id, exp, new InfosErreur(tokenleft, tokenright)); :}
+             |  expression_variable:id AFFECT expression:exp SEMIC:token                          {: RESULT = new Affectation(null, id, exp, new InfosErreur(tokenleft, tokenright)); :}
              //|  POINTER ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMIC  {: RESULT = new Affectation((EnumType)type, id, exp); :}
              ;
 
 //Vérification de ENUM_TYPE == enum
-enumeration ::= ENUM_TYPE:type expression_variable:id LBRACE liste_expression:list RBRACE SEMIC {: RESULT = new EnumerationOwn((EnumType)type, id, list); :}
+enumeration ::= ENUM_TYPE:type expression_variable:id LBRACE liste_expression:list RBRACE SEMIC:token {: RESULT = new EnumerationOwn((EnumType)type, id, list, new InfosErreur(tokenleft, tokenright)); :}
              ;
 
 instruction_if ::= IF expression:condition THEN                                       
@@ -111,7 +111,7 @@ instruction_for ::= FOR LRBRA affectation:affect expression:condition SEMIC incr
                  ;
 
 
-increment ::= expression_variable:id AFFECT expression:exp                            {: RESULT = new Affectation(null, id, exp); :}
+increment ::= expression_variable:id AFFECT:token expression:exp                            {: RESULT = new Affectation(null, id, exp, new InfosErreur(tokenleft, tokenright)); :}
            |
            ;
 
@@ -123,12 +123,12 @@ instruction_while ::= WHILE expression:condition
                    ;
 
 
-procedure ::= DEF ID:nom LRBRA liste_expression:parametres RRBRA
+procedure ::= DEF:token ID:nom LRBRA liste_expression:parametres RRBRA
                       bloc_instruction:blocInstruction
-                      valeur_retour:ret                                               {: RESULT = new ProcedureDefinition(nom, parametres, blocInstruction, ret); :}
-            | DEF ID:nom LRBRA liste_expression:parametres RRBRA
-                      bloc_instruction:blocInstruction                                {: RESULT = new ProcedureDefinition(nom, parametres, blocInstruction, null); :}
-            | ID:nom LRBRA liste_expression:parametres RRBRA SEMIC                    {: RESULT = new ProcedureAppel(nom, parametres); :}
+                      valeur_retour:ret                                               {: RESULT = new ProcedureDefinition(nom, parametres, blocInstruction, ret, new InfosErreur(tokenleft, tokenright)); :}
+            | DEF:token ID:nom LRBRA liste_expression:parametres RRBRA
+                      bloc_instruction:blocInstruction                                {: RESULT = new ProcedureDefinition(nom, parametres, blocInstruction, null, new InfosErreur(tokenleft, tokenright)); :}
+            | ID:nom LRBRA liste_expression:parametres RRBRA SEMIC:token                    {: RESULT = new ProcedureAppel(nom, parametres, new InfosErreur(tokenleft, tokenright)); :}
             ;
 
 valeur_retour ::= RETURN expression:valeur SEMIC                                      {: RESULT = valeur; :}
@@ -149,11 +149,11 @@ liste_expression ::= liste_expression:list COMMA expression:exp                 
                                                                                          RESULT = l; :}
                   ;
 
-expression ::= expression:e1 PLUS   expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.PLUS); :}
-            |  expression:e1 MINUS  expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.MINUS); :}
-            |  expression:e1 TIMES  expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.TIMES); :}
-            |  expression:e1 DIVIDE expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.DIVIDE); :}
-            |  expression:e1 MOD    expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.MOD); :}
+expression ::= expression:e1 PLUS:token   expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.PLUS, new InfosErreur(tokenleft, tokenright)); :}
+            |  expression:e1 MINUS:token  expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.MINUS, new InfosErreur(tokenleft, tokenright)); :}
+            |  expression:e1 TIMES:token  expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.TIMES, new InfosErreur(tokenleft, tokenright)); :}
+            |  expression:e1 DIVIDE:token expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.DIVIDE, new InfosErreur(tokenleft, tokenright)); :}
+            |  expression:e1 MOD:token    expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.MOD, new InfosErreur(tokenleft, tokenright)); :}
             |  MINUS expression:exp                   {: RESULT = new ArithmetiqueUnaire(exp, EnumOp.MINUS); :}
 
             |  expression:e1 AND     expression:e2    {: RESULT = new AndBool(e1, e2);     :}

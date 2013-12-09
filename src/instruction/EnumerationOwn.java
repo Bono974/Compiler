@@ -11,11 +11,13 @@ public class EnumerationOwn extends Instruction {
     private Expression variable;
     private List<Expression> valeurs;
     private EnumType type;
+    private InfosErreur info;
 
-    public EnumerationOwn (EnumType type, Expression variable, List<Expression> valeurs) {
+    public EnumerationOwn (EnumType type, Expression variable, List<Expression> valeurs, InfosErreur info) {
         this.variable = variable;
         this.valeurs = valeurs;
         this.type = type;
+        this.info = info;
     }
 
     public void genererCode(Label suivant, Stack pileTableVariable) {
@@ -24,7 +26,7 @@ public class EnumerationOwn extends Instruction {
 
         HashMap hm = (HashMap)pileTableVariable.peek();
 
-        GenererErreur.genErreurDeclaration(hm, type, variable.getNomVariable());
+        GenererErreur.genErreurDeclaration(hm, type, variable.getNomVariable(), info);
     }
 }
 

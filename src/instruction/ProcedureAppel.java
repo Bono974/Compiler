@@ -9,21 +9,23 @@ public class ProcedureAppel extends Instruction {
 
     private String nom;
     private LinkedList<Expression> listeExpression;
+    private InfosErreur info;
 
-    public ProcedureAppel(String nom, LinkedList<Expression> list) {
+    public ProcedureAppel(String nom, LinkedList<Expression> list, InfosErreur info) {
         this.nom = nom;
         this.listeExpression = list;
+        this.info = info;
     }
 
     public void genererCode(Label suivant, Stack pileTableVariable) {
         
         HashMap hm = (HashMap)pileTableVariable.peek();
-        GenererErreur.genErreurProcedure(hm, this.nom);
+        GenererErreur.genErreurProcedure(hm, this.nom, info);
 
         ModifierStack.pushTV(pileTableVariable);
         
         if(GenererErreur.inProcedure) {
-            GenererErreur.genErreurProcRecursive(GenererErreur.currentProcedure, this.nom);
+            GenererErreur.genErreurProcRecursive(GenererErreur.currentProcedure, this.nom, info);
         }
 
         for (Expression e: this.listeExpression) {
