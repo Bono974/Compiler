@@ -8,13 +8,13 @@ import tac.*;
 
 parser code {:
     public void syntax_error(Symbol cur_token) {
-        System.err.println("----error----");
-        System.err.println("line :"+ cur_token.left + " column :"+ cur_token.right);
-        report_error("syntax_error", null);
+        System.err.println("---- Erreur de syntaxe ----");
+        System.err.println("Ligne : "+ (cur_token.left + 1) + " Colonne : "+ (cur_token.right + 1));
+        //report_error("syntax_error", null);
     }
     public void unrecovered_syntax_error(Symbol cur_token) {
         syntax_error(cur_token);
-        System.err.println("----fin----");
+        System.err.println("---- Fin d'erreur de syntaxe ----");
     }
 :}
 
@@ -83,6 +83,7 @@ instruction ::= declaration:declInstruction                     {: RESULT = null
              |  instruction_if:ifInstruction                    {: RESULT = ifInstruction; :}
              |  bloc_instruction:blocInstruction                {: RESULT = blocInstruction; :}
              |  procedure:procedureInstruction                  {: RESULT = procedureInstruction; :}
+             | error // Gestion des erreurs de syntaxes
              ;
 
 //TODO : rajouter le type dans le constructeur, test si liste_expression ne contient que des "type.variable"

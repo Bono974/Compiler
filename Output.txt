@@ -10,20 +10,23 @@ Il n'est pas possible d'affecter une valeur à un intervalle.
 ===============*/
 
 L1:
+err2 = 999
+
+L2:
 t0 = 15 + 3
 j = t0
 
-L2:
+L3:
 c = 'a'
 
-L3:
+L4:
 i = j
 
-L4:
+L5:
 t0 = 6 + 4
 
 /*===============
-Erreur à la ligne : 11
+Erreur à la ligne : 14
 Il n'est pas autorisé de faire une opération arithmétique
 entre des nombres et des booléens.
 ===============*/
@@ -32,59 +35,59 @@ t2 = t0 < t1
 i = t2
 
 /*===============
-Erreur à la ligne : 11
+Erreur à la ligne : 14
 Affectation impossible avec la variable : "i"
 L'élément à gauche est de type : INTEGER
-Alors que celui de "ErreurGetNomVariable" est de type : OP_BOOL
+Alors que celui de droite est de type : OP_BOOL
 ===============*/
 
-L5:
+L6:
 
 /*===============
-Erreur à la ligne : 12
+Erreur à la ligne : 15
 Il n'est pas autorisé de faire une opération arithmétique
 entre des nombres et des booléens.
 ===============*/
 t0 = true + 7
 i = t0
 
-L6:
-if j < 20 jump L8
-jump L7
-L8:
+L7:
+if j < 20 jump L9
+jump L8
+L9:
 newJ = 60
 
-L7:
+L8:
 newJ = 25
 
 /*===============
-Erreur à la ligne : 18
+Erreur à la ligne : 21
 La variable : "newJ" n'a pas été déclarée précédemment.
 ===============*/
 
-L9:
+L10:
 
 /*===============
-Erreur à la ligne : 23
+Erreur à la ligne : 32
 La variable/procédure : "tutu" a déjà été déclarée !!
 ===============*/
 tutu:
 func tutu
 a = k
-L11:
+L12:
 param q
 param 26
 call tutu
 return k
 
-L10:
+L11:
 tyty:
 func tyty
 a = k
-L13:
+L14:
 
 /*===============
-Erreur à la ligne : 30
+Erreur à la ligne : 39
 Il est interdit d'appeler une procédure dans le corps d'une procédure
 en dehors d'elle même.
 La procédure : tutu a été appelée dans : tyty
@@ -93,25 +96,25 @@ param a
 param 10
 call tutu
 
-L12:
+L13:
 param 6
 param 23
 call tutu
 
-L14:
+L15:
 t0 = 3 + 4.3
 t1 = t0 - 4
 k = t1
 
 /*===============
-Erreur à la ligne : 35
+Erreur à la ligne : 44
 La variable : "k" n'a pas été déclarée précédemment.
 ===============*/
 
-L15:
+L16:
 
 /*===============
-Erreur à la ligne : 36
+Erreur à la ligne : 45
 La variable/procédure : "toto" n'a pas été déclarée en tant que procédure.
 ===============*/
 param 3
@@ -121,158 +124,158 @@ t0 = k - j
 param t0
 call toto
 
-L16:
+L17:
 
 /*===============
-Erreur à la ligne : 38
+Erreur à la ligne : 47
 La variable/procédure : "txtx" n'a pas été déclarée précédemment.
 ===============*/
 param 15
 param 20
 call txtx
 
-L17:
+L18:
 
 /*===============
-Erreur à la ligne : 40
+Erreur à la ligne : 49
 La variable/procédure : "toto" a déjà été déclarée !!
 ===============*/
 
 /*===============
-Erreur à la ligne : 41
+Erreur à la ligne : 50
 La variable/procédure : "toto" a déjà été déclarée !!
 ===============*/
 t0 = - 8
 u = t0
 
-L18:
+L19:
 p = 95
 
-L19:
+L20:
 i = 65535
 
-L20:
+L21:
 j = 14.312465
 
-L21:
+L22:
 u = 13
 
-L22:
+L23:
 o = 15.36
 
-L23:
+L24:
 x = 6
 
-L24:
+L25:
 x = 22
 
-L25:
+L26:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int = t2
 
-L26:
+L27:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real = t2
 
-L27:
+L28:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool = t2
 
-L28:
+L29:
 t0 = - 69
 t1 = - 42
 t2 = t0 + t1
 var_int = t2
 
-L29:
+L30:
 t0 = 666 * 10
 var_int = t0
 
-L30:
+L31:
 t0 = 6 < 9
 var_bool = t0
 
-L31:
+L32:
 var_bool = true
 
-L32:
+L33:
 t0 = ! true
 var_bool = t0
 
-L33:
+L34:
 var_bool = false
 
-L34:
+L35:
 var_char = 'a'
 
-L35:
+L36:
 t0 = 1.6 * 4.2
 var_real = t0
 
-L36:
+L37:
 
 /*===============
-Erreur à la ligne : 112
+Erreur à la ligne : 121
 La variable/procédure : "couleur" a déjà été déclarée !!
 ===============*/
 c = 'Q'
 
-L37:
+L38:
 str = "blablabla"
 
-L38:
+L39:
 tab[2] = 66
 
 /*===============
-Erreur à la ligne : 129
+Erreur à la ligne : 138
 La variable : "tab" n'a pas été déclarée précédemment.
 ===============*/
 
-L39:
+L40:
 bibi = 69
 
-L40:
+L41:
 xx = 'x'
 
-L41:
+L42:
 realpointer = &xx
 
 /*===============
-Erreur à la ligne : 137
+Erreur à la ligne : 146
 Affectation impossible avec la variable : "realpointer"
 L'élément à gauche est de type : POINTER_REAL
-Alors que celui de "xx" est de type : CHARACTER
+Alors que celui de droite est de type : CHARACTER
 ===============*/
 
-L42:
+L43:
 bibiPOINTER = &bibi
 
-L43:
+L44:
 newBibi = *bibiPOINTER
 
-L44:
+L45:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t1 * 15
 t3 = t0 + t2
 var_real = t3
 
-L45:
+L46:
 t0 = 1 < 2
 t1 = 3 + 4
 t2 = t0 > t1
 var_bool = t2
 
-L46:
+L47:
 
 /*===============
-Erreur à la ligne : 150
+Erreur à la ligne : 159
 La variable/procédure : "toto" n'a pas été déclarée en tant que procédure.
 ===============*/
 param 3
@@ -282,92 +285,92 @@ t0 = k - j
 param t0
 call toto
 
-L47:
+L48:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int_new = t2
 
-L48:
+L49:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real_new = t2
 
-L49:
+L50:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool_new = t2
 
-L50:
-if 1 < 2 jump L52
-jump L53
-L52:
+L51:
+if 1 < 2 jump L53
+jump L54
+L53:
 t0 = 72 + 3
 var_int_new = t0
-jump L51
-L53:
+jump L52
+L54:
 var_int_new = 29
 
-L51:
-if var_int_new < 447 jump L55
-jump L54
-L55:
+L52:
+if var_int_new < 447 jump L56
+jump L55
+L56:
 var_int_new = 447
 
-L54:
+L55:
 i = 22
-
-L56:
-i = 44
-L58:
-if i > 22 jump L59
-jump L57
-L59:
-var_int_new = 12
-t0 = i - 1
-i = t0
-jump L58
 
 L57:
 i = 44
-L61:
-if i > 22 jump L62
-jump L60
-L62:
-var_int_new = 12
-jump L61
-
+L59:
+if i > 22 jump L60
+jump L58
 L60:
-L64:
-if var_bool_new != 0 jump L65
-jump L66
-L66:
-if 6 != 0 jump L65
-jump L63
+var_int_new = 12
+t0 = i - 1
+i = t0
+jump L59
+
+L58:
+i = 44
+L62:
+if i > 22 jump L63
+jump L61
+L63:
+var_int_new = 12
+jump L62
+
+L61:
 L65:
+if var_bool_new != 0 jump L66
+jump L67
+L67:
+if 6 != 0 jump L66
+jump L64
+L66:
 t0 = var_int_new + 1
 var_int_new = t0
-jump L64
+jump L65
 
-L63:
-L68:
+L64:
+L69:
 t0 = k + 1
 i = t0
-if var_bool_new != 0 jump L68
-jump L67
+if var_bool_new != 0 jump L69
+jump L68
 
-L67:
-if 2 < 1 jump L70
-jump L71
-L70:
-var_int_new = 666
-jump L69
+L68:
+if 2 < 1 jump L71
+jump L72
 L71:
-if 4 >= 1 jump L72
-jump L69
+var_int_new = 666
+jump L70
 L72:
+if 4 >= 1 jump L73
+jump L70
+L73:
 var_int_new = 999
 
-L69:
+L70:

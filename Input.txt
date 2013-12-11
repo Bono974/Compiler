@@ -3,6 +3,12 @@ bool e = !a;
 int tutu[4+2+1+2+33..b];
 int toto[4+2+1+2+33..b] = 6; // << Erreur, Pas d'affectation dans un intervalle
 
+
+// Erreur de syntaxe qui génère un message dans Error.txt
+// L'analyse du fichier continu malgré cette erreur de syntaxe
+int err = 666 
+int err2 = 999;
+
 int j = 15 + 3;
 int i;
 
