@@ -21,11 +21,6 @@ public class EnumerationOwn extends Instruction {
     }
 
     public void genererCode(Label suivant) {
-        //Pas de code à générer.
-        //EnumOp droiteType = droite.getType();
-
-        //HashMap hm = (HashMap)pileTableVariable.peek();
-
         GenererErreur.genErreurDeclaration(type, variable.getNomVariable(), info);
     }
 }

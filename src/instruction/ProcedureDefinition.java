@@ -22,17 +22,14 @@ public class ProcedureDefinition extends Instruction {
     }
 
     public void genererCode(Label suivant) {
-        //HashMap hm = (HashMap)pileTableVariable.peek();
         GenererErreur.genErreurDeclaration(EnumType.PROCEDURE, this.nom, info);
 
         System.out.println(this.nom + ":");
         System.out.println("func "+ this.nom);
-        //ModifierStack.pushTV(pileTableVariable);
         PileTableVariable.ajouterEnvironnement();
 
         GenererErreur.inProcedure = true;
         GenererErreur.currentProcedure = this.nom;
-
 
         blocInstruction.genererCode(suivant);
 
@@ -43,7 +40,6 @@ public class ProcedureDefinition extends Instruction {
 
         GenererErreur.currentProcedure = null;
         GenererErreur.inProcedure = false;
-        //ModifierStack.popTV(pileTableVariable);
         PileTableVariable.retirerEnvironnement();
     }
 }

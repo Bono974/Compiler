@@ -70,19 +70,4 @@ public class PileTableVariable {
     /*
     public static boolean verifierTypeProcedure(String procedure, List<EnumType> listTypeParametres) { }
     */
-
-    public  static void main(String args []) {
-        PileTableVariable pv = new PileTableVariable();
-        pv.ajouter("Toto", EnumType.INTEGER);
-
-        pv.ajouter("Toto", EnumType.PROCEDURE);
-
-
-        System.out.println("TEST" + pv.verifierDeclarationProcedure("Toto"));
-        System.out.println("TEST" + pv.verifierDeclarationProcedure("Titi"));
-        System.out.println("TEST" + pv.verifierDeclarationProcedure("Tutu"));
-        System.out.println("TEST" + pv.verifierDeclarationVariable("Toto"));
-        System.out.println("TEST" + pv.verifierDeclarationVariable("j"));
-
-    }
 }

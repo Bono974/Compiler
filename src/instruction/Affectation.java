@@ -23,7 +23,6 @@ public class Affectation extends Instruction {
     public void genererCode(Label suivant) {
         EnumType droiteType = droite.getType();
         String expName;
-        //HashMap hm = (HashMap)pileTableVariable.peek();
         expName = variable.getNomVariable();
 
         if(variable.getType() == EnumType.INTERVALLE) {

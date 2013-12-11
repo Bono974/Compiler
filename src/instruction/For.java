@@ -22,7 +22,6 @@ public class For extends Instruction {
     public void genererCode(Label suivant) {
         Label avantFor = new Label();
         Label selfLabel = new Label();
-        //ModifierStack.pushTV(pileTableVariable);
         PileTableVariable.ajouterEnvironnement();
 
         affectation.genererCode(avantFor);
@@ -36,7 +35,6 @@ public class For extends Instruction {
             increment.genererCode(avantFor);
 
         System.out.println("jump "+ avantFor);
-        //ModifierStack.popTV(pileTableVariable);
         PileTableVariable.retirerEnvironnement();
     }
 }

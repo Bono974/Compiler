@@ -16,7 +16,6 @@ public class IfThen extends Instruction {
 
     public void genererCode(Label suivant) {
         Label selfLabel = new Label();
-        //ModifierStack.pushTV(pileTableVariable);
         PileTableVariable.ajouterEnvironnement();
         condition.genererJumpCode(selfLabel, suivant);
 
@@ -24,7 +23,6 @@ public class IfThen extends Instruction {
         System.out.println(result);
 
         self.genererCode(suivant);
-        //ModifierStack.popTV(pileTableVariable);
         PileTableVariable.retirerEnvironnement();
     }
 }

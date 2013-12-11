@@ -14,9 +14,6 @@ public class TableVariable {
     public TableVariable() {
         this.table = new HashMap <String, EnumType>();
         this.procedures = new HashMap <String, String>();
-
-        //this.procedure = new HashMap <String, List<EnumType>>();
-        //Vérification de type des expressions mises en paramètre (Idée)
     }
 
     public void ajouterVariable(String v, EnumType t) {

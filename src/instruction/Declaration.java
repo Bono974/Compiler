@@ -22,7 +22,6 @@ public class Declaration extends Instruction {
         String expName;
 
         for (int i = 0; i < variable.size(); i++){
-            //HashMap hm = (HashMap)pileTableVariable.peek();
             expName = variable.get(i).getNomVariable();
             GenererErreur.genErreurDeclaration(type, expName, info);
         }

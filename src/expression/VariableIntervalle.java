@@ -16,7 +16,6 @@ public class VariableIntervalle extends OperationArithmetique {
     }
 
     public Identifiant genererCode(){
-        //TODO
         Identifiant inf = this.borneInf.genererCode();
         //Identifiant sup = this.borneSup.genererCode();
         return new IdentifiantVariableTableau(this.nomVariable, inf);

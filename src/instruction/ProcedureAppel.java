@@ -18,11 +18,7 @@ public class ProcedureAppel extends Instruction {
     }
 
     public void genererCode(Label suivant) {
-        
-        //HashMap hm = (HashMap)pileTableVariable.peek();
         GenererErreur.genErreurProcedure(this.nom, info);
-
-        //ModifierStack.pushTV(pileTableVariable);
         PileTableVariable.ajouterEnvironnement();
         
         if(GenererErreur.inProcedure) {
@@ -34,7 +30,6 @@ public class ProcedureAppel extends Instruction {
             System.out.println("param "+ resTmp);
         }
         System.out.println("call "+ this.nom);
-        //ModifierStack.popTV(pileTableVariable);
         PileTableVariable.retirerEnvironnement();
     }
 }

@@ -17,7 +17,7 @@ public class GenererErreur {
             if(type == null) {
                 System.out.println("\n/*===============");
                 info.AfficherPositionErreur();
-                System.out.println("La variable/procédure : \"" + nomVariable + "\" n'a pas été déclarée précédemment.");
+                System.out.println("La variable : \"" + nomVariable + "\" n'a pas été déclarée précédemment.");
                 System.out.println("===============*/");
             }
 
@@ -25,14 +25,13 @@ public class GenererErreur {
             if(type != null) {
                 System.out.println("\n/*===============");
                 info.AfficherPositionErreur();
-                System.out.println("La variable/procédure : \"" + nomVariable + "\" a déjà été déclarée !!");
+                System.out.println("La variable : \"" + nomVariable + "\" a déjà été déclarée !!");
                 System.out.println("===============*/");
             }
         }
 
         // Il n'y a pas eu d'erreurs, on peut ajouter la variable et son type à la Table
         PileTableVariable.ajouter(nomVariable, type);
-        //hm.put(nomVariable, type);
         return false;
     }
 
@@ -50,16 +49,6 @@ public class GenererErreur {
             System.out.println("===============*/");
 
         }
-        //  else { // Si la variable est deja dans la table des variables
-            
-        //     //PileTableVariable.verifierTypeVariable(nomVariable, EnumType.PROCEDURE)
-        //     // if((EnumType)hm.get(nomVariable) != EnumType.PROCEDURE) {
-        //     //     System.out.println("\n/*===============");
-        //     //     info.AfficherPositionErreur();
-        //     //     System.out.println("La variable/procédure : \"" + nomVariable + "\" n'a pas été déclarée en tant que procédure.");
-        //     //     System.out.println("===============*/");
-        //     // }*/
-        // }
 
         return false;
     }
@@ -67,7 +56,6 @@ public class GenererErreur {
     public static boolean genErreurAffectation(EnumType typeGauche, EnumType typeDroite, String nomVariableGauche, String nomVariableDroite, InfosErreur info) {
 
         boolean erreur = false;
-
     
         // Si on se trouve dans une procédure, on ne test pas les types des variables
         if(GenererErreur.inProcedure)
@@ -75,7 +63,6 @@ public class GenererErreur {
 
         if(typeGauche == null) {
             if(PileTableVariable.verifierDeclarationVariable(nomVariableGauche)) {
-                //typeGauche = (EnumType)hm.get(nomVariableGauche);
                 typeGauche = PileTableVariable.recupererTypeVariable(nomVariableGauche);
             } else {
                 System.out.println("\n/*===============");
@@ -85,27 +72,20 @@ public class GenererErreur {
 
                 erreur = true;
             }
+        } else {
+            if(PileTableVariable.verifierDeclarationVariable(nomVariableGauche)) {
+                System.out.println("\n/*===============");
+                info.AfficherPositionErreur();
+                System.out.println("La variable : \"" + nomVariableGauche + "\" a déjà été déclarée !!");
+                System.out.println("===============*/");
+            }
         }
 
-        //System.out.println("Je suis un KIWI!2");
-
-        // if((typeGauche = PileTableVariable.recupererTypeVariable(nomVariableGauche)) != null) {
-        //     System.out.println("\n/*===============");
-        //     info.AfficherPositionErreur();
-        //     System.out.println("La variable : \"" + nomVariableGauche + "\" n'a pas été déclarée précédemment.");
-        //     System.out.println("===============*/");
-
-        //     erreur = true;
-        // }else {
-        //     typeGauche = typeGauche;
-
-        // }
-
-        //System.out.println("Je suis un KIWI!3");
 
         if(typeDroite == EnumType.VARIABLE) {
-            if((typeDroite = PileTableVariable.recupererTypeVariable(nomVariableDroite)) != null) {
-                
+            if(PileTableVariable.verifierDeclarationVariable(nomVariableDroite)) {
+                typeDroite = PileTableVariable.recupererTypeVariable(nomVariableDroite);
+            } else {
                 System.out.println("\n/*===============");
                 info.AfficherPositionErreur();
                 System.out.println("La variable : \"" + nomVariableDroite + "\" n'a pas été déclarée précédemment.");
@@ -114,8 +94,6 @@ public class GenererErreur {
                 erreur = true;
             }
         }
-
-        //System.out.println("Je suis un KIWI!4 " + typeGauche + " -- " + typeDroite);
 
         if(erreur)
             return true;
@@ -129,10 +107,7 @@ public class GenererErreur {
             System.out.println("===============*/");  
         }
 
-        //System.out.println("Je suis un KIWI!5");
-
         // Il n'y a pas eu d'erreurs, on peut ajouter la variable et son type à la Table
-        //hm.put(nomVariableGauche, typeGauche);
         PileTableVariable.ajouter(nomVariableGauche, typeGauche);
 
         return false;

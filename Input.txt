@@ -1,7 +1,28 @@
-bool e = !a;
 
-int tutu[4+2+1+2+33..b];
-int toto[4+2+1+2+33..b] = 6; // << Erreur, Pas d'affectation dans un intervalle
+
+/* =====================
+   Fichier INPUT de test 
+   ===================== */
+
+
+
+// ===========================================
+// Gestion des erreurs de syntaxes et de types
+
+int j = 15 + 3;
+
+if (j < 20) then {
+    int newJ = 60;
+}
+
+newJ = 25; // <<< Doit générer une erreur : "Non déclarée"
+
+int tititi[4+2+1+2+33..b] = 6; // << Erreur, Pas d'affectation dans un intervalle
+
+int i;
+char c = 'a';
+i = j;
+int i = true + 7; // Erreur car Opération arithmétique avec un Booléen
 
 // Erreur de syntaxe
 int err = 666 
@@ -10,55 +31,12 @@ int err2 = 999;
 // Erreur de syntaxe
 err2 = = 62;
 
-int j = 15 + 3;
-int i;
-
-char c = 'a';
-i = j;
-int i = true + 7;
-
-if (j < 20) then {
-    int newJ = 60;
-}
-
-newJ = 25; // <<< Doit générer une erreur : "Non déclarée"
-
-//int toto, ttyty, eee, ttyty, toto;
-enum couleur { blanc, noir };
-
-def tutu (a, q) {
-    a = k;
-    tutu(q, 26);
-} return k;
-
+// Appel récursif impossible
 def tyty (a) {
     a = k;
     tutu(a, 10);
 }
 
-tutu(6, 23);
-
-k = 3 + 4.3 -4;
-toto(3,3,6,k-j);
-
-txtx(15,20);
-
-int toto;
-real toto;
-
-short u = -8;
-unsigned short p = 95;
-int i = 65535;
-real j = 14.312465;
-unsigned int u = 13;
-unsigned real o = 15.36;
-
-
-
-
-/* =====================
-   Fichier INPUT de test 
-   ===================== */
 
 // ==============================================
 // La gestion des commentaires est Operationnelle
@@ -66,12 +44,21 @@ unsigned real o = 15.36;
 // ============================================
 // Déclaration de variables typées statiquement
 
-int x = 6;
 int x = 22;
 
 int var_int = 1 + 2 * 2 / 3;
 real var_real = (3 % 2) + 47 / 5.6;
 bool var_bool = 1 < 2 + 3 + 4;
+
+short sh = -8;
+unsigned short ush = 95;
+int ii = 65535;
+real jj = 14.312465;
+unsigned int u = 13;
+unsigned real ur = 15.36;
+
+// Multi-déclaration
+int var1, var2, var3;
 
 // ==========================
 // Gestion des entiers signés
@@ -81,7 +68,7 @@ var_int = -69 + -42;
 // ==============================
 // Gestion des entiers non signés
 
-int var_int = 666 * 10;
+int var_int2 = 666 * 10;
 
 // ====================
 // Gestion des booléens
@@ -94,7 +81,7 @@ var_bool = false;
 // ======================
 // Gestion des caractères
 
-char var_char = 'a';
+char var_char2 = 'a';
 
 // =================
 // Gestion des réels
@@ -104,7 +91,7 @@ var_real = 1.6 * 4.2;
 // ========================
 // Gestion des énumérations
 
-enum couleur { blanc, noir }; // << ERREUR deja déclaré
+enum couleur { blanc, noir };
 
 // ========================
 // Gestion des intervalles
@@ -114,14 +101,14 @@ int tata[4+2+1+2+33..b];
 // ========================
 // Gestion des chaines de caractères
 
-char c = 'Q';
+char cc = 'Q';
 string str = "blablabla";
 
 // ========================
 // Gestion des tableaux à 1 dimension
 
 //int tab[10] = 12;
-tab[2] = 66;
+int tab[2] = 66;
 
 // ========================
 // Gestion des pointeurs
@@ -136,8 +123,17 @@ pointer real newBibi = *bibiPOINTER;
 // ================================================
 // Gestion des opérations arithmétiques et logiques
 
-real var_real = (3 % 2) + 47 / 5.6 * 15;
+real var_real2 = (3 % 2) + 47 / 5.6 * 15;
 var_bool = 1 < 2 > (3 + 4);
+
+// ===============================
+// Les déclarations des procédures
+
+// Appel récursif possible
+def toto (a, q) {
+    a = k;
+    toto(q, 26);
+} return k;
 
 // ========================
 // Les appels de procédures
@@ -154,9 +150,9 @@ bool var_bool_new = 1 < 2 + 3 + 4;
 // =========
 // Les tests
 if(1 < 2) then
-	int var_int_new = 72 + 3;
+	var_int_new = 72 + 3;
 else
-	int var_int_new = 29;
+	var_int_new = 29;
 
 if(var_int_new < 447) then
 	var_int_new = 447;
@@ -164,19 +160,18 @@ if(var_int_new < 447) then
 // ===========
 // Les boucles
 
-int i = 22;
-
+i = 22;
 
 for(i = 44; i > 22; i = i - 1)
-	int var_int_new = 12;
+	int var_int_new3 = 12;
 
 
 for(i = 44; i > 22;) {
-	int var_int_new = 12;
+	int var_int_new3 = 12;
 }
 
 while (var_bool_new || 6)
-	int var_int_new = var_int_new + 1;
+	int var_int_new3 = var_int_new3 + 1;
 
 do {
     i = k + 1;

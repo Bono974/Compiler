@@ -20,7 +20,6 @@ public class IfThenElse extends Instruction {
     public void genererCode(Label suivant) {
         Label oui = new Label();
         Label non = new Label();
-        //ModifierStack.pushTV(pileTableVariable);
         PileTableVariable.ajouterEnvironnement();
         condition.genererJumpCode(oui, non);
 
@@ -30,7 +29,6 @@ public class IfThenElse extends Instruction {
         System.out.println("jump " + suivant +
                            "\n" + non + ":");
         selfElse.genererCode(suivant);
-        //ModifierStack.popTV(pileTableVariable);
         PileTableVariable.retirerEnvironnement();
     }
 }

@@ -20,8 +20,6 @@ parser code {:
 :}
 
 action code {:
-  //HashMap tableVariable = new HashMap();
-  //Stack pileTableVariable = new Stack();
   PileTableVariable pileTableVariable = new PileTableVariable();
 
 :}
@@ -32,13 +30,10 @@ terminal IF, THEN, ELSE, DEF;
 terminal FOR, WHILE, DO, RETURN;
 terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT;
 terminal PLUS, MINUS, TIMES, DIVIDE, MOD, AMPERSAND, NOT_U, POINTER_U;
-terminal /*EQUALS,*/ AFFECT;
+terminal AFFECT;
 terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE;
 terminal RBRACE, LBRACE;
 terminal INTER;
-//Rounded bracket ( ) RBRA
-//Square bracket [ ]  SBRA
-//Brace  { } BRACES
 
 terminal Integer INT;
 terminal Float REAL;
@@ -88,7 +83,6 @@ instruction ::= declaration:declInstruction                     {: RESULT = null
              |  error // Gestion des erreurs de syntaxes
              ;
 
-//TODO : rajouter le type dans le constructeur, test si liste_expression ne contient que des "type.variable"
 declaration ::= ENUM_TYPE:type liste_expression:liste SEMIC:token                                {: RESULT = new Declaration((EnumType)type, liste, new InfosErreur(tokenleft, tokenright)); :}
              ;
 
@@ -112,7 +106,6 @@ instruction_for ::= FOR LRBRA affectation:affect expression:condition SEMIC incr
                         instruction:blocFor                                           {: RESULT = new For(affect, condition, inc, blocFor); :}
                  ;
 
-
 increment ::= expression_variable:id AFFECT:token expression:exp                            {: RESULT = new Affectation(null, id, exp, new InfosErreur(tokenleft, tokenright)); :}
            |
            ;
@@ -123,7 +116,6 @@ instruction_while ::= WHILE expression:condition
                         instruction:blocWhile
                       WHILE expression:condition SEMIC                                {: RESULT = new DoWhile(blocWhile, condition); :}
                    ;
-
 
 procedure ::= DEF:token ID:nom LRBRA liste_expression:parametres RRBRA
                       bloc_instruction:blocInstruction

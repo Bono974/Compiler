@@ -12,14 +12,12 @@ public class DoWhile extends While {
 
     public void genererCode(Label suivant) {
         Label avantDo = new Label();
-        //ModifierStack.pushTV(pileTableVariable);
         PileTableVariable.ajouterEnvironnement();
 
         System.out.println(avantDo + ":");
         self.genererCode(avantDo);
 
         condition.genererJumpCode(avantDo, suivant);
-        //ModifierStack.popTV(pileTableVariable);
         PileTableVariable.retirerEnvironnement();
     }
 

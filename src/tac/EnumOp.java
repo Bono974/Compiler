@@ -11,10 +11,6 @@ public enum EnumOp {
     //Opérateur d'affectation
     AFFECT("NOT DEFINED => EnumOp");
 
-    //OP_ARITHMETIQUE("OP_ARITHMETIQUE"), OP_BOOL("OP_BOOL"),
-    //CHARACTER("CHARACTER"), CHARACTERS("CHARACTERS"),
-    //TABLEAU("TABLEAU"), INTERVALLE("INTERVALLE"), VARIABLE("VARIABLE");
-
     private String name = "";
 
 	EnumOp(String name){

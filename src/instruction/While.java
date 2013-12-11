@@ -17,7 +17,6 @@ public class While extends Instruction {
     public void genererCode(Label suivant) {
         Label avantWhile = new Label();
         Label selfLabel = new Label();
-        //ModifierStack.pushTV(pileTableVariable);
         PileTableVariable.ajouterEnvironnement();
 
         System.out.println(avantWhile + ":");
@@ -26,7 +25,6 @@ public class While extends Instruction {
         System.out.println(selfLabel + ":");
         self.genererCode(avantWhile);
         System.out.println("jump "+ avantWhile);
-        //ModifierStack.popTV(pileTableVariable);
         PileTableVariable.retirerEnvironnement();
     }
 }
