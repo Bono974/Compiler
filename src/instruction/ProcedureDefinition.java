@@ -11,17 +11,19 @@ public class ProcedureDefinition extends Instruction {
     private LinkedList<Expression> listeExpression;
     private Instruction blocInstruction;
     private Expression valeurRetour;
+    private InfosErreur info;
 
-    public ProcedureDefinition(String nom, LinkedList<Expression> list, Instruction bloc, Expression valeurRetour) {
+    public ProcedureDefinition(String nom, LinkedList<Expression> list, Instruction bloc, Expression valeurRetour, InfosErreur info) {
         this.nom = nom;
         this.listeExpression = list;
         this.blocInstruction = bloc;
         this.valeurRetour = valeurRetour;
+        this.info = info;
     }
 
     public void genererCode(Label suivant, Stack pileTableVariable) {
         HashMap hm = (HashMap)pileTableVariable.peek();
-        GenererErreur.genErreurDeclaration(hm, EnumType.PROCEDURE, this.nom);
+        GenererErreur.genErreurDeclaration(hm, EnumType.PROCEDURE, this.nom, info);
 
 
         System.out.println(this.nom + ":");

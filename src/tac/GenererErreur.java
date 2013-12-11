@@ -6,7 +6,7 @@ public class GenererErreur {
     public static boolean inProcedure = false;
     public static String currentProcedure = null;
 
-    public static boolean genErreurDeclaration(HashMap hm, EnumType type, String nomVariable) {
+    public static boolean genErreurDeclaration(HashMap hm, EnumType type, String nomVariable, InfosErreur info) {
 
         // Si on se trouve dans une procédure, on ne test pas les types des variables
         if(GenererErreur.inProcedure)
@@ -16,6 +16,7 @@ public class GenererErreur {
 
             if(type == null) {
                 System.out.println("\n/*===============");
+                info.AfficherPositionErreur();
                 System.out.println("La variable/procédure : \"" + nomVariable + "\" n'a pas été déclarée précédemment.");
                 System.out.println("===============*/");
             }
@@ -23,6 +24,7 @@ public class GenererErreur {
         } else { // Si la variable est deja dans la table des variables
             if(type != null) {
                 System.out.println("\n/*===============");
+                info.AfficherPositionErreur();
                 System.out.println("La variable/procédure : \"" + nomVariable + "\" a déjà été déclarée !!");
                 System.out.println("===============*/");
             }
@@ -33,7 +35,7 @@ public class GenererErreur {
         return false;
     }
 
-    public static boolean genErreurProcedure(HashMap hm, String nomVariable) {
+    public static boolean genErreurProcedure(HashMap hm, String nomVariable, InfosErreur info) {
 
         // Si on se trouve dans une procédure, on ne test pas les types des variables
         if(GenererErreur.inProcedure)
@@ -42,6 +44,7 @@ public class GenererErreur {
         if(!hm.containsKey(nomVariable)) { // Si la variable n'a pas encore été déclarée
 
             System.out.println("\n/*===============");
+            info.AfficherPositionErreur();
             System.out.println("La variable/procédure : \"" + nomVariable + "\" n'a pas été déclarée précédemment.");
             System.out.println("===============*/");
 
@@ -49,6 +52,7 @@ public class GenererErreur {
             
             if((EnumType)hm.get(nomVariable) != EnumType.PROCEDURE) {
                 System.out.println("\n/*===============");
+                info.AfficherPositionErreur();
                 System.out.println("La variable/procédure : \"" + nomVariable + "\" n'a pas été déclarée en tant que procédure.");
                 System.out.println("===============*/");
             }
@@ -57,7 +61,7 @@ public class GenererErreur {
         return false;
     }
 
-    public static boolean genErreurAffectation(HashMap hm, EnumType typeGauche, EnumType typeDroite, String nomVariableGauche, String nomVariableDroite) {
+    public static boolean genErreurAffectation(HashMap hm, EnumType typeGauche, EnumType typeDroite, String nomVariableGauche, String nomVariableDroite, InfosErreur info) {
 
         boolean erreur = false;
 
@@ -70,6 +74,7 @@ public class GenererErreur {
                 typeGauche = (EnumType)hm.get(nomVariableGauche);
             } else {
                 System.out.println("\n/*===============");
+                info.AfficherPositionErreur();
                 System.out.println("La variable : \"" + nomVariableGauche + "\" n'a pas été déclarée précédemment.");
                 System.out.println("===============*/");
 
@@ -82,6 +87,7 @@ public class GenererErreur {
                 typeDroite = (EnumType)hm.get(nomVariableDroite);
             } else {
                 System.out.println("\n/*===============");
+                info.AfficherPositionErreur();
                 System.out.println("La variable : \"" + nomVariableDroite + "\" n'a pas été déclarée précédemment.");
                 System.out.println("===============*/");
 
@@ -94,6 +100,7 @@ public class GenererErreur {
 
         if(comparerType(typeGauche, typeDroite)){
             System.out.println("\n/*===============");
+            info.AfficherPositionErreur();
             System.out.println("Affectation impossible avec la variable : \"" + nomVariableGauche + "\"");
             System.out.println("L'élément à gauche est de type : " + typeGauche);
             System.out.println("Alors que celui de droite est de type : " + typeDroite);
@@ -106,16 +113,18 @@ public class GenererErreur {
         return false;
     }
 
-    public static void genErreurIntervalle(String nomVariable) {
+    public static void genErreurIntervalle(String nomVariable, InfosErreur info) {
         System.out.println("\n/*===============");
+        info.AfficherPositionErreur();
         System.out.println("La variable : \"" + nomVariable + "\" est un tableau avec intervalle.");
         System.out.println("Il n'est pas possible d'affecter une valeur à un intervalle.");
         System.out.println("===============*/");
     }
 
-    public static void genErreurProcRecursive(String nomProc, String nomProcCalled) {
+    public static void genErreurProcRecursive(String nomProc, String nomProcCalled, InfosErreur info) {
         if(!nomProc.equals(nomProcCalled)) {
             System.out.println("\n/*===============");
+            info.AfficherPositionErreur();
             System.out.println("Il est interdit d'appeler une procédure dans le corps d'une procédure");
             System.out.println("en dehors d'elle même.");
             System.out.println("La procédure : " + nomProcCalled + " a été appelée dans : " + nomProc);
@@ -123,10 +132,11 @@ public class GenererErreur {
         }
     }
 
-    public static void genErreurOperation(EnumType typeGauche, EnumType typeDroite) {
+    public static void genErreurOperation(EnumType typeGauche, EnumType typeDroite, InfosErreur info) {
         if((typeGauche == EnumType.OP_BOOL) && (typeDroite != EnumType.OP_BOOL)
             || (typeGauche != EnumType.OP_BOOL) && (typeDroite == EnumType.OP_BOOL)) {
             System.out.println("\n/*===============");
+            info.AfficherPositionErreur();
             System.out.println("Il n'est pas autorisé de faire une opération arithmétique");
             System.out.println("entre des nombres et des booléens.");
             System.out.println("===============*/");

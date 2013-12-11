@@ -11,11 +11,13 @@ public class Affectation extends Instruction {
     private Expression variable;
     private Expression droite;
     private EnumType type;
+    private InfosErreur info;
 
-    public Affectation(EnumType type, Expression variable, Expression droite){
+    public Affectation(EnumType type, Expression variable, Expression droite, InfosErreur info){
         this.variable = variable;
         this.droite = droite;
         this.type = type;
+        this.info = info;
     }
 
     public void genererCode(Label suivant, Stack pileTableVariable) {
@@ -25,7 +27,7 @@ public class Affectation extends Instruction {
         expName = variable.getNomVariable();
 
         if(variable.getType() == EnumType.INTERVALLE) {
-            GenererErreur.genErreurIntervalle(expName);
+            GenererErreur.genErreurIntervalle(expName, info);
         }
         else {
             Identifiant resDroite = droite.genererCode();
@@ -38,6 +40,6 @@ public class Affectation extends Instruction {
         // System.out.println("AFFECTATION -- Type Variable : " + variable.getType());
         // System.out.println("===============*/");
 
-        GenererErreur.genErreurAffectation(hm, type, droiteType, expName, droite.getNomVariable());
+        GenererErreur.genErreurAffectation(hm, type, droiteType, expName, droite.getNomVariable(), info);
     }
 }

@@ -4,6 +4,7 @@ e = t0
 L0:
 
 /*===============
+Erreur à la ligne : 4
 La variable : "toto" est un tableau avec intervalle.
 Il n'est pas possible d'affecter une valeur à un intervalle.
 ===============*/
@@ -22,6 +23,7 @@ L4:
 t0 = 6 + 4
 
 /*===============
+Erreur à la ligne : 11
 Il n'est pas autorisé de faire une opération arithmétique
 entre des nombres et des booléens.
 ===============*/
@@ -30,6 +32,7 @@ t2 = t0 < t1
 i = t2
 
 /*===============
+Erreur à la ligne : 11
 Affectation impossible avec la variable : "i"
 L'élément à gauche est de type : INTEGER
 Alors que celui de "ErreurGetNomVariable" est de type : OP_BOOL
@@ -38,6 +41,7 @@ Alors que celui de "ErreurGetNomVariable" est de type : OP_BOOL
 L5:
 
 /*===============
+Erreur à la ligne : 12
 Il n'est pas autorisé de faire une opération arithmétique
 entre des nombres et des booléens.
 ===============*/
@@ -54,12 +58,14 @@ L7:
 newJ = 25
 
 /*===============
+Erreur à la ligne : 18
 La variable : "newJ" n'a pas été déclarée précédemment.
 ===============*/
 
 L9:
 
 /*===============
+Erreur à la ligne : 23
 La variable/procédure : "tutu" a déjà été déclarée !!
 ===============*/
 tutu:
@@ -78,6 +84,7 @@ a = k
 L13:
 
 /*===============
+Erreur à la ligne : 30
 Il est interdit d'appeler une procédure dans le corps d'une procédure
 en dehors d'elle même.
 La procédure : tutu a été appelée dans : tyty
@@ -97,12 +104,14 @@ t1 = t0 - 4
 k = t1
 
 /*===============
+Erreur à la ligne : 35
 La variable : "k" n'a pas été déclarée précédemment.
 ===============*/
 
 L15:
 
 /*===============
+Erreur à la ligne : 36
 La variable/procédure : "toto" n'a pas été déclarée en tant que procédure.
 ===============*/
 param 3
@@ -115,6 +124,7 @@ call toto
 L16:
 
 /*===============
+Erreur à la ligne : 38
 La variable/procédure : "txtx" n'a pas été déclarée précédemment.
 ===============*/
 param 15
@@ -124,10 +134,12 @@ call txtx
 L17:
 
 /*===============
+Erreur à la ligne : 40
 La variable/procédure : "toto" a déjà été déclarée !!
 ===============*/
 
 /*===============
+Erreur à la ligne : 41
 La variable/procédure : "toto" a déjà été déclarée !!
 ===============*/
 t0 = - 8
@@ -206,6 +218,7 @@ var_real = t0
 L36:
 
 /*===============
+Erreur à la ligne : 112
 La variable/procédure : "couleur" a déjà été déclarée !!
 ===============*/
 c = 'Q'
@@ -217,6 +230,7 @@ L38:
 tab[2] = 66
 
 /*===============
+Erreur à la ligne : 129
 La variable : "tab" n'a pas été déclarée précédemment.
 ===============*/
 
@@ -230,6 +244,7 @@ L41:
 realpointer = &xx
 
 /*===============
+Erreur à la ligne : 137
 Affectation impossible avec la variable : "realpointer"
 L'élément à gauche est de type : POINTER_REAL
 Alors que celui de "xx" est de type : CHARACTER
@@ -257,6 +272,7 @@ var_bool = t2
 L46:
 
 /*===============
+Erreur à la ligne : 150
 La variable/procédure : "toto" n'a pas été déclarée en tant que procédure.
 ===============*/
 param 3

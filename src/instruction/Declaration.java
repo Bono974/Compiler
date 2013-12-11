@@ -1,4 +1,5 @@
 package instruction;
+import java_cup.runtime.Symbol;
 
 import java.util.*;
 
@@ -9,10 +10,12 @@ public class Declaration extends Instruction {
 
     private List<Expression> variable;
     private EnumType type;
+    private InfosErreur info;
 
-    public Declaration(EnumType type, List<Expression> variable) {
+    public Declaration(EnumType type, List<Expression> variable, InfosErreur info) {
         this.type = type;
         this.variable = variable;
+        this.info = info; 
     }
 
     public void genererCode(Label suivant, Stack pileTableVariable) {
@@ -21,7 +24,7 @@ public class Declaration extends Instruction {
         for (int i = 0; i < variable.size(); i++){
             HashMap hm = (HashMap)pileTableVariable.peek();
             expName = variable.get(i).getNomVariable();
-            GenererErreur.genErreurDeclaration(hm, type, expName);
+            GenererErreur.genErreurDeclaration(hm, type, expName, info);
         }
     }
 }
