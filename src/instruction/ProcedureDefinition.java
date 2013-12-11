@@ -21,19 +21,20 @@ public class ProcedureDefinition extends Instruction {
         this.info = info;
     }
 
-    public void genererCode(Label suivant, Stack pileTableVariable) {
-        HashMap hm = (HashMap)pileTableVariable.peek();
-        GenererErreur.genErreurDeclaration(hm, EnumType.PROCEDURE, this.nom, info);
-
+    public void genererCode(Label suivant) {
+        //HashMap hm = (HashMap)pileTableVariable.peek();
+        GenererErreur.genErreurDeclaration(EnumType.PROCEDURE, this.nom, info);
 
         System.out.println(this.nom + ":");
         System.out.println("func "+ this.nom);
-        ModifierStack.pushTV(pileTableVariable);
+        //ModifierStack.pushTV(pileTableVariable);
+        PileTableVariable.ajouterEnvironnement();
+
         GenererErreur.inProcedure = true;
         GenererErreur.currentProcedure = this.nom;
 
 
-        blocInstruction.genererCode(suivant, pileTableVariable);
+        blocInstruction.genererCode(suivant);
 
         if (this.valeurRetour != null) {
             Identifiant res = this.valeurRetour.genererCode();
@@ -42,6 +43,7 @@ public class ProcedureDefinition extends Instruction {
 
         GenererErreur.currentProcedure = null;
         GenererErreur.inProcedure = false;
-        ModifierStack.popTV(pileTableVariable);
+        //ModifierStack.popTV(pileTableVariable);
+        PileTableVariable.retirerEnvironnement();
     }
 }

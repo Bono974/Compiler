@@ -18,13 +18,13 @@ public class Declaration extends Instruction {
         this.info = info; 
     }
 
-    public void genererCode(Label suivant, Stack pileTableVariable) {
+    public void genererCode(Label suivant) {
         String expName;
 
         for (int i = 0; i < variable.size(); i++){
-            HashMap hm = (HashMap)pileTableVariable.peek();
+            //HashMap hm = (HashMap)pileTableVariable.peek();
             expName = variable.get(i).getNomVariable();
-            GenererErreur.genErreurDeclaration(hm, type, expName, info);
+            GenererErreur.genErreurDeclaration(type, expName, info);
         }
     }
 }

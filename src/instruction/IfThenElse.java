@@ -17,18 +17,20 @@ public class IfThenElse extends Instruction {
         this.selfElse = selfElse;
     }
 
-    public void genererCode(Label suivant, Stack pileTableVariable) {
+    public void genererCode(Label suivant) {
         Label oui = new Label();
         Label non = new Label();
-        ModifierStack.pushTV(pileTableVariable);
+        //ModifierStack.pushTV(pileTableVariable);
+        PileTableVariable.ajouterEnvironnement();
         condition.genererJumpCode(oui, non);
 
         System.out.println(oui + ":");
-        selfIf.genererCode(suivant, pileTableVariable);
+        selfIf.genererCode(suivant);
 
         System.out.println("jump " + suivant +
                            "\n" + non + ":");
-        selfElse.genererCode(suivant, pileTableVariable);
-        ModifierStack.popTV(pileTableVariable);
+        selfElse.genererCode(suivant);
+        //ModifierStack.popTV(pileTableVariable);
+        PileTableVariable.retirerEnvironnement();
     }
 }

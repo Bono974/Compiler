@@ -6,13 +6,13 @@ public class GenererErreur {
     public static boolean inProcedure = false;
     public static String currentProcedure = null;
 
-    public static boolean genErreurDeclaration(HashMap hm, EnumType type, String nomVariable, InfosErreur info) {
+    public static boolean genErreurDeclaration(EnumType type, String nomVariable, InfosErreur info) {
 
         // Si on se trouve dans une procédure, on ne test pas les types des variables
         if(GenererErreur.inProcedure)
             return false;
 
-        if(!hm.containsKey(nomVariable)) { // Si la variable n'a pas encore été déclarée
+        if(!PileTableVariable.verifierDeclarationVariable(nomVariable)) { // Si la variable n'a pas encore été déclarée
 
             if(type == null) {
                 System.out.println("\n/*===============");
@@ -31,47 +31,52 @@ public class GenererErreur {
         }
 
         // Il n'y a pas eu d'erreurs, on peut ajouter la variable et son type à la Table
-        hm.put(nomVariable, type);
+        PileTableVariable.ajouter(nomVariable, type);
+        //hm.put(nomVariable, type);
         return false;
     }
 
-    public static boolean genErreurProcedure(HashMap hm, String nomVariable, InfosErreur info) {
+    public static boolean genErreurProcedure(String nomVariable, InfosErreur info) {
 
         // Si on se trouve dans une procédure, on ne test pas les types des variables
         if(GenererErreur.inProcedure)
             return false;
 
-        if(!hm.containsKey(nomVariable)) { // Si la variable n'a pas encore été déclarée
+        if(!PileTableVariable.verifierDeclarationProcedure(nomVariable)) { // Si la variable n'a pas encore été déclarée
 
             System.out.println("\n/*===============");
             info.AfficherPositionErreur();
-            System.out.println("La variable/procédure : \"" + nomVariable + "\" n'a pas été déclarée précédemment.");
+            System.out.println("La procédure : \"" + nomVariable + "\" n'a pas été déclarée précédemment.");
             System.out.println("===============*/");
 
-        } else { // Si la variable est deja dans la table des variables
-            
-            if((EnumType)hm.get(nomVariable) != EnumType.PROCEDURE) {
-                System.out.println("\n/*===============");
-                info.AfficherPositionErreur();
-                System.out.println("La variable/procédure : \"" + nomVariable + "\" n'a pas été déclarée en tant que procédure.");
-                System.out.println("===============*/");
-            }
         }
+        //  else { // Si la variable est deja dans la table des variables
+            
+        //     //PileTableVariable.verifierTypeVariable(nomVariable, EnumType.PROCEDURE)
+        //     // if((EnumType)hm.get(nomVariable) != EnumType.PROCEDURE) {
+        //     //     System.out.println("\n/*===============");
+        //     //     info.AfficherPositionErreur();
+        //     //     System.out.println("La variable/procédure : \"" + nomVariable + "\" n'a pas été déclarée en tant que procédure.");
+        //     //     System.out.println("===============*/");
+        //     // }*/
+        // }
 
         return false;
     }
 
-    public static boolean genErreurAffectation(HashMap hm, EnumType typeGauche, EnumType typeDroite, String nomVariableGauche, String nomVariableDroite, InfosErreur info) {
+    public static boolean genErreurAffectation(EnumType typeGauche, EnumType typeDroite, String nomVariableGauche, String nomVariableDroite, InfosErreur info) {
 
         boolean erreur = false;
 
+    
         // Si on se trouve dans une procédure, on ne test pas les types des variables
         if(GenererErreur.inProcedure)
             return false;
 
         if(typeGauche == null) {
-            if(hm.containsKey(nomVariableGauche)) {
-                typeGauche = (EnumType)hm.get(nomVariableGauche);
+            if(PileTableVariable.verifierDeclarationVariable(nomVariableGauche)) {
+                //typeGauche = (EnumType)hm.get(nomVariableGauche);
+                typeGauche = PileTableVariable.recupererTypeVariable(nomVariableGauche);
             } else {
                 System.out.println("\n/*===============");
                 info.AfficherPositionErreur();
@@ -82,10 +87,25 @@ public class GenererErreur {
             }
         }
 
+        //System.out.println("Je suis un KIWI!2");
+
+        // if((typeGauche = PileTableVariable.recupererTypeVariable(nomVariableGauche)) != null) {
+        //     System.out.println("\n/*===============");
+        //     info.AfficherPositionErreur();
+        //     System.out.println("La variable : \"" + nomVariableGauche + "\" n'a pas été déclarée précédemment.");
+        //     System.out.println("===============*/");
+
+        //     erreur = true;
+        // }else {
+        //     typeGauche = typeGauche;
+
+        // }
+
+        //System.out.println("Je suis un KIWI!3");
+
         if(typeDroite == EnumType.VARIABLE) {
-            if(hm.containsKey(nomVariableDroite)) {
-                typeDroite = (EnumType)hm.get(nomVariableDroite);
-            } else {
+            if((typeDroite = PileTableVariable.recupererTypeVariable(nomVariableDroite)) != null) {
+                
                 System.out.println("\n/*===============");
                 info.AfficherPositionErreur();
                 System.out.println("La variable : \"" + nomVariableDroite + "\" n'a pas été déclarée précédemment.");
@@ -94,6 +114,8 @@ public class GenererErreur {
                 erreur = true;
             }
         }
+
+        //System.out.println("Je suis un KIWI!4 " + typeGauche + " -- " + typeDroite);
 
         if(erreur)
             return true;
@@ -107,8 +129,11 @@ public class GenererErreur {
             System.out.println("===============*/");  
         }
 
+        //System.out.println("Je suis un KIWI!5");
+
         // Il n'y a pas eu d'erreurs, on peut ajouter la variable et son type à la Table
-        hm.put(nomVariableGauche, typeGauche);
+        //hm.put(nomVariableGauche, typeGauche);
+        PileTableVariable.ajouter(nomVariableGauche, typeGauche);
 
         return false;
     }

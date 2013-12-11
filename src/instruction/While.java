@@ -14,17 +14,19 @@ public class While extends Instruction {
         this.self = self;
     }
 
-    public void genererCode(Label suivant, Stack pileTableVariable) {
+    public void genererCode(Label suivant) {
         Label avantWhile = new Label();
         Label selfLabel = new Label();
-        ModifierStack.pushTV(pileTableVariable);
+        //ModifierStack.pushTV(pileTableVariable);
+        PileTableVariable.ajouterEnvironnement();
 
         System.out.println(avantWhile + ":");
         condition.genererJumpCode(selfLabel, suivant);
 
         System.out.println(selfLabel + ":");
-        self.genererCode(avantWhile, pileTableVariable);
+        self.genererCode(avantWhile);
         System.out.println("jump "+ avantWhile);
-        ModifierStack.popTV(pileTableVariable);
+        //ModifierStack.popTV(pileTableVariable);
+        PileTableVariable.retirerEnvironnement();
     }
 }

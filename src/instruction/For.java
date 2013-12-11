@@ -19,23 +19,25 @@ public class For extends Instruction {
         this.self = self;
     }
 
-    public void genererCode(Label suivant, Stack pileTableVariable) {
+    public void genererCode(Label suivant) {
         Label avantFor = new Label();
         Label selfLabel = new Label();
-        ModifierStack.pushTV(pileTableVariable);
+        //ModifierStack.pushTV(pileTableVariable);
+        PileTableVariable.ajouterEnvironnement();
 
-        affectation.genererCode(avantFor, pileTableVariable);
+        affectation.genererCode(avantFor);
         System.out.println(avantFor + ":");
         condition.genererJumpCode(selfLabel, suivant);
 
         System.out.println(selfLabel + ":");
-        self.genererCode(avantFor, pileTableVariable);
+        self.genererCode(avantFor);
 
         if(increment != null)
-            increment.genererCode(avantFor, pileTableVariable);
+            increment.genererCode(avantFor);
 
         System.out.println("jump "+ avantFor);
-        ModifierStack.popTV(pileTableVariable);
+        //ModifierStack.popTV(pileTableVariable);
+        PileTableVariable.retirerEnvironnement();
     }
 }
 

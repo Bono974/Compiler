@@ -5,5 +5,5 @@ import tac.*;
 
 public abstract class Instruction {
 
-    public abstract void genererCode(Label suivant, Stack pileTableVariable); 
+    public abstract void genererCode(Label suivant); 
 }

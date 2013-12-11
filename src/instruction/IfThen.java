@@ -14,16 +14,18 @@ public class IfThen extends Instruction {
         this.self = self;
     }
 
-    public void genererCode(Label suivant, Stack pileTableVariable) {
+    public void genererCode(Label suivant) {
         Label selfLabel = new Label();
-        ModifierStack.pushTV(pileTableVariable);
+        //ModifierStack.pushTV(pileTableVariable);
+        PileTableVariable.ajouterEnvironnement();
         condition.genererJumpCode(selfLabel, suivant);
 
         String result = selfLabel + ":";
         System.out.println(result);
 
-        self.genererCode(suivant, pileTableVariable);
-        ModifierStack.popTV(pileTableVariable);
+        self.genererCode(suivant);
+        //ModifierStack.popTV(pileTableVariable);
+        PileTableVariable.retirerEnvironnement();
     }
 }
 

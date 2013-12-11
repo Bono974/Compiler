@@ -22,72 +22,58 @@ c = 'a'
 L4:
 i = j
 
+/*===============
+Erreur à la ligne : 17
+La variable : "j" n'a pas été déclarée précédemment.
+===============*/
+
 L5:
-t0 = 6 + 4
 
 /*===============
-Erreur à la ligne : 14
-Il n'est pas autorisé de faire une opération arithmétique
-entre des nombres et des booléens.
-===============*/
-t1 = 5 + true
-t2 = t0 < t1
-i = t2
-
-/*===============
-Erreur à la ligne : 14
-Affectation impossible avec la variable : "i"
-L'élément à gauche est de type : INTEGER
-Alors que celui de droite est de type : OP_BOOL
-===============*/
-
-L6:
-
-/*===============
-Erreur à la ligne : 15
+Erreur à la ligne : 18
 Il n'est pas autorisé de faire une opération arithmétique
 entre des nombres et des booléens.
 ===============*/
 t0 = true + 7
 i = t0
 
-L7:
-if j < 20 jump L9
-jump L8
-L9:
+L6:
+if j < 20 jump L8
+jump L7
+L8:
 newJ = 60
 
-L8:
+L7:
 newJ = 25
 
 /*===============
-Erreur à la ligne : 21
+Erreur à la ligne : 24
 La variable : "newJ" n'a pas été déclarée précédemment.
 ===============*/
 
-L10:
+L9:
 
 /*===============
-Erreur à la ligne : 32
+Erreur à la ligne : 29
 La variable/procédure : "tutu" a déjà été déclarée !!
 ===============*/
 tutu:
 func tutu
 a = k
-L12:
+L11:
 param q
 param 26
 call tutu
 return k
 
-L11:
+L10:
 tyty:
 func tyty
 a = k
-L14:
+L13:
 
 /*===============
-Erreur à la ligne : 39
+Erreur à la ligne : 36
 Il est interdit d'appeler une procédure dans le corps d'une procédure
 en dehors d'elle même.
 La procédure : tutu a été appelée dans : tyty
@@ -96,26 +82,26 @@ param a
 param 10
 call tutu
 
-L13:
+L12:
 param 6
 param 23
 call tutu
 
-L15:
+L14:
 t0 = 3 + 4.3
 t1 = t0 - 4
 k = t1
 
 /*===============
-Erreur à la ligne : 44
+Erreur à la ligne : 41
 La variable : "k" n'a pas été déclarée précédemment.
 ===============*/
 
-L16:
+L15:
 
 /*===============
-Erreur à la ligne : 45
-La variable/procédure : "toto" n'a pas été déclarée en tant que procédure.
+Erreur à la ligne : 42
+La procédure : "toto" n'a pas été déclarée précédemment.
 ===============*/
 param 3
 param 3
@@ -124,159 +110,162 @@ t0 = k - j
 param t0
 call toto
 
-L17:
+L16:
 
 /*===============
-Erreur à la ligne : 47
-La variable/procédure : "txtx" n'a pas été déclarée précédemment.
+Erreur à la ligne : 44
+La procédure : "txtx" n'a pas été déclarée précédemment.
 ===============*/
 param 15
 param 20
 call txtx
 
-L18:
+L17:
 
 /*===============
-Erreur à la ligne : 49
+Erreur à la ligne : 46
 La variable/procédure : "toto" a déjà été déclarée !!
 ===============*/
 
 /*===============
-Erreur à la ligne : 50
+Erreur à la ligne : 47
 La variable/procédure : "toto" a déjà été déclarée !!
 ===============*/
 t0 = - 8
 u = t0
 
-L19:
+L18:
 p = 95
 
-L20:
+L19:
 i = 65535
 
-L21:
+L20:
 j = 14.312465
 
-L22:
+L21:
 u = 13
 
-L23:
+L22:
 o = 15.36
 
-L24:
+L23:
 x = 6
 
-L25:
+L24:
 x = 22
 
-L26:
+L25:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int = t2
 
-L27:
+L26:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real = t2
 
-L28:
+L27:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool = t2
 
-L29:
+L28:
 t0 = - 69
 t1 = - 42
 t2 = t0 + t1
 var_int = t2
 
-L30:
+L29:
 t0 = 666 * 10
 var_int = t0
 
-L31:
+L30:
 t0 = 6 < 9
 var_bool = t0
 
-L32:
+L31:
 var_bool = true
 
-L33:
+L32:
 t0 = ! true
 var_bool = t0
 
-L34:
+L33:
 var_bool = false
 
-L35:
+L34:
 var_char = 'a'
 
-L36:
+L35:
 t0 = 1.6 * 4.2
 var_real = t0
 
-L37:
+L36:
 
 /*===============
-Erreur à la ligne : 121
+Erreur à la ligne : 107
 La variable/procédure : "couleur" a déjà été déclarée !!
 ===============*/
 c = 'Q'
 
-L38:
+L37:
 str = "blablabla"
 
-L39:
+L38:
 tab[2] = 66
 
 /*===============
-Erreur à la ligne : 138
+Erreur à la ligne : 124
 La variable : "tab" n'a pas été déclarée précédemment.
 ===============*/
 
-L40:
+L39:
 bibi = 69
 
-L41:
+L40:
 xx = 'x'
 
-L42:
+L41:
 realpointer = &xx
 
 /*===============
-Erreur à la ligne : 146
-Affectation impossible avec la variable : "realpointer"
-L'élément à gauche est de type : POINTER_REAL
-Alors que celui de droite est de type : CHARACTER
+Erreur à la ligne : 132
+La variable : "xx" n'a pas été déclarée précédemment.
+===============*/
+
+L42:
+bibiPOINTER = &bibi
+
+/*===============
+Erreur à la ligne : 133
+La variable : "bibi" n'a pas été déclarée précédemment.
 ===============*/
 
 L43:
-bibiPOINTER = &bibi
-
-L44:
 newBibi = *bibiPOINTER
 
-L45:
+L44:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t1 * 15
 t3 = t0 + t2
 var_real = t3
 
-L46:
+L45:
 t0 = 1 < 2
 t1 = 3 + 4
 t2 = t0 > t1
 var_bool = t2
 
-L47:
+L46:
 
 /*===============
-Erreur à la ligne : 159
-La variable/procédure : "toto" n'a pas été déclarée en tant que procédure.
+Erreur à la ligne : 145
+La procédure : "toto" n'a pas été déclarée précédemment.
 ===============*/
 param 3
 param 3
@@ -285,92 +274,92 @@ t0 = k - j
 param t0
 call toto
 
-L48:
+L47:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int_new = t2
 
-L49:
+L48:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real_new = t2
 
-L50:
+L49:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool_new = t2
 
-L51:
-if 1 < 2 jump L53
-jump L54
-L53:
+L50:
+if 1 < 2 jump L52
+jump L53
+L52:
 t0 = 72 + 3
 var_int_new = t0
-jump L52
-L54:
+jump L51
+L53:
 var_int_new = 29
 
-L52:
-if var_int_new < 447 jump L56
-jump L55
-L56:
+L51:
+if var_int_new < 447 jump L55
+jump L54
+L55:
 var_int_new = 447
 
-L55:
+L54:
 i = 22
 
-L57:
+L56:
 i = 44
+L58:
+if i > 22 jump L59
+jump L57
 L59:
-if i > 22 jump L60
-jump L58
-L60:
 var_int_new = 12
 t0 = i - 1
 i = t0
-jump L59
+jump L58
 
-L58:
+L57:
 i = 44
-L62:
-if i > 22 jump L63
-jump L61
-L63:
-var_int_new = 12
-jump L62
-
 L61:
-L65:
-if var_bool_new != 0 jump L66
-jump L67
-L67:
-if 6 != 0 jump L66
-jump L64
+if i > 22 jump L62
+jump L60
+L62:
+var_int_new = 12
+jump L61
+
+L60:
+L64:
+if var_bool_new != 0 jump L65
+jump L66
 L66:
+if 6 != 0 jump L65
+jump L63
+L65:
 t0 = var_int_new + 1
 var_int_new = t0
-jump L65
+jump L64
 
-L64:
-L69:
+L63:
+L68:
 t0 = k + 1
 i = t0
-if var_bool_new != 0 jump L69
-jump L68
+if var_bool_new != 0 jump L68
+jump L67
 
-L68:
-if 2 < 1 jump L71
-jump L72
-L71:
+L67:
+if 2 < 1 jump L70
+jump L71
+L70:
 var_int_new = 666
-jump L70
+jump L69
+L71:
+if 4 >= 1 jump L72
+jump L69
 L72:
-if 4 >= 1 jump L73
-jump L70
-L73:
 var_int_new = 999
 
-L70:
+L69:

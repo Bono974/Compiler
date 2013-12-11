@@ -6,6 +6,7 @@ import identifiant.*;
 import instruction.*;
 import tac.*;
 
+
 parser code {:
     public void syntax_error(Symbol cur_token) {
         System.err.println("---- Erreur de syntaxe ----");
@@ -19,8 +20,10 @@ parser code {:
 :}
 
 action code {:
-  HashMap tableVariable = new HashMap();
-  Stack pileTableVariable = new Stack();
+  //HashMap tableVariable = new HashMap();
+  //Stack pileTableVariable = new Stack();
+  PileTableVariable pileTableVariable = new PileTableVariable();
+
 :}
 
 init with {: :}
@@ -67,23 +70,22 @@ start with beginning;
 beginning ::= beginning instruction:inst {: //Cas d'une déclaration : pas besoin de nouveau Label
                                             if (inst != null) {
                                                 Label suivant = new Label();
-                                                inst.genererCode(suivant, pileTableVariable);
+                                                inst.genererCode(suivant);
                                                 System.out.println("\n" + suivant + ":");
                                                 IdentifiantRegistre.reinitialiser(); 
                                             } :}
-            | /* Fin du parsing */       {: pileTableVariable.push(tableVariable); :}
-            ;
+            | /* Fin du parsing */      ;
 
 //Les instructions.genererCode(null), permettent la gestion de type/vérification.
-instruction ::= declaration:declInstruction                     {: RESULT = null; declInstruction.genererCode(null, pileTableVariable); :}
+instruction ::= declaration:declInstruction                     {: RESULT = null; declInstruction.genererCode(null); :}
              |  affectation:affInstruction                      {: RESULT = affInstruction; :}
-             |  enumeration:affEnumeration                      {: RESULT = null; affEnumeration.genererCode(null, pileTableVariable); :}
+             |  enumeration:affEnumeration                      {: RESULT = null; affEnumeration.genererCode(null); :}
              |  instruction_for:forInstruction                  {: RESULT = forInstruction; :}
              |  instruction_while:whileInstruction              {: RESULT = whileInstruction; :}
              |  instruction_if:ifInstruction                    {: RESULT = ifInstruction; :}
              |  bloc_instruction:blocInstruction                {: RESULT = blocInstruction; :}
              |  procedure:procedureInstruction                  {: RESULT = procedureInstruction; :}
-             | error // Gestion des erreurs de syntaxes
+             |  error // Gestion des erreurs de syntaxes
              ;
 
 //TODO : rajouter le type dans le constructeur, test si liste_expression ne contient que des "type.variable"
@@ -92,7 +94,6 @@ declaration ::= ENUM_TYPE:type liste_expression:liste SEMIC:token               
 
 affectation ::= ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMIC:token           {: RESULT = new Affectation((EnumType)type, id, exp, new InfosErreur(tokenleft, tokenright)); :}
              |  expression_variable:id AFFECT expression:exp SEMIC:token                          {: RESULT = new Affectation(null, id, exp, new InfosErreur(tokenleft, tokenright)); :}
-             //|  POINTER ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMIC  {: RESULT = new Affectation((EnumType)type, id, exp); :}
              ;
 
 //Vérification de ENUM_TYPE == enum

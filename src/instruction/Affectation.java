@@ -20,10 +20,10 @@ public class Affectation extends Instruction {
         this.info = info;
     }
 
-    public void genererCode(Label suivant, Stack pileTableVariable) {
+    public void genererCode(Label suivant) {
         EnumType droiteType = droite.getType();
         String expName;
-        HashMap hm = (HashMap)pileTableVariable.peek();
+        //HashMap hm = (HashMap)pileTableVariable.peek();
         expName = variable.getNomVariable();
 
         if(variable.getType() == EnumType.INTERVALLE) {
@@ -40,6 +40,6 @@ public class Affectation extends Instruction {
         // System.out.println("AFFECTATION -- Type Variable : " + variable.getType());
         // System.out.println("===============*/");
 
-        GenererErreur.genErreurAffectation(hm, type, droiteType, expName, droite.getNomVariable(), info);
+        GenererErreur.genErreurAffectation(type, droiteType, expName, droite.getNomVariable(), info);
     }
 }

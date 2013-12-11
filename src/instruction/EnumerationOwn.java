@@ -20,13 +20,13 @@ public class EnumerationOwn extends Instruction {
         this.info = info;
     }
 
-    public void genererCode(Label suivant, Stack pileTableVariable) {
+    public void genererCode(Label suivant) {
         //Pas de code à générer.
         //EnumOp droiteType = droite.getType();
 
-        HashMap hm = (HashMap)pileTableVariable.peek();
+        //HashMap hm = (HashMap)pileTableVariable.peek();
 
-        GenererErreur.genErreurDeclaration(hm, type, variable.getNomVariable(), info);
+        GenererErreur.genErreurDeclaration(type, variable.getNomVariable(), info);
     }
 }
 

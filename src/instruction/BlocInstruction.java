@@ -13,15 +13,15 @@ public class BlocInstruction extends Instruction {
         this.list = list;
     }
 
-    public void genererCode(Label suivant, Stack pileTableVariable) {
+    public void genererCode(Label suivant) {
         int tailleListe = this.list.size();
 
         for (int i = 0; i < tailleListe - 1; i++) {
             Label suivantInstruction = new Label();
-            list.get(i).genererCode(suivantInstruction, pileTableVariable);
+            list.get(i).genererCode(suivantInstruction);
             System.out.println(suivantInstruction + ":");
         }
 
-        list.get(tailleListe - 1).genererCode(suivant, pileTableVariable);
+        list.get(tailleListe - 1).genererCode(suivant);
     }
 }
