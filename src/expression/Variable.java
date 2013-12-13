@@ -1,7 +1,8 @@
 package expression;
 
-import identifiant.*;
-import tac.*;
+import identifiant.Identifiant;
+import identifiant.IdentifiantVariable;
+import tac.EnumType;
 
 public class Variable extends OperationArithmetique {
 
@@ -16,11 +17,10 @@ public class Variable extends OperationArithmetique {
     }
 
     public String getNomVariable(){
-        return nomVariable;
+        return this.nomVariable;
     }
 
     public EnumType getType(){
         return EnumType.VARIABLE;
     }
 }
-

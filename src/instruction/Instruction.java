@@ -1,9 +1,7 @@
 package instruction;
 
-import java.util.*;
-import tac.*;
+import tac.Label;
 
-public abstract class Instruction {
-
-    public abstract void genererCode(Label suivant); 
+public interface Instruction {
+    public void genererCode(Label suivant);
 }

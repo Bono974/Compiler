@@ -1,17 +1,21 @@
 package instruction;
 
-import java.util.*;
+import java.util.List;
+
 import expression.Expression;
 import identifiant.Identifiant;
-import tac.*;
+import tac.GenererErreur;
+import tac.InfosErreur;
+import tac.Label;
+import tac.PileTableVariable;
 
-public class ProcedureAppel extends Instruction {
+public class ProcedureAppel extends InstructionAbs {
 
     private String nom;
-    private LinkedList<Expression> listeExpression;
+    private List<Expression> listeExpression;
     private InfosErreur info;
 
-    public ProcedureAppel(String nom, LinkedList<Expression> list, InfosErreur info) {
+    public ProcedureAppel(String nom, List<Expression> list, InfosErreur info) {
         this.nom = nom;
         this.listeExpression = list;
         this.info = info;
@@ -20,15 +24,16 @@ public class ProcedureAppel extends Instruction {
     public void genererCode(Label suivant) {
         GenererErreur.genErreurProcedure(this.nom, info);
         PileTableVariable.ajouterEnvironnement();
-        
-        if(GenererErreur.inProcedure) {
-            GenererErreur.genErreurProcRecursive(GenererErreur.currentProcedure, this.nom, info);
-        }
+
+        if(GenererErreur.inProcedure)
+            GenererErreur.genErreurProcRecursive(GenererErreur.currentProcedure,
+                                                 this.nom, info);
 
         for (Expression e: this.listeExpression) {
             Identifiant resTmp = e.genererCode();
             System.out.println("param "+ resTmp);
         }
+
         System.out.println("call "+ this.nom);
         PileTableVariable.retirerEnvironnement();
     }

@@ -20,7 +20,7 @@ public class TableVariable {
         this.table.put(v, t);
     }
 
-    public void ajouterProcedure(String procedure /*,List<EnumType> listType*/) {
+    public void ajouterProcedure(String procedure/*,List<EnumType> listType*/) {
         this.procedures.put(procedure, "Procédure "+ procedure +" ajoutée");
     }
 
@@ -43,7 +43,8 @@ public class TableVariable {
     /*
      * Idée pour vérifier les types mis en paramètres d'un appel de procédure */
     /*
-    public boolean verifierTypeProcedure(String procedure, List<EnumType> listTypeParametres) {
+    public boolean verifierTypeProcedure(String procedure,
+                                         List<EnumType> listTypeParametres) {
         if (! verifierDeclarationProcedure(procedure))
             return false;
 
@@ -54,10 +55,10 @@ public class TableVariable {
             return false;
 
         for (int i = 0; i < tailleSelf; i++)
-            if (this.procedures.get(procedure).get(i) != listTypeParametres.get(i))
+            if (this.procedures.get(procedure).get(i) !=
+                                                      listTypeParametres.get(i))
                 return false;
 
-        return true;
-    }
+        return true; }
     */
 }

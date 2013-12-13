@@ -1,5 +1,4 @@
 package tac;
-import java.util.*;
 
 public class GenererErreur {
 

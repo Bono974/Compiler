@@ -1,7 +1,8 @@
 package expression;
 
+import identifiant.Identifiant;
+import identifiant.IdentifiantRegistre;
 import tac.Label;
-import identifiant.*;
 
 public class NotBool extends OperationBooleenne {
 

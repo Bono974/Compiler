@@ -1,27 +1,19 @@
  package expression;
 
-import identifiant.*;
-import tac.*;
+import identifiant.Identifiant;
+import identifiant.IdentifiantVariable;
+import tac.EnumType;
 
-public class VariablePointeur extends OperationArithmetique {
+public class VariablePointeur extends Variable {
 
-    protected String nomVariable;
     private String symbole;
 
     public VariablePointeur(String nomVariable, String symbole) {
-        this.nomVariable = nomVariable;
+        super(nomVariable);
         this.symbole = symbole;
     }
 
     public Identifiant genererCode() {
         return new IdentifiantVariable(symbole + this.nomVariable);
-    }
-
-    public String getNomVariable(){
-        return nomVariable;
-    }
-
-    public EnumType getType(){
-        return EnumType.VARIABLE;
     }
 }

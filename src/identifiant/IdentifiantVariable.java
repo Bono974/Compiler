@@ -2,7 +2,7 @@ package identifiant;
 
 public class IdentifiantVariable implements Identifiant {
 
-    private String nom;
+    protected String nom;
 
     public IdentifiantVariable(String nom){
         this.nom = nom;

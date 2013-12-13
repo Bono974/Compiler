@@ -1,6 +1,6 @@
 package expression;
 
-import tac.*;
+import tac.EnumType;
 
 public class CharacterUnique extends Variable {
 

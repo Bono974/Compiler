@@ -21,7 +21,7 @@ public class PileTableVariable {
     }
 
     public static void retirerEnvironnement() {
-        lTable.remove(lTable.size() - 1);      
+        lTable.remove(lTable.size() - 1);
     }
 
     public static void ajouterVariable(String v, EnumType t) {
@@ -68,6 +68,7 @@ public class PileTableVariable {
     }
 
     /*
-    public static boolean verifierTypeProcedure(String procedure, List<EnumType> listTypeParametres) { }
+    public static boolean verifierTypeProcedure(String procedure,
+                                                List<EnumType> listTypeParametres) { }
     */
 }

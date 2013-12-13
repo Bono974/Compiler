@@ -2,14 +2,14 @@ package tac;
 
 public class Label {
 
-    private int label;
-    private static int labelSuivant = 0;
+    private static int suivant = 0;
+    private int self;
 
-    public Label(){
-        this.label = this.labelSuivant++;
+    public Label() {
+        this.self = this.suivant++;
     }
 
     public String toString() {
-        return "L" + this.label;
+        return "L" + this.self;
     }
 }

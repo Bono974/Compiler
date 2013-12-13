@@ -1,16 +1,18 @@
 package expression;
 
-import identifiant.*;
-import tac.*;
+import identifiant.Identifiant;
+import identifiant.IdentifiantVariableTableau;
+import tac.EnumType;
 
-public class VariableIntervalle extends OperationArithmetique {
+public class VariableIntervalle extends Variable {
+    // Partiellement géré
 
-    protected String nomVariable;
-    protected Expression borneInf;
-    protected Expression borneSup;
+    private Expression borneInf;
+    private Expression borneSup;
 
-    public VariableIntervalle(String nomVariable, Expression borneInf, Expression borneSup) {
-        this.nomVariable = nomVariable;
+    public VariableIntervalle(String nomVariable, Expression borneInf,
+                              Expression borneSup) {
+        super(nomVariable);
         this.borneInf = borneInf;
         this.borneSup = borneSup;
     }
@@ -19,10 +21,6 @@ public class VariableIntervalle extends OperationArithmetique {
         Identifiant inf = this.borneInf.genererCode();
         //Identifiant sup = this.borneSup.genererCode();
         return new IdentifiantVariableTableau(this.nomVariable, inf);
-    }
-
-    public String getNomVariable(){
-        return nomVariable;
     }
 
     public EnumType getType(){

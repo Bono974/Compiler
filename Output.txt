@@ -6,33 +6,40 @@ if j < 20 jump L2
 jump L1
 L2:
 newJ = 60
+L3:
+newJ = 60
+
+/*===============
+Erreur à la ligne : 13
+La variable : "newJ" a déjà été déclarée !!
+===============*/
 
 L1:
 newJ = 25
 
 /*===============
-Erreur à la ligne : 18
+Erreur à la ligne : 16
 La variable : "newJ" n'a pas été déclarée précédemment.
 ===============*/
 
-L3:
+L4:
 
 /*===============
-Erreur à la ligne : 20
+Erreur à la ligne : 18
 La variable : "tititi" est un tableau avec intervalle.
 Il n'est pas possible d'affecter une valeur à un intervalle.
 ===============*/
 
-L4:
+L5:
 c = 'a'
 
-L5:
+L6:
 i = j
 
-L6:
+L7:
 
 /*===============
-Erreur à la ligne : 25
+Erreur à la ligne : 23
 Il n'est pas autorisé de faire une opération arithmétique
 entre des nombres et des booléens.
 ===============*/
@@ -40,21 +47,32 @@ t0 = true + 7
 i = t0
 
 /*===============
-Erreur à la ligne : 25
+Erreur à la ligne : 23
 La variable : "i" a déjà été déclarée !!
 ===============*/
 
-L7:
+L8:
 err2 = 999
 
-L8:
+L9:
 tyty:
 func tyty
 a = k
-L10:
+L11:
 
 /*===============
-Erreur à la ligne : 37
+Erreur à la ligne : 35
+Il est interdit d'appeler une procédure dans le corps d'une procédure
+en dehors d'elle même.
+La procédure : tutu a été appelée dans : tyty
+===============*/
+param a
+param 10
+call tutu
+L12:
+
+/*===============
+Erreur à la ligne : 35
 Il est interdit d'appeler une procédure dans le corps d'une procédure
 en dehors d'elle même.
 La procédure : tutu a été appelée dans : tyty
@@ -63,132 +81,136 @@ param a
 param 10
 call tutu
 
-L9:
+L10:
 x = 22
 
-L11:
+L13:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int = t2
 
-L12:
+L14:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real = t2
 
-L13:
+L15:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool = t2
 
-L14:
+L16:
 t0 = - 8
 sh = t0
 
-L15:
+L17:
 ush = 95
 
-L16:
+L18:
 ii = 65535
 
-L17:
+L19:
 jj = 14.312465
 
-L18:
+L20:
 u = 13
 
-L19:
+L21:
 ur = 15.36
 
-L20:
+L22:
 t0 = - 69
 t1 = - 42
 t2 = t0 + t1
 var_int = t2
 
-L21:
+L23:
 t0 = 666 * 10
 var_int2 = t0
 
-L22:
+L24:
 t0 = 6 < 9
 var_bool = t0
 
-L23:
+L25:
 var_bool = true
 
-L24:
+L26:
 t0 = ! true
 var_bool = t0
 
-L25:
+L27:
 var_bool = false
 
-L26:
+L28:
 var_char2 = 'a'
 
-L27:
+L29:
 t0 = 1.6 * 4.2
 var_real = t0
 
-L28:
+L30:
 cc = 'Q'
 
-L29:
+L31:
 str = "blablabla"
 
-L30:
+L32:
 tab[2] = 66
 
-L31:
+L33:
 bibi = 69
 
-L32:
+L34:
 xx = 'x'
 
-L33:
+L35:
 realpointer = &xx
 
 /*===============
-Erreur à la ligne : 119
+Erreur à la ligne : 117
 Affectation impossible avec la variable : "realpointer"
 L'élément à gauche est de type : POINTER_REAL
 Alors que celui de droite est de type : CHARACTER
 ===============*/
 
-L34:
+L36:
 bibiPOINTER = &bibi
 
-L35:
+L37:
 newBibi = *bibiPOINTER
 
-L36:
+L38:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t1 * 15
 t3 = t0 + t2
 var_real2 = t3
 
-L37:
+L39:
 t0 = 1 < 2
 t1 = 3 + 4
 t2 = t0 > t1
 var_bool = t2
 
-L38:
+L40:
 toto:
 func toto
 a = k
-L40:
+L42:
+param q
+param 26
+call toto
+L43:
 param q
 param 26
 call toto
 return k
 
-L39:
+L41:
 param 3
 param 3
 param 6
@@ -196,92 +218,106 @@ t0 = k - j
 param t0
 call toto
 
-L41:
+L44:
 t0 = 2 * 2
 t1 = t0 / 3
 t2 = 1 + t1
 var_int_new = t2
 
-L42:
+L45:
 t0 = 3 % 2
 t1 = 47 / 5.6
 t2 = t0 + t1
 var_real_new = t2
 
-L43:
+L46:
 t0 = 2 + 3
 t1 = t0 + 4
 t2 = 1 < t1
 var_bool_new = t2
 
-L44:
-if 1 < 2 jump L46
-jump L47
-L46:
+L47:
+if 1 < 2 jump L49
+jump L50
+L49:
 t0 = 72 + 3
 var_int_new = t0
-jump L45
-L47:
+jump L48
+L50:
 var_int_new = 29
 
-L45:
-if var_int_new < 447 jump L49
-jump L48
-L49:
+L48:
+if var_int_new < 447 jump L52
+jump L51
+L52:
 var_int_new = 447
 
-L48:
+L51:
 i = 22
 
-L50:
-i = 44
-L52:
-if i > 22 jump L53
-jump L51
 L53:
-var_int_new3 = 12
-t0 = i - 1
-i = t0
-jump L52
-
-L51:
 i = 44
 L55:
 if i > 22 jump L56
 jump L54
 L56:
 var_int_new3 = 12
+t0 = i - 1
+i = t0
 jump L55
 
 L54:
+i = 44
 L58:
-if var_bool_new != 0 jump L59
-jump L60
-L60:
-if 6 != 0 jump L59
+if i > 22 jump L59
 jump L57
 L59:
-t0 = var_int_new3 + 1
-var_int_new3 = t0
+var_int_new3 = 12
+L60:
+var_int_new3 = 12
+
+/*===============
+Erreur à la ligne : 168
+La variable : "var_int_new3" a déjà été déclarée !!
+===============*/
 jump L58
 
 L57:
 L62:
-t0 = k + 1
-i = t0
-if var_bool_new != 0 jump L62
+if var_bool_new != 0 jump L63
+jump L64
+L64:
+if 6 != 0 jump L63
 jump L61
+L63:
+t0 = var_int_new3 + 1
+var_int_new3 = t0
+jump L62
 
 L61:
-if 2 < 1 jump L64
-jump L65
-L64:
-var_int_new = 666
-jump L63
-L65:
-if 4 >= 1 jump L66
-jump L63
 L66:
+t0 = k + 1
+i = t0
+L67:
+t1 = k + 1
+i = t1
+if var_bool_new != 0 jump L66
+jump L65
+
+L65:
+if 2 < 1 jump L69
+jump L70
+L69:
+var_int_new = 666
+L71:
+var_int_new = 666
+jump L68
+L70:
+if 4 >= 1 jump L72
+jump L68
+L72:
+var_int_new = 999
+L73:
 var_int_new = 999
 
-L63:
+L68:

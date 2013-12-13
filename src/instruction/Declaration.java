@@ -1,30 +1,32 @@
 package instruction;
-import java_cup.runtime.Symbol;
 
-import java.util.*;
+import java.util.List;
 
 import expression.Expression;
-import tac.*;
+import tac.EnumType;
+import tac.Label;
+import tac.GenererErreur;
+import tac.InfosErreur;
 
-public class Declaration extends Instruction {
+public class Declaration extends InstructionAbs {
 
     private List<Expression> variable;
     private EnumType type;
     private InfosErreur info;
 
-    public Declaration(EnumType type, List<Expression> variable, InfosErreur info) {
+    public Declaration(EnumType type, List<Expression> variable,
+                       InfosErreur info) {
         this.type = type;
         this.variable = variable;
-        this.info = info; 
+        this.info = info;
     }
 
     public void genererCode(Label suivant) {
         String expName;
 
-        for (int i = 0; i < variable.size(); i++){
-            expName = variable.get(i).getNomVariable();
+        for (Expression ptr: this.variable) {
+            expName = ptr.getNomVariable();
             GenererErreur.genErreurDeclaration(type, expName, info);
         }
     }
 }
-

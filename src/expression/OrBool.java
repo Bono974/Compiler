@@ -1,16 +1,14 @@
 package expression;
 
 import tac.Label;
-import identifiant.Identifiant;
+import tac.EnumOp;
 
 public class OrBool extends OperationBooleenne {
-
-    private Expression gauche;
-    private Expression droite;
 
     public OrBool (Expression gauche, Expression droite) {
         this.gauche = gauche;
         this.droite = droite;
+        this.op = EnumOp.OR;
     }
 
     public void genererJumpCode(Label oui, Label non) {
@@ -18,9 +16,5 @@ public class OrBool extends OperationBooleenne {
         gauche.genererJumpCode(oui, labelDroite);
         System.out.println(labelDroite + ":");
         droite.genererJumpCode(oui, non);
-    }
-
-    public Identifiant genererCode(){
-        return null;
     }
 }

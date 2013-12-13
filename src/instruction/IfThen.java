@@ -1,10 +1,10 @@
 package instruction;
 
-import java.util.*;
 import expression.Expression;
-import tac.*;
+import tac.Label;
+import tac.PileTableVariable;
 
-public class IfThen extends Instruction {
+public class IfThen extends InstructionAbs {
 
     private Expression condition;
     private Instruction self;

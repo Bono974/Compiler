@@ -1,19 +1,26 @@
 package instruction;
 
-import java.util.*;
-import expression.Expression;
-import tac.*;
-import identifiant.Identifiant;
+import java.util.List;
 
-public class ProcedureDefinition extends Instruction {
+import expression.Expression;
+import identifiant.Identifiant;
+import tac.EnumType;
+import tac.GenererErreur;
+import tac.InfosErreur;
+import tac.Label;
+import tac.PileTableVariable;
+
+public class ProcedureDefinition extends InstructionAbs {
 
     private String nom;
-    private LinkedList<Expression> listeExpression;
+    private List<Expression> listeExpression;
     private Instruction blocInstruction;
     private Expression valeurRetour;
     private InfosErreur info;
 
-    public ProcedureDefinition(String nom, LinkedList<Expression> list, Instruction bloc, Expression valeurRetour, InfosErreur info) {
+    public ProcedureDefinition(String nom, List<Expression> list,
+                               Instruction bloc, Expression valeurRetour,
+                               InfosErreur info) {
         this.nom = nom;
         this.listeExpression = list;
         this.blocInstruction = bloc;

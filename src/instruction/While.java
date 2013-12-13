@@ -1,10 +1,10 @@
 package instruction;
 
-import java.util.*;
 import expression.Expression;
-import tac.*;
+import tac.Label;
+import tac.PileTableVariable;
 
-public class While extends Instruction {
+public class While extends InstructionAbs {
 
     protected Expression condition;
     protected Instruction self;

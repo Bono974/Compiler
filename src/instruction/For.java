@@ -1,10 +1,10 @@
 package instruction;
 
-import java.util.*;
 import expression.Expression;
-import tac.*;
+import tac.Label;
+import tac.PileTableVariable;
 
-public class For extends Instruction {
+public class For extends InstructionAbs {
 
     private Instruction affectation;
     private Expression condition;
@@ -12,7 +12,8 @@ public class For extends Instruction {
 
     private Instruction self;
 
-    public For(Instruction affectation, Expression condition, Instruction increment, Instruction self) {
+    public For(Instruction affectation, Expression condition,
+               Instruction increment, Instruction self) {
         this.affectation = affectation;
         this.condition = condition;
         this.increment = increment;

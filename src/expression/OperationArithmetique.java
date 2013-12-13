@@ -1,9 +1,10 @@
 package expression;
 
-import tac.*;
-import identifiant.*;
+import identifiant.Identifiant;
+import tac.EnumType;
+import tac.Label;
 
-public abstract class OperationArithmetique extends Expression {
+public abstract class OperationArithmetique extends ExpressionAbs {
 
     public void genererJumpCode(Label oui, Label non) {
            Identifiant res = genererCode();

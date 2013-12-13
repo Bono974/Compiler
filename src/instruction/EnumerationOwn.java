@@ -1,19 +1,22 @@
 package instruction;
 
-import java.util.*;
+import java.util.List;
 
-import expression.*;
-import identifiant.*;
-import tac.*;
+import expression.Expression;
+import tac.EnumType;
+import tac.GenererErreur;
+import tac.InfosErreur;
+import tac.Label;
 
-public class EnumerationOwn extends Instruction {
+public class EnumerationOwn extends InstructionAbs {
 
     private Expression variable;
     private List<Expression> valeurs;
     private EnumType type;
     private InfosErreur info;
 
-    public EnumerationOwn (EnumType type, Expression variable, List<Expression> valeurs, InfosErreur info) {
+    public EnumerationOwn(EnumType type, Expression variable,
+                          List<Expression> valeurs, InfosErreur info) {
         this.variable = variable;
         this.valeurs = valeurs;
         this.type = type;
@@ -21,7 +24,8 @@ public class EnumerationOwn extends Instruction {
     }
 
     public void genererCode(Label suivant) {
-        GenererErreur.genErreurDeclaration(type, variable.getNomVariable(), info);
+        GenererErreur.genErreurDeclaration(type, variable.getNomVariable(),
+                                           info);
     }
 }
 

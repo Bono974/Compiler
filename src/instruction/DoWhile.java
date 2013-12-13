@@ -1,8 +1,8 @@
 package instruction;
 
-import java.util.*;
 import expression.Expression;
-import tac.*;
+import tac.Label;
+import tac.PileTableVariable;
 
 public class DoWhile extends While {
 

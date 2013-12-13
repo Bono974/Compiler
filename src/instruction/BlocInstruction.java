@@ -1,27 +1,27 @@
 package instruction;
 
-import java.util.*;
+import java.util.List;
 import tac.Label;
 
 
-public class BlocInstruction extends Instruction {
+public class BlocInstruction extends InstructionAbs {
 
     //Liste chainée d'Instructions
-    private LinkedList<Instruction> list;
+    private List<Instruction> list;
 
-    public BlocInstruction(LinkedList<Instruction> list) {
+    public BlocInstruction(List<Instruction> list) {
         this.list = list;
     }
 
     public void genererCode(Label suivant) {
         int tailleListe = this.list.size();
 
-        for (int i = 0; i < tailleListe - 1; i++) {
+        for (Instruction ptr: this.list) {
             Label suivantInstruction = new Label();
-            list.get(i).genererCode(suivantInstruction);
+            ptr.genererCode(suivantInstruction);
             System.out.println(suivantInstruction + ":");
         }
 
-        list.get(tailleListe - 1).genererCode(suivant);
+        this.list.get(tailleListe - 1).genererCode(suivant);
     }
 }

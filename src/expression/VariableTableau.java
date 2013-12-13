@@ -1,11 +1,12 @@
 package expression;
 
-import identifiant.*;
-import tac.*;
+import identifiant.Identifiant;
+import identifiant.IdentifiantVariableTableau;
+import tac.EnumType;
 
 public class VariableTableau extends Variable {
 
-    public Expression taille;
+    public Expression taille; // ou indice
 
     public VariableTableau(String nomVariable, Expression taille) {
         super(nomVariable);

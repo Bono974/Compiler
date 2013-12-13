@@ -1,17 +1,17 @@
 import java_cup.runtime.*;
 import java.lang.Number;
-import java.util.*;
+import java.util.List;
+import java.util.LinkedList;
+
 import expression.*;
 import identifiant.*;
 import instruction.*;
 import tac.*;
 
-
 parser code {:
     public void syntax_error(Symbol cur_token) {
         System.err.println("---- Erreur de syntaxe ----");
         System.err.println("Ligne : "+ (cur_token.left + 1) + " Colonne : "+ (cur_token.right + 1));
-        //report_error("syntax_error", null);
     }
     public void unrecovered_syntax_error(Symbol cur_token) {
         syntax_error(cur_token);
@@ -21,7 +21,6 @@ parser code {:
 
 action code {:
   PileTableVariable pileTableVariable = new PileTableVariable();
-
 :}
 
 init with {: :}
@@ -31,13 +30,14 @@ terminal FOR, WHILE, DO, RETURN;
 terminal AND, OR, LT, GT, LE, GE, EQ, DIFF, NOT;
 terminal PLUS, MINUS, TIMES, DIVIDE, MOD, AMPERSAND, NOT_U, POINTER_U;
 terminal AFFECT;
-terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA, ENUM_TYPE;
+terminal LRBRA, RRBRA, LSBRA, RSBRA, SEMIC, COMMA;
 terminal RBRACE, LBRACE;
 terminal INTER;
 
 terminal Integer INT;
 terminal Float REAL;
 terminal String ID, CHARACTER, CHARACTERS, BOOL;
+terminal EnumType ENUM_TYPE;
 
 non terminal beginning;
 
@@ -45,12 +45,12 @@ non terminal Instruction instruction,
                          affectation, declaration, enumeration,
                          bloc_instruction, procedure, increment,
                          instruction_if, instruction_while, instruction_for;
-non terminal LinkedList<Instruction> liste_instruction;
+non terminal List<Instruction> liste_instruction;
 
 non terminal Expression expression,
                         expression_variable, expression_valeur,
                         valeur_retour;
-non terminal LinkedList<Expression> liste_expression;
+non terminal List<Expression> liste_expression;
 
 precedence left AND, OR;
 precedence left LT, GT, GE, LE, EQ, DIFF;
@@ -62,12 +62,12 @@ precedence right ELSE;
 
 start with beginning;
 
-beginning ::= beginning instruction:inst {: //Cas d'une déclaration : pas besoin de nouveau Label
+beginning ::= beginning instruction:inst {: //Cas d'une déclaration / enumeration : pas besoin de nouveau Label
                                             if (inst != null) {
                                                 Label suivant = new Label();
                                                 inst.genererCode(suivant);
                                                 System.out.println("\n" + suivant + ":");
-                                                IdentifiantRegistre.reinitialiser(); 
+                                                IdentifiantRegistre.reinitialiser();
                                             } :}
             | /* Fin du parsing */      ;
 
@@ -83,18 +83,17 @@ instruction ::= declaration:declInstruction                     {: RESULT = null
              |  error // Gestion des erreurs de syntaxes
              ;
 
-declaration ::= ENUM_TYPE:type liste_expression:liste SEMIC:token                                {: RESULT = new Declaration((EnumType)type, liste, new InfosErreur(tokenleft, tokenright)); :}
+declaration ::= ENUM_TYPE:type liste_expression:liste SEMIC:token                                       {: RESULT = new Declaration(type, liste, new InfosErreur(tokenleft, tokenright)); :}
              ;
 
-affectation ::= ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMIC:token           {: RESULT = new Affectation((EnumType)type, id, exp, new InfosErreur(tokenleft, tokenright)); :}
-             |  expression_variable:id AFFECT expression:exp SEMIC:token                          {: RESULT = new Affectation(null, id, exp, new InfosErreur(tokenleft, tokenright)); :}
+affectation ::= ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMIC:token                 {: RESULT = new Affectation(type, id, exp, new InfosErreur(tokenleft, tokenright)); :}
+             |  expression_variable:id AFFECT expression:exp SEMIC:token                                {: RESULT = new Affectation(null, id, exp, new InfosErreur(tokenleft, tokenright)); :}
              ;
 
-//Vérification de ENUM_TYPE == enum
-enumeration ::= ENUM_TYPE:type expression_variable:id LBRACE liste_expression:list RBRACE SEMIC:token {: RESULT = new EnumerationOwn((EnumType)type, id, list, new InfosErreur(tokenleft, tokenright)); :}
+enumeration ::= ENUM_TYPE:type expression_variable:id LBRACE liste_expression:list RBRACE SEMIC:token   {: RESULT = new EnumerationOwn(type, id, list, new InfosErreur(tokenleft, tokenright)); :}
              ;
 
-instruction_if ::= IF expression:condition THEN                                       
+instruction_if ::= IF expression:condition THEN
                       instruction:blocIf
                       ELSE instruction:blocElse                                       {: RESULT = new IfThenElse(condition, blocIf, blocElse); :}
 
@@ -106,7 +105,7 @@ instruction_for ::= FOR LRBRA affectation:affect expression:condition SEMIC incr
                         instruction:blocFor                                           {: RESULT = new For(affect, condition, inc, blocFor); :}
                  ;
 
-increment ::= expression_variable:id AFFECT:token expression:exp                            {: RESULT = new Affectation(null, id, exp, new InfosErreur(tokenleft, tokenright)); :}
+increment ::= expression_variable:id AFFECT:token expression:exp                      {: RESULT = new Affectation(null, id, exp, new InfosErreur(tokenleft, tokenright)); :}
            |
            ;
 
@@ -122,7 +121,7 @@ procedure ::= DEF:token ID:nom LRBRA liste_expression:parametres RRBRA
                       valeur_retour:ret                                               {: RESULT = new ProcedureDefinition(nom, parametres, blocInstruction, ret, new InfosErreur(tokenleft, tokenright)); :}
             | DEF:token ID:nom LRBRA liste_expression:parametres RRBRA
                       bloc_instruction:blocInstruction                                {: RESULT = new ProcedureDefinition(nom, parametres, blocInstruction, null, new InfosErreur(tokenleft, tokenright)); :}
-            | ID:nom LRBRA liste_expression:parametres RRBRA SEMIC:token                    {: RESULT = new ProcedureAppel(nom, parametres, new InfosErreur(tokenleft, tokenright)); :}
+            | ID:nom LRBRA liste_expression:parametres RRBRA SEMIC:token              {: RESULT = new ProcedureAppel(nom, parametres, new InfosErreur(tokenleft, tokenright)); :}
             ;
 
 valeur_retour ::= RETURN expression:valeur SEMIC                                      {: RESULT = valeur; :}
@@ -131,50 +130,50 @@ valeur_retour ::= RETURN expression:valeur SEMIC                                
 bloc_instruction ::= LBRACE liste_instruction:bloc RBRACE                             {: RESULT = new BlocInstruction(bloc); :}
                   ;
 
-liste_instruction ::= liste_instruction:list instruction:nouvelleInstruction          {: list.add(nouvelleInstruction); //append en fin de liste
+liste_instruction ::= liste_instruction:list instruction:nouvelleInstruction          {: list.add(nouvelleInstruction);
                                                                                          RESULT = list;  :}
                    |                                                                  {: RESULT = new LinkedList<Instruction>(); :}
                    ;
 
-liste_expression ::= liste_expression:list COMMA expression:exp                       {: list.add(exp); //append en fin de liste
+liste_expression ::= liste_expression:list COMMA expression:exp                       {: list.add(exp);
                                                                                          RESULT = list; :}
                   |  expression:exp                                                   {: LinkedList l = new LinkedList<Expression>();
                                                                                          l.add(exp);
                                                                                          RESULT = l; :}
                   ;
 
-expression ::= expression:e1 PLUS:token   expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.PLUS, new InfosErreur(tokenleft, tokenright)); :}
-            |  expression:e1 MINUS:token  expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.MINUS, new InfosErreur(tokenleft, tokenright)); :}
-            |  expression:e1 TIMES:token  expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.TIMES, new InfosErreur(tokenleft, tokenright)); :}
+expression ::= expression:e1 PLUS:token   expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.PLUS,   new InfosErreur(tokenleft, tokenright)); :}
+            |  expression:e1 MINUS:token  expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.MINUS,  new InfosErreur(tokenleft, tokenright)); :}
+            |  expression:e1 TIMES:token  expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.TIMES,  new InfosErreur(tokenleft, tokenright)); :}
             |  expression:e1 DIVIDE:token expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.DIVIDE, new InfosErreur(tokenleft, tokenright)); :}
-            |  expression:e1 MOD:token    expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.MOD, new InfosErreur(tokenleft, tokenright)); :}
-            |  MINUS expression:exp                   {: RESULT = new ArithmetiqueUnaire(exp, EnumOp.MINUS); :}
+            |  expression:e1 MOD:token    expression:e2     {: RESULT = new ArithmetiqueBinaire(e1, e2, EnumOp.MOD,    new InfosErreur(tokenleft, tokenright)); :}
+            |  MINUS expression:exp                         {: RESULT = new ArithmetiqueUnaire(exp, EnumOp.MINUS); :}
 
-            |  expression:e1 AND     expression:e2    {: RESULT = new AndBool(e1, e2);     :}
-            |  expression:e1 OR      expression:e2    {: RESULT = new OrBool(e1, e2);      :}
-            |  expression:e1 DIFF    expression:e2    {: RESULT = new ComparaisonBool(e1, e2, EnumOp.DIFF);    :}
-            |  expression:e1 LT      expression:e2    {: RESULT = new ComparaisonBool(e1, e2, EnumOp.LT);      :}
-            |  expression:e1 GT      expression:e2    {: RESULT = new ComparaisonBool(e1, e2, EnumOp.GT);      :}
-            |  expression:e1 GE      expression:e2    {: RESULT = new ComparaisonBool(e1, e2, EnumOp.GE);      :}
-            |  expression:e1 LE      expression:e2    {: RESULT = new ComparaisonBool(e1, e2, EnumOp.LE);      :}
-            |  expression:e1 EQ      expression:e2    {: RESULT = new ComparaisonBool(e1, e2, EnumOp.EQUALS);  :}
+            |  expression:e1 AND     expression:e2          {: RESULT = new AndBool(e1, e2); :}
+            |  expression:e1 OR      expression:e2          {: RESULT = new OrBool(e1, e2);  :}
+            |  expression:e1 DIFF    expression:e2          {: RESULT = new ComparaisonBool(e1, e2, EnumOp.DIFF);   :}
+            |  expression:e1 LT      expression:e2          {: RESULT = new ComparaisonBool(e1, e2, EnumOp.LT);     :}
+            |  expression:e1 GT      expression:e2          {: RESULT = new ComparaisonBool(e1, e2, EnumOp.GT);     :}
+            |  expression:e1 GE      expression:e2          {: RESULT = new ComparaisonBool(e1, e2, EnumOp.GE);     :}
+            |  expression:e1 LE      expression:e2          {: RESULT = new ComparaisonBool(e1, e2, EnumOp.LE);     :}
+            |  expression:e1 EQ      expression:e2          {: RESULT = new ComparaisonBool(e1, e2, EnumOp.EQUALS); :}
 
-            |  NOT expression:b                       {: RESULT = new NotBool(b); :} %prec NOT_U
-            |  LRBRA expression:b RRBRA               {: RESULT = b; :}
+            |  NOT expression:b                             {: RESULT = new NotBool(b); :} %prec NOT_U
+            |  LRBRA expression:b RRBRA                     {: RESULT = b; :}
 
-            |  expression_variable:exp                {: RESULT = exp; :}
-            |  expression_valeur:exp                  {: RESULT = exp; :}
+            |  expression_variable:exp                      {: RESULT = exp; :}
+            |  expression_valeur:exp                        {: RESULT = exp; :}
             ;
 
 expression_valeur ::= INT:nb                       {: RESULT = new Value(nb); :}
                    |  REAL:nb                      {: RESULT = new Value(nb); :}
                    |  BOOL:bool                    {: RESULT = new ValueBool(Boolean.parseBoolean(bool)); :}
                    |  CHARACTERS:ch                {: RESULT = new CharacterMultiple(ch); :}
-                   |  CHARACTER:ch                 {: RESULT = new CharacterUnique(ch); :}
+                   |  CHARACTER:ch                 {: RESULT = new CharacterUnique(ch);   :}
                    ;
 
 expression_variable ::= ID:id                                                   {: RESULT = new Variable(id); :}
-                     |  ID:id LSBRA expression:exp RSBRA                        {: RESULT = new VariableTableau(id, exp); :}
+                     |  ID:id LSBRA expression:exp RSBRA                        {: RESULT = new VariableTableau(id, exp);  :}
                      |  ID:id LSBRA expression:exp1 INTER expression:exp2 RSBRA {: RESULT = new VariableIntervalle(id, exp1, exp2); :}
                      |  TIMES ID:id                                             {: RESULT = new VariablePointeur(id, "*"); :} %prec POINTER_U
                      |  AMPERSAND ID:id                                         {: RESULT = new VariablePointeur(id, "&"); :} %prec POINTER_U

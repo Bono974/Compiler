@@ -1,12 +1,13 @@
 package expression;
 
-import identifiant.*;
+import identifiant.Identifiant;
+import identifiant.IdentifiantValeur;
 
-public class ValueBool<T> extends OperationBooleenne {
+public class ValueBool extends OperationBooleenne {
 
-    private T value;
+    private boolean value;
 
-    public ValueBool(T value){
+    public ValueBool(boolean value){
         this.value = value;
     }
 

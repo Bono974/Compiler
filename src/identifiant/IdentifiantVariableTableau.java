@@ -1,17 +1,16 @@
 package identifiant;
 
-public class IdentifiantVariableTableau implements Identifiant {
+public class IdentifiantVariableTableau extends IdentifiantVariable {
 
-    private String nom;
     private Identifiant taille;
 
     public IdentifiantVariableTableau(String nom, Identifiant taille){
-        this.nom = nom;
+        super(nom);
         this.taille = taille;
     }
 
     public String toString() {
-        return this.nom + "[" + this.taille + "]";
+        return super.toString() + "[" + this.taille + "]";
     }
 }
 

@@ -1,19 +1,21 @@
 package instruction;
 
-import java.util.*;
-
 import expression.Expression;
-import identifiant.*;
-import tac.*;
+import identifiant.Identifiant;
+import tac.EnumType;
+import tac.GenererErreur;
+import tac.InfosErreur;
+import tac.Label;
 
-public class Affectation extends Instruction {
+public class Affectation extends InstructionAbs {
 
     private Expression variable;
     private Expression droite;
     private EnumType type;
     private InfosErreur info;
 
-    public Affectation(EnumType type, Expression variable, Expression droite, InfosErreur info){
+    public Affectation(EnumType type, Expression variable, Expression droite,
+                       InfosErreur info){
         this.variable = variable;
         this.droite = droite;
         this.type = type;
@@ -21,24 +23,19 @@ public class Affectation extends Instruction {
     }
 
     public void genererCode(Label suivant) {
-        EnumType droiteType = droite.getType();
-        String expName;
-        expName = variable.getNomVariable();
+        EnumType droiteType = this.droite.getType();
+        String expName = this.variable.getNomVariable();
 
-        if(variable.getType() == EnumType.INTERVALLE) {
-            GenererErreur.genErreurIntervalle(expName, info);
-        }
+        if(this.variable.getType() == EnumType.INTERVALLE)
+            GenererErreur.genErreurIntervalle(expName, this.info);
         else {
-            Identifiant resDroite = droite.genererCode();
-            Identifiant resVariable = variable.genererCode();
+            Identifiant resDroite = this.droite.genererCode();
+            Identifiant resVariable = this.variable.genererCode();
             System.out.println(resVariable + " = " + resDroite);
         }
 
-        // System.out.println("\n/*===============");
-        // System.out.println("Type de gauche : " + type + " Variable : " + expName +  " -- Type de droite : " + droiteType);
-        // System.out.println("AFFECTATION -- Type Variable : " + variable.getType());
-        // System.out.println("===============*/");
-
-        GenererErreur.genErreurAffectation(type, droiteType, expName, droite.getNomVariable(), info);
+        GenererErreur.genErreurAffectation(this.type, droiteType, expName,
+                                           this.droite.getNomVariable(),
+                                           this.info);
     }
 }

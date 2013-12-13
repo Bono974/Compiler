@@ -1,6 +1,7 @@
 package expression;
 
-import identifiant.*;
+import identifiant.Identifiant;
+import identifiant.IdentifiantValeur;
 
 public class Value<T> extends OperationArithmetique {
 

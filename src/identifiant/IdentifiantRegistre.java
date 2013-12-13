@@ -2,10 +2,10 @@ package identifiant;
 
 public class IdentifiantRegistre implements Identifiant {
 
-    public static int suivant = 0;
-    public int self;
+    private static int suivant = 0;
+    private int self;
 
-    public IdentifiantRegistre(){
+    public IdentifiantRegistre() {
         this.self = this.suivant++;
     }
 
