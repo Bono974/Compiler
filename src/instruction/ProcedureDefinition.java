@@ -33,7 +33,6 @@ public class ProcedureDefinition extends InstructionAbs {
 
         System.out.println(this.nom + ":");
         System.out.println("func "+ this.nom);
-        PileTableVariable.ajouterEnvironnement();
 
         GenererErreur.inProcedure = true;
         GenererErreur.currentProcedure = this.nom;
@@ -47,6 +46,5 @@ public class ProcedureDefinition extends InstructionAbs {
 
         GenererErreur.currentProcedure = null;
         GenererErreur.inProcedure = false;
-        PileTableVariable.retirerEnvironnement();
     }
 }

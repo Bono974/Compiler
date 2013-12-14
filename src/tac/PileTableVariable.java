@@ -53,6 +53,10 @@ public class PileTableVariable {
         return false;
     }
 
+    public static boolean verifierDeclarationBlocCourant(String v) {
+        return lTable.get(lTable.size() - 1).verifierDeclarationVariable(v);
+    }
+
     public static boolean verifierTypeVariable(String v, EnumType t){
         for (TableVariable ptr: reversed(lTable))
             if (ptr.verifierTypeVariable(v, t))

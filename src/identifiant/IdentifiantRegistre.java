@@ -13,6 +13,10 @@ public class IdentifiantRegistre implements Identifiant {
         suivant = 0;
     }
 
+    public static int precedent() {
+        return suivant - 1;
+    }
+
     public String toString() {
         return "t" + this.self;
     }

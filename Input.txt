@@ -2,13 +2,10 @@
    Fichier INPUT de test 
    ===================== */
 
-
-
 // ===========================================
 // Gestion des erreurs de syntaxes et de types
 
 int j = 15 + 3;
-
 if (j < 20) then {
     int newJ = 60;
 }
@@ -20,7 +17,7 @@ int tititi[4+2+1+2+33..b] = 6; // << Erreur, Pas d'affectation dans un intervall
 int i;
 char c = 'a';
 i = j;
-int i = true + 7; // Erreur car Opération arithmétique avec un Booléen
+i = true + 7; // Erreur car Opération arithmétique avec un Booléen
 
 // Erreur de syntaxe
 int err = 666 
@@ -29,12 +26,37 @@ int err2 = 999;
 // Erreur de syntaxe
 err2 = = 62;
 
+// Erreur procédure non déclarée
+tyty(e);
+
 // Appel récursif impossible
 def tyty (a) {
     a = k;
     tutu(a, 10);
 }
 
+// Gestion des blocs et de la portée des variables (et de leur redéfinition)
+
+int o = 1;
+{
+    int o = 2;
+    {
+        int o = 3;
+        {
+            int o = 4;
+            {
+
+                int o = 5;
+                int o = 5;
+            }
+        }
+    }
+}
+
+
+
+
+i = tyty(39);
 
 // ==============================================
 // La gestion des commentaires est Operationnelle

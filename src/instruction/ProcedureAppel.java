@@ -4,6 +4,7 @@ import java.util.List;
 
 import expression.Expression;
 import identifiant.Identifiant;
+import identifiant.IdentifiantRegistre;
 import tac.GenererErreur;
 import tac.InfosErreur;
 import tac.Label;
@@ -34,7 +35,9 @@ public class ProcedureAppel extends InstructionAbs {
             System.out.println("param "+ resTmp);
         }
 
-        System.out.println("call "+ this.nom);
+        Identifiant res = new IdentifiantRegistre();
+
+        System.out.println(res + " = call "+ this.nom + ", " + listeExpression.size());
         PileTableVariable.retirerEnvironnement();
     }
 }

@@ -43,7 +43,7 @@ non terminal beginning;
 
 non terminal Instruction instruction,
                          affectation, declaration, enumeration,
-                         bloc_instruction, procedure, increment,
+                         bloc_instruction, procedure, procedureAppel, increment,
                          instruction_if, instruction_while, instruction_for;
 non terminal List<Instruction> liste_instruction;
 
@@ -63,23 +63,26 @@ precedence right ELSE;
 start with beginning;
 
 beginning ::= beginning instruction:inst {: //Cas d'une déclaration / enumeration : pas besoin de nouveau Label
-                                            if (inst != null) {
+                                            if (inst instanceof Declaration || inst instanceof EnumerationOwn || inst instanceof BlocInstruction)
+                                                inst.genererCode(null);
+                                            else if (inst != null) {
                                                 Label suivant = new Label();
                                                 inst.genererCode(suivant);
                                                 System.out.println("\n" + suivant + ":");
                                                 IdentifiantRegistre.reinitialiser();
-                                            } :}
+                                            }
+                                         :}
             | /* Fin du parsing */      ;
 
-//Les instructions.genererCode(null), permettent la gestion de type/vérification.
-instruction ::= declaration:declInstruction                     {: RESULT = null; declInstruction.genererCode(null); :}
+instruction ::= declaration:declInstruction                     {: RESULT = declInstruction;  :}
              |  affectation:affInstruction                      {: RESULT = affInstruction; :}
-             |  enumeration:affEnumeration                      {: RESULT = null; affEnumeration.genererCode(null); :}
+             |  enumeration:affEnumeration                      {: RESULT = affEnumeration; :}
              |  instruction_for:forInstruction                  {: RESULT = forInstruction; :}
              |  instruction_while:whileInstruction              {: RESULT = whileInstruction; :}
              |  instruction_if:ifInstruction                    {: RESULT = ifInstruction; :}
              |  bloc_instruction:blocInstruction                {: RESULT = blocInstruction; :}
              |  procedure:procedureInstruction                  {: RESULT = procedureInstruction; :}
+             |  procedureAppel:procedureInstruction             {: RESULT = procedureInstruction; :}
              |  error // Gestion des erreurs de syntaxes
              ;
 
@@ -88,6 +91,9 @@ declaration ::= ENUM_TYPE:type liste_expression:liste SEMIC:token               
 
 affectation ::= ENUM_TYPE:type expression_variable:id AFFECT expression:exp SEMIC:token                 {: RESULT = new Affectation(type, id, exp, new InfosErreur(tokenleft, tokenright)); :}
              |  expression_variable:id AFFECT expression:exp SEMIC:token                                {: RESULT = new Affectation(null, id, exp, new InfosErreur(tokenleft, tokenright)); :}
+
+             |  ENUM_TYPE:type expression_variable:id AFFECT procedureAppel:inst                        {: RESULT = new Affectation(type, id, inst, new InfosErreur(instleft, instright)); :}
+             |  expression_variable:id AFFECT procedureAppel:inst                                       {: RESULT = new Affectation(null, id, inst, new InfosErreur(instleft, instright)); :}
              ;
 
 enumeration ::= ENUM_TYPE:type expression_variable:id LBRACE liste_expression:list RBRACE SEMIC:token   {: RESULT = new EnumerationOwn(type, id, list, new InfosErreur(tokenleft, tokenright)); :}
@@ -121,8 +127,10 @@ procedure ::= DEF:token ID:nom LRBRA liste_expression:parametres RRBRA
                       valeur_retour:ret                                               {: RESULT = new ProcedureDefinition(nom, parametres, blocInstruction, ret, new InfosErreur(tokenleft, tokenright)); :}
             | DEF:token ID:nom LRBRA liste_expression:parametres RRBRA
                       bloc_instruction:blocInstruction                                {: RESULT = new ProcedureDefinition(nom, parametres, blocInstruction, null, new InfosErreur(tokenleft, tokenright)); :}
-            | ID:nom LRBRA liste_expression:parametres RRBRA SEMIC:token              {: RESULT = new ProcedureAppel(nom, parametres, new InfosErreur(tokenleft, tokenright)); :}
             ;
+
+procedureAppel ::= ID:nom LRBRA liste_expression:parametres RRBRA SEMIC:token         {: RESULT = new ProcedureAppel(nom, parametres, new InfosErreur(tokenleft, tokenright)); :}
+                ;
 
 valeur_retour ::= RETURN expression:valeur SEMIC                                      {: RESULT = valeur; :}
                ;

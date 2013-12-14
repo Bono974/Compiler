@@ -2,7 +2,7 @@ package expression;
 
 import identifiant.Identifiant;
 import tac.EnumOp;
-import tac.Label;;
+import tac.Label;
 
 public class ComparaisonBool extends OperationBooleenne {
 

@@ -2,6 +2,7 @@ package instruction;
 
 import java.util.List;
 import tac.Label;
+import tac.PileTableVariable;
 
 
 public class BlocInstruction extends InstructionAbs {
@@ -14,14 +15,19 @@ public class BlocInstruction extends InstructionAbs {
     }
 
     public void genererCode(Label suivant) {
-        int tailleListe = this.list.size();
+        PileTableVariable.ajouterEnvironnement();
 
         for (Instruction ptr: this.list) {
+            if (ptr instanceof Declaration) {
+                ptr.genererCode(null);
+                continue;
+            }
+
             Label suivantInstruction = new Label();
             ptr.genererCode(suivantInstruction);
             System.out.println(suivantInstruction + ":");
         }
 
-        this.list.get(tailleListe - 1).genererCode(suivant);
+        PileTableVariable.retirerEnvironnement();
     }
 }

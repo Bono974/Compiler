@@ -11,7 +11,7 @@ public class GenererErreur {
         if(GenererErreur.inProcedure)
             return false;
 
-        if(!PileTableVariable.verifierDeclarationVariable(nomVariable)) { // Si la variable n'a pas encore été déclarée
+        if(!PileTableVariable.verifierDeclarationBlocCourant(nomVariable)) { // Si la variable n'a pas encore été déclarée
 
             if(type == null) {
                 System.out.println("\n/*===============");
@@ -22,10 +22,12 @@ public class GenererErreur {
 
         } else { // Si la variable est deja dans la table des variables
             if(type != null) {
-                System.out.println("\n/*===============");
-                info.AfficherPositionErreur();
-                System.out.println("La variable : \"" + nomVariable + "\" a déjà été déclarée !!");
-                System.out.println("===============*/");
+                if(PileTableVariable.verifierDeclarationBlocCourant(nomVariable)) { // Si la variable a été déclarée dans le bloc courant
+                    System.out.println("\n/*===============");
+                    info.AfficherPositionErreur();
+                    System.out.println("La treiutreoiutrevariable : \"" + nomVariable + "\" a déjà été déclarée !!");
+                    System.out.println("===============*/");
+                }
             }
         }
 
@@ -72,7 +74,7 @@ public class GenererErreur {
                 erreur = true;
             }
         } else {
-            if(PileTableVariable.verifierDeclarationVariable(nomVariableGauche)) {
+            if(PileTableVariable.verifierDeclarationBlocCourant(nomVariableGauche)) {
                 System.out.println("\n/*===============");
                 info.AfficherPositionErreur();
                 System.out.println("La variable : \"" + nomVariableGauche + "\" a déjà été déclarée !!");
