@@ -54,10 +54,6 @@ int o = 1;
 }
 
 
-
-
-i = tyty(39);
-
 // ==============================================
 // La gestion des commentaires est Operationnelle
 
@@ -127,7 +123,6 @@ string str = "blablabla";
 // ========================
 // Gestion des tableaux à 1 dimension
 
-//int tab[10] = 12;
 int tab[2] = 66;
 
 // ========================
@@ -159,6 +154,10 @@ def toto (a, q) {
 // Les appels de procédures
 
 toto(3,3,6,k-j);
+
+// Affectation de la valeur de retour 
+// d'une procedure dans une variable
+i = tyty(39); 
 
 // ================
 // Les affectations
@@ -206,6 +205,12 @@ if(2 < 1) then {
 	var_int_new = 999;
 }
 
-
+int uuu = 3;
+{
+    int uuu = 4;
+    {
+        int uuu = 5;
+    }
+}
 
 /* ============================= */
